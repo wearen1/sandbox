@@ -1,0 +1,1 @@
+json.partial! 'file_node', :file_node => @file_node

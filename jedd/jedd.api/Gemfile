@@ -1,0 +1,65 @@
+source 'https://rubygems.org'
+
+ruby '2.3'
+
+gem 'asset_sync', "~> 1.1"
+gem 'bcrypt', '~> 3.1'
+gem 'coffee-rails', '~> 4.1'
+gem 'devise', "~> 3.5"
+gem 'devise-i18n', "~> 0.12"
+gem 'haml', "~> 4.0"
+gem 'nokogiri', "~> 1.6"
+gem 'responders', "~> 2.1"
+gem 'faraday', "~> 0.9"
+gem 'connection_pool', "~> 2.2"
+gem 'normalize_url', "~> 0.0"
+gem 'jbuilder', '~> 2.3'
+gem 'jquery-rails', "~> 4.0"
+gem 'jquery-turbolinks', "~> 2.1"
+gem 'momentjs-rails', "~> 2.10"
+gem 'pg', "~> 0.18"
+gem 'rails', '~> 4.2'
+gem 'rails-i18n', "~> 4.0"
+gem 'russian', "~> 0.6"
+gem 'sass-rails', '~> 5.0'
+gem 'session_injector', :github => 'pvf/session-injector'
+gem 'sqlite3', "~> 1.3"
+gem 'turbolinks', "~> 2.5"
+gem 'uglifier', '~> 2.7'
+gem 'redis-session-store', "~> 0.8"
+gem 'redis', "~> 3.2"
+gem 'slim', "~> 3.0"
+gem 'stylus', "~> 1.0"
+gem 'angular_rails_csrf', "~> 1.0"
+gem 'crono', "~> 0.9"
+gem 'puma', "~> 2.14"
+gem 'yajl-ruby', "~> 1.2", require: 'yajl'
+gem 'mimemagic', "~> 0.3"
+gem 'aws-sdk', '~> 2.1'
+
+if `whoami`.strip != 'ec2-user'
+  gem 'v-shared', '~> 0.1', :path => '../..', :branch => :master, :ref => :HEAD
+else
+  gem 'v-shared', '~> 0.1', :git => 'git@bitbucket.org:N-1/v-shared.git', :branch => :master
+end
+
+group :development, :test do
+	gem 'factory_girl_rails', "~> 4.5"
+  gem 'annotate', :github => 'ctran/annotate_models'
+  gem 'byebug', "~> 6.0"
+  gem 'railroady', "~> 1.3"
+  gem 'spring', "~> 1.4"
+  gem 'unicorn', "~> 4.9"
+  gem 'web-console', '~> 2.2'
+	gem 'yard', "~> 0.8"
+	gem 'json_spec', "~> 1.1"
+	gem 'json_expressions', "~> 0.8"
+end
+
+group :development do
+  gem 'erb2haml', "~> 0.1"
+end
+
+group :doc do
+  gem 'sdoc', '~> 0.4'
+end

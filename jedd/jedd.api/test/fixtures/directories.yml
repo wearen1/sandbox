@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# Mark
+
+#root:
+#  jedd_directory_id: null
+#  name: pvf
+#  user_id:
+#  hastags: MyText
+#
+#two:
+#  jedd_directory_id:
+#  name: MyString
+#  user_id:
+#  hastags: MyText

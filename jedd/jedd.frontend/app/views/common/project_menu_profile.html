@@ -1,0 +1,9 @@
+<div class="fl_r profile-info">
+  <div class="fl_l userpic">
+    <div class="userpic-img" ng-style="{'background-image': 'url('+ current_user.avatar +')'}"></div>
+  </div>
+  <div class="fl_l profile-info-name ng-binding">
+    {{ [current_user.first_name, current_user.last_name].join(' ') }}
+    <span class="fl_r profile-info-state" id=""></span>
+  </div>
+</div>

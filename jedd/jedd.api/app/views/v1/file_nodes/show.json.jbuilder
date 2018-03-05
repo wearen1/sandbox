@@ -1,0 +1,1 @@
+json.merge! @file_node.attributes

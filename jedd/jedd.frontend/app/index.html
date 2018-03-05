@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/build.css">
+    <!-- endbuild -->
+
+    <base href="/">
+  </head>
+  <body ng-app="jedd">
+    <wrapper>
+      <shutter class="opened"></shutter>
+      <preview source=""></preview>
+      <!-- <drop-uploader class="hidden"></drop-uploader> -->
+
+      <project-menu current="Jedd"></project-menu>
+      <navigation-menu></navigation-menu>
+      <div ui-view class="high"></div>
+      <upload_button ng-show="current_user.nick==selected_user.nick"></upload_button>
+    </wrapper>
+
+
+
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/angular-click-outside/clickoutside.directive.js"></script>
+    <script src="bower_components/bluebird/js/browser/bluebird.js"></script>
+    <script src="bower_components/progressbar.js/dist/progressbar.js"></script>
+    <script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/angular-dropzone/lib/angular-dropzone.js"></script>
+    <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
+    <script src="bower_components/angular-draganddrop/angular-draganddrop.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+
+    <!-- Services -->
+    <script src="scripts/services/configuration.js"></script>
+    <script src="scripts/services/user.js"></script>
+    <script src="scripts/services/directory.js"></script>
+    <script src="scripts/services/clipboard.js"></script>
+    <script src="scripts/services/shutter.js"></script>
+    <script src="scripts/services/file.js"></script>
+    <script src="scripts/services/uploader.js"></script>
+    <!-- EndServices -->
+
+    <!-- Controllers -->
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/index.js"></script>
+    <script src="scripts/controllers/world.js"></script>
+    <script src="scripts/controllers/news.js"></script>
+    <!-- EndControllers -->
+
+    <!-- Filters -->
+    <script src="scripts/filters/bytes.js"></script>
+    <!-- EndFilters -->
+
+    <!-- Directives -->
+    <script src="scripts/directives/navigation_menu.js"></script>
+    <script src="scripts/directives/shutter.js"></script>
+    <script src="scripts/directives/modal.js"></script>
+    <script src="scripts/directives/project_menu.js"></script>
+    <script src="scripts/directives/project_menu_profile.js"></script>
+    <script src="scripts/directives/project_menu_profile_stats.js"></script>
+    <script src="scripts/directives/file_browser.js"></script>
+    <script src="scripts/directives/wrapper.js"></script>
+    <script src="scripts/directives/preloader.js"></script>
+    <script src="scripts/directives/preview.js"></script>
+    <script src="scripts/directives/drop_uploader.js"></script>
+    <script src="scripts/directives/upload_button.js"></script>
+    <!-- EndDirectives -->
+
+    <!-- endbuild -->
+</body>
+</html>

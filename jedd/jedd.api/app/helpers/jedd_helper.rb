@@ -1,0 +1,2 @@
+module JeddHelper
+end

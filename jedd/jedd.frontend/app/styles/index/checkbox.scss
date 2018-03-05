@@ -1,0 +1,31 @@
+file-checkbox {
+  //remove blue flow
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+  outline: none;
+}
+
+.point {
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  border: 1px solid #dadada;
+  cursor: pointer;
+}
+
+.point:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.checked {
+  width: 10px;
+  height: 10px;
+  background: #3483C1;
+  margin: 4px;
+  border-radius: 100%;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}

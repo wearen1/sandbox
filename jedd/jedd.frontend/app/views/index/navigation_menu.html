@@ -1,0 +1,10 @@
+<div class="navigation">
+  <div class="wide">
+    <div class="fl_l tab_container" ng-repeat="menu in navigation_menus">
+      <div class="tab item fl_l" ui-sref="{{ menu.name }}">
+        {{ menu.title }}
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

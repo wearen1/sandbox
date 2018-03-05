@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+#
+#one:
+#  name: MyString
+#  owner:
+#  mime_type: MyString
+#  size:
+#  preview: MyString
+#  tags: MyText
+#  likes_count:
+#  comments_count:
+#  reposts_count:
+#  vspace_directory_id:
+#
+#two:
+#  name: MyString
+#  owner:
+#  mime_type: MyString
+#  size:
+#  preview: MyString
+#  tags: MyText
+#  likes_count:
+#  comments_count:
+#  reposts_count:
+#  vspace_directory_id:

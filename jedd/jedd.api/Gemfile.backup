@@ -1,0 +1,65 @@
+source 'https://rubygems.org'
+
+ruby '2.2.1'
+
+gem 'asset_sync'
+gem 'bcrypt', '~> 3.1.7'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'devise'
+gem 'devise-i18n'
+gem 'haml'
+gem 'nokogiri'
+gem 'responders'
+gem 'faraday'
+gem 'connection_pool'
+gem 'normalize_url'
+gem 'jbuilder', '~> 2.0'
+gem 'jquery-rails'
+gem 'jquery-turbolinks'
+gem 'momentjs-rails'
+gem 'pg'
+gem 'rails', '~> 4.2'
+gem 'rails-i18n'
+gem 'russian'
+gem 'sass-rails', '~> 5.0'
+gem 'session_injector', :github => 'pvf/session-injector'
+gem 'sqlite3'
+gem 'turbolinks'
+gem 'uglifier', '>= 1.3.0'
+gem 'redis-session-store'
+gem 'redis'
+gem 'slim'
+gem 'stylus'
+gem 'angular_rails_csrf'
+gem 'crono'
+gem 'puma'
+gem 'yajl-ruby', require: 'yajl'
+gem 'mimemagic'
+gem 'aws-sdk', '~> 2'
+
+if `whoami`.strip != 'ec2-user'
+  gem 'v-shared', '~>0.1', :path => '../..', :branch => :master, :ref => :HEAD
+else
+  gem 'v-shared', '~>0.1', :git => 'git@bitbucket.org:N-1/v-shared.git', :branch => :master
+end
+
+group :development, :test do
+	gem 'factory_girl_rails'
+  gem 'annotate', :github => 'ctran/annotate_models'
+  gem 'byebug'
+  gem 'railroady'
+  gem 'spring'
+  gem 'unicorn'
+  gem 'web-console', '~> 2.0'
+	gem 'yard'
+	gem 'json_spec'
+	gem 'json_expressions'
+end
+
+group :development do
+  gem 'erb2haml'
+end
+
+group :doc do
+  gem 'sdoc', '~> 0.4.0'
+end

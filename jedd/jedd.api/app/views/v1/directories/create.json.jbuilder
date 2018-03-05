@@ -1,0 +1,1 @@
+json.partial! 'directory', :directory => @directories.first

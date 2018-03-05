@@ -1,0 +1,10 @@
+<div class="top">
+  <div ng-repeat="project in projects"
+       class="fl_l link"
+       ng-class="project.name===currentProjectName?'active':''"
+       ng-click="navigateTo(project.url)">
+    {{ project.name }}
+  </div>
+  <project-menu-profile></project-menu-profile>
+  <project-menu-profile-stats></project-menu-profile-stats>
+</div>

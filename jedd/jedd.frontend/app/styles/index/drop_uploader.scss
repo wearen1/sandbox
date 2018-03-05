@@ -1,0 +1,351 @@
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+@mixin animate($name, $duration, $iteration, $direction, $fillMode) {
+  -webkit-animation-duration: $duration;
+     -moz-animation-duration: $duration;
+       -o-animation-duration: $duration;
+          animation-duration: $duration;
+  -webkit-animation-iteration-count: $iteration;
+     -moz-animation-iteration-count: $iteration;
+       -o-animation-iteration-count: $iteration;
+          animation-iteration-count: $iteration;
+  -webkit-animation-name: $name;
+     -moz-animation-name: $name;
+       -o-animation-name: $name;
+          animation-name: $name;
+  -webkit-animation-direction: $direction;
+     -moz-animation-direction: $direction;
+       -o-animation-direction: $direction;
+          animation-direction: $direction;
+  -webkit-animation-fill-mode: $fillMode;
+     -moz-animation-fill-mode: $fillMode;
+       -o-animation-fill-mode: $fillMode;
+          animation-fill-mode: $fillMode;          
+}
+
+
+@include keyframes(moveLeft) {
+  from {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  to {
+    margin-left: -30px;
+    margin-top: -50px;
+  }
+}
+
+@include keyframes(moveLeft2) {
+  from {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  to {
+    margin-left: -36px;
+    margin-top: -64px;
+  }
+}
+
+@include keyframes(moveLeftBack) {
+  from {
+    margin-left: -30px;
+    margin-top: -50px;
+  }  
+
+  to {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+@include keyframes(moveRight) {
+  from {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  to {
+    margin-left: 30px;
+    margin-top: -50px;
+  }
+}
+
+@include keyframes(moveRightBack) {
+  from {
+    margin-left: 30px;
+    margin-top: -50px;
+  }
+
+  to {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+@mixin move($name) {
+  @include animate($name, 0.6s, 1, normal, forwards);
+}
+
+
+// @mixin minimize {
+//   @include animate(minimize, 0.3s, 1, normal, forwards);
+// }
+
+.point-size {
+  width: 0px;
+  height: 0px;
+  margin-left: 16px;
+  margin-top: 16px;
+
+  // transition: all 0.6s ease-out;
+
+  svg {
+    width: 0px;
+    height: 0px;
+
+    transition: all 0.6s ease-out;
+  }
+}
+
+
+upload-button {
+  position: absolute;
+  right: 100px;
+  bottom: 100px;
+  z-index: 100;
+  opacity: 0.6;
+  transition: opacity 0.6s linear;
+
+  &:hover {
+    opacity: 1;
+
+    .file {
+      z-index: 9;
+      @include move(moveLeft);
+    }
+
+    .link {
+      z-index: 9;
+      @include move(moveRight);
+    }
+
+    .plus {
+      @extend .point-size;
+      z-index: 8;
+      
+      &:after {
+        content: '';
+        display: block;
+        width: 96px;
+        height: 96px;
+        // background-color: red;
+        border-radius: 50%;
+        margin-left: -50%;
+        margin-top: -50%;
+        // opacity: 0.3;
+
+        @include move(moveLeft2);
+      }
+    }
+  }
+
+  .container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+.file-picker {
+  // &:hover {
+    
+  // }
+  // margin: 60px auto 80px auto;
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  background-color: #fff;
+
+  svg {
+    fill: #80a6cd;
+  }
+
+  &.plus {
+    transition: all 0.6s ease-out;
+
+    svg {
+      transition: all 0.6s ease-out;
+    }
+
+    // &:after {
+    //     content: '';
+    //     display: block;
+    //     width: 64px;
+    //     height: 64px;
+    //     background-color: red;
+    //     border-radius: 50%;
+    //     margin-left: -50%;
+    //     margin-top: -50%;
+    //     opacity: 0.3;
+
+    //     // @include move(moveLeft);
+    //   }
+
+    z-index: 11;
+  }
+
+  &.file {
+    z-index: 8;
+
+    @include move(moveLeftBack);
+  }
+
+  &.link {
+    z-index: 8;
+
+    @include move(moveRightBack);
+
+    svg {
+      margin: 8px;
+    }
+  }
+}
+
+.file-picker:hover {
+  background-color: #eee;
+
+  svg {
+    fill: #1366A4;
+  }
+}
+
+.file-picker > * {
+  position: absolute;
+}
+
+.file-picker__overlay {
+  visibility: hidden;
+  display: none;
+  z-index: 10;
+}
+
+.file-picker__form, .file-picker__progress, .file-picker__overlay {
+  width: 100%;
+  height: 100%;
+}
+
+.file-picker__icon, .file-picker__icon--cancel {
+  height: 80%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.file-picker__icon--cancel {
+  opacity: 0;
+}
+
+.file-picker__icon path, polygon {
+  transition: fill .2s ease;
+}
+
+.file-picker__progress > svg {
+  height: 100%;
+  display: block;
+}
+
+/* Disabled states */
+
+.file-picker.uploading {
+  fill: #bbb;
+}
+
+.file-picker.uploading:hover {
+  background: none;
+  fill: #333;
+}
+
+.file-picker.uploading > .file-picker__overlay {
+  visibility: visible;
+  display: block;
+}
+
+.file-picker.uploading > .file-picker__icon {
+  opacity: 0;
+}
+
+.file-picker.uploading > .file-picker__icon--cancel {
+  opacity: 1;
+}
+
+/* Utilities */
+
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+
+.rotating {
+  -webkit-animation: rotating 3s linear infinite;
+  -ms-animation: rotating 3s linear infinite;
+  animation: rotating 3s linear infinite;
+  -webkit-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+
+
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+

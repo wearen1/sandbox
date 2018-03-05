@@ -1,0 +1,156 @@
+<div class="nav fl_l">
+  <!--<span class="icon-cloud fl_l"></span>-->
+  <span class="fl_l userpic">
+    <div class="userpic-img" ng-style="{'background-image': 'url('+ selected_user.avatar +')'}"></div>
+  </span>
+
+  <div class="item" ng-click="navigateTo($index)" ng-repeat="directory in current_directories">{{ directory.name }}</div>
+  <!--
+  <div class="item">home</div>
+  <div class="item">projects</div> -->
+</div>
+
+<!--<div class="view-switcher fl_r control-box">-->
+  <!--<a title="Grid" ng-class="{active:activeViewType==='grid'}" ng-click="setActiveViewType('grid')">-->
+    <!--<i class="fa fa-th"></i>-->
+  <!--</a>-->
+
+  <!--<a title="List" ng-class="{active:activeViewType==='list'}" ng-click="setActiveViewType('list')">-->
+    <!--<i class="fa fa-align-justify"></i>-->
+  <!--</a>-->
+<!--</div>-->
+
+<div class="file-operations control-box fl_r" ng-show="true || selectedNodes.length > 0">
+  <a>Copy</a>
+  <a>Cut</a>
+  <a>Paste</a>
+  <a>Remove</a>
+  <a>Download</a>
+</div>
+
+<div class="hr fl_l" ng-show="isScrolling"></div>
+
+
+<!-- <form class="dropzone" id="dropzone" style="width: 100%; height: 100%; background-color: aliceblue;">
+</form> -->
+
+<table class="file-listing" ng-if="activeViewType==='list'">
+
+  <thead ng-if="current_user.nick==selected_user.nick">
+    <tr>
+      <td colspan="10">
+      <div class="upload-invite" data-feature-name="repository-uploads">
+        <img alt="Feature image" height="30" src="https://assets-cdn.github.com/images/files-lg.svg" width="116">
+        <h3>File uploading is now available</h3>
+        <p>
+          You can now drag and drop files into your repositories.
+          <!-- <a href="https://help.github.com/articles/adding-a-file-to-a-repository">Learn more</a> -->
+        </p>
+
+        <div class="close_button" ng-click="close()">
+          <i class="fa fa-close"></i>
+        </div>
+
+       <!--  <button type="button" class="btn-link feature-dismiss-link js-dismiss-feature-callout">
+          <svg aria-hidden="true" class="octicon octicon-x" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z"></path></svg> Dismiss
+        </button> -->
+
+      </div>
+      </td>
+    </tr>
+
+    <tr ng-if="current_user.nick==selected_user.nick" style="color: #666">
+      <td class="node-icon">
+        <i class="directory flaticon new">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="14px" height="14px" viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;" xml:space="preserve">
+<g>
+  <g>
+    <path d="M194.644,13.909H55.72c-15.411,0-27.901,12.351-27.901,27.818V153h556.363V97.336c0-15.356-12.462-27.791-27.763-27.791    H222.545V41.727C222.545,26.372,210.361,13.909,194.644,13.909z" fill="rgba(43, 187, 80, 0.7)"/>
+    <polygon points="556.363,598.091 556.363,542.454 612,542.454 612,486.818 556.363,486.818 556.363,431.182 500.728,431.182     500.728,486.818 445.091,486.818 445.091,542.454 500.728,542.454 500.728,598.091   " fill="rgba(43, 187, 80, 0.7)"/>
+    <path d="M0,208.831V570.05c0,15.495,12.212,28.041,27.874,28.041h427.064c-23.089-20.391-37.666-50.212-37.666-83.454    c0-61.451,49.822-111.273,111.273-111.273c33.242,0,63.063,14.577,83.454,37.666V208.831c0-15.467-12.24-28.013-27.874-28.013    H27.874C12.49,180.818,0,193.309,0,208.831z" fill="rgba(43, 187, 80, 0.7)"/>
+  </g>
+</g>
+</svg>
+
+          </i>
+      </td>
+
+      <td ng-click="createDirectory()">
+        Create new
+      </td>
+    </tr>
+  </thead>
+ <!-- ng-scrollbars ng-scrollbars-config="scrollbar_config" -->
+  <tbody ng-scrollbars ng-scrollbars-config="scrollbar_config">
+    <tr ng-repeat="($index, node) in jedd_directory.jedd_nodes"
+        ng-switch="node.type"
+        ng-click="selectNode($event, $index)"
+        ng-class="{selected:selectedNodes.indexOf($index)!==-1}"
+        class="item"
+        >
+
+      <!--<td>-->
+        <!--<file-checkbox ng-click="switch()"></file-checkbox>-->
+      <!--</td>-->
+
+      <td class="node-icon" ng-class="node.selected?'selected':''">
+        <i class="{{ 'file flaticon-' + fileIcon($index) }}" ng-click="switch($index)" ng-if="node.type !== 'directory'"></i>
+
+        <i class='directory flaticon' ng-click="switch($index)" ng-if="node.type === 'directory'">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14">
+            <path d="M13 4H7v-1c0-0.66-0.31-1-1-1H1c-0.55 0-1 0.45-1 1v10c0 0.55 0.45 1 1 1h12c0.55 0 1-0.45 1-1V5c0-0.55-0.45-1-1-1z m-7 0H1v-1h5v1z">
+            </path>
+          </svg>
+        </i>
+      </td>
+
+
+      <td ng-click="open($index)">
+        {{ node.name }}
+      </td>
+
+      <!--<td ng-switch-when="directory">-->
+        <!--{{ node.name }}-->
+      <!--</td>-->
+
+      <!--<td ng-switch-when="file">-->
+        <!--{{ node.name }}-->
+      <!--</td>-->
+
+      <td class="counter">
+        {{ node.created_at | amDateFormat:'MMM Do' }}
+      </td>
+
+      <td class="social-counter">
+        <i class="fa fa-star" style="" ng-click="toggleLike($index)" ng-class="{active: node.liked}"></i>
+        {{ node.likes_count || ''}}
+      </td>
+
+      <td class="social-counter">
+        <i class="fa fa-comments" style="color:#3483C1" ng-click="showNodeInfo($index)"></i>
+        {{ node.comments_count || '' }}
+      </td>
+
+      <td class="social-counter">
+        <i class="fa fa-reply" style="color:#3483C1"></i>
+        {{ node.reposts_count || ''}}
+      </td>
+
+
+      <td style="width: 100px;display: block;margin: 0 auto;">
+        <div class="social-btn" ng-if="node.type === 'directory' && !node.followed" ng-click="toggleFollow($index)">
+          Follow
+        </div>
+
+        <div class="social-btn active" ng-if="node.type === 'directory' && node.followed" ng-click="toggleFollow($index)">
+          Unfollow
+        </div>
+
+        <div class="social-btn" ng-if="node.type === 'file'" ng-click="download($index)">
+          Download
+        </div>
+      </td>
+
+    </tr>
+  </tbody>
+</table>
