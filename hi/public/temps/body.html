@@ -1,0 +1,639 @@
+<div class="overlay" ng-show="is_attach_preview" ng-click="is_attach_preview = false">
+  <img ng-src="{{attach_preview}}" class="preview_image" />
+</div>
+
+<div class="overlay" ng-show="is_choose_window">
+  <window></window>
+</div>
+
+<div class="smooth right-menu-call"  id="show-settings">
+    <div class="smooth right-menu-call" id="show-settings">
+        <div class="menu-lines-icon">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line" style="margin-bottom: 0px"></div>
+        </div>
+    </div>
+</div>
+
+<div class="smooth left-menu-call" id="compact-mode-menu" onclick="goFull()" style="display: none">
+    <div class="menu-arrow-icon">
+        <div class="arrow-icon"></div>
+    </div>
+</div>
+
+<div class="fl_l left-navig-call" style="display: none" id="compact-mode-menu">
+    <div class="fl_l userpic-compact-mode">
+        <img ng-src="{{user.image}}" class="userpic-img"></img>
+    </div>
+</div>
+  <div class="fl_l left-navig" id="full-mode-menu">
+    <div class="fl_l top-search">
+        <input class="top-input" id="global-search" ng-model="global_search" placeholder="{{'g_s'|translate}}">
+    </div>
+
+    <div class="fl_l left-navig-title" ng-hide="global_search.length>0" translate="recent"></div>
+    <div class="fl_l tab_1" style="margin-top: 2px;" ng-show="global_search.length>0">
+      <div class="tab_2" ng-class="searchtype!=1?'active':''" ng-click="slideSearch(0)">{{'dialogs'|translate}}</div>
+      <div class="tab_2" ng-class="searchtype==1?'active':''" ng-click="slideSearch(1)">{{'users'|translate}}</div>
+    </div>
+
+    <div class="container">
+      <div class="fl_l dialogs" id="scroll-dialogs">
+        <div ng-hide="convs_f.length>0" class="fl_l left-navig-title" translate="no_convers"></div>
+
+        <div class="fl_l dialog"
+            ng-repeat="conv in convs_f = (convs | filter: global_search) | orderBy:'messages[messages.length-1].date':!reverse"
+            ng-click="openChatWindow(conv)">
+
+            <div class="fl_l left-dialog">
+                <div class="dialog-pic" ng-style="{'background-image': 'url(' + conv.image + ')'}"></div>
+            </div>
+            <div class="fl_r right-dialog">
+                <div class="fl_l dialog-info">
+
+                    <div class="fl_l dialog-name" title="{{conv.name}}">
+                      {{conv.name}}
+                    </div>
+
+                    <div class="fl_l dialog-state m8" id="{{conv.status}}"></div>
+
+                    <div class="fl_r dialog-date" ng-show="conv.unread == 0">{{conv.messages[conv.messages.length-1].diff}}</div><!-- Счетчик сообщений -->
+                    <div class="fl_r dialog-date" id="count-messages" ng-show="conv.unread != 0">{{conv.unread}} new</div>
+
+                    <div class="fl_l dialog-text" ng-show="conv.typing.length==0">
+                      <span class="fl_l" id="{{conv.messages[conv.messages.length-1].state}}"></span>
+
+                      <span ng-show="conv.messages[conv.messages.length-1].isChange">{{conv.messages[conv.messages.length-1].change.kind|translate}} {{conv.messages[conv.messages.length-1].change.subject}}</span>
+
+                      <span ng-bind-html="conv.messages[conv.messages.length-1].text.slice(0, (conv.messages[conv.messages.length-1].text.indexOf('<') == -1)?22:conv.messages[conv.messages.length-1].text.indexOf('<')) + ((conv.messages[conv.messages.length-1].text.length > 22)?'...':'')"></span>
+
+                      <span ng-show="conv.messages[conv.messages.length-1].attachment.url.length>0">Attach: {{conv.messages[conv.messages.length-1].attachment.name.slice(0, 22) + ((conv.messages[conv.messages.length-1].text.length > 22)?'...':'')}}</span>
+                    </div>
+
+                    <div class="fl_l dialog-text" ng-hide="conv.typing.length==0">
+                      <i ng-show="conv.typing.length==1">{{conv.typing[0].user.firstname}} {{'typing'|translate}}...</i>
+                      <i ng-show="conv.typing.length>1">{{conv.typing.length}} {{'typings'|translate}}...</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="fl_l dialogs" id="scroll-search">
+        <div class="fl_l left-navig-title" ng-hide="global_search_result.length>0" translate="no_results"></div>
+        <div class="fl_l contact"
+              ng-repeat="contact in global_search_result | orderBy:'rate':!reverse">
+
+            <div class="fl_l contact-pic">
+                <div class="contact-pic-img" ng-style="{'background-image' : 'url('+ contact.image +')'}"></div>
+            </div>
+            <div class="fl_l contact-name" title="{{contact.firstname+' '+contact.lastname}}">
+              {{contact.firstname+' '+contact.lastname}}
+            </div>
+            <div class="fl_l dialog-state" id="{{contact.status}}"></div>
+
+            <div  class="fl_r contact-add contact-btn"
+                  ng-hide="contact.isContact"
+                  ng-click="addcontact(contact)"
+                  title="Add to contacts"
+                  ng-include="'images/contact-add.svg'"></div>
+
+            <div  class="fl_r contact-new-msg contact-btn"
+                  ng-click="createDialogS(contact)"
+                  ng-show="contact.isMessage"
+                  title="Write a message"
+                  ng-include="'images/new-msg.svg'"></div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+      <div class="fl_l tab_1">
+                <div class="tab_2" ng-class="contype!=1?'active':''" ng-click="slideContacts(0)">{{'contacts'|translate}}</div>
+                <div class="tab_2" ng-class="contype==1?'active':''" ng-click="slideContacts(1)">{{'requests'|translate}}<!--[{{requests.length}}]--></div>
+      </div>
+          <div class="fl_l contacts">
+            <div  id="scroll-contacts" class="fl_l">
+              <div class="fl_l left-navig-title" ng-show="contacts == undefined|| contacts.length<1" translate="no_contacts"></div>
+              <div class="fl_l contact"
+                    ng-class="{ 'unver-contact': contact.accept == 0,
+                                'req-contact': contact.accept == 1}"
+                    ng-repeat="contact in contacts = (user.contacts | filter: {state: 2}) | orderBy:'rate':!reverse">
+
+                    <div class="fl_l contact-pic" ng-click="createDialog(contact, $index);">
+                        <div class="contact-pic-img" ng-style="{'background-image' : 'url('+ contact.user.image +')'}"></div>
+                    </div>
+
+                    <div class="fl_l contact-name" title="{{contact.user.firstname+' '+contact.user.lastname}}" ng-click="createDialog(contact, $index);">
+                      {{contact.user.firstname+' '+contact.user.lastname}}
+                    </div>
+                    <div class="fl_l dialog-state" id="{{contact.user.status}}"></div>
+
+                    <div id="contact-{{$index}}" class="fl_r contact-slider">
+                      <div class="fl_r contact-menu contact-btn-s"
+                           ng-click="deleteContact(contact, $index)"
+                           title="{{'delete'|translate}}">
+                          <span style="color: #EE3853;" aria-hidden="true" data-icon="&#xe004;"></span>
+                      </div>
+                    </div>
+                    
+
+                    <div class="fl_r contact-menu contact-btn"
+                         ng-click="contactMenu(contact, '#contact-' + $index)"
+                         title="{{'menu'|translate}}">
+                      <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe067;"></span>
+                    </div>
+              </div>
+            </div>
+            <div id="scroll-requests" class="fl_l">
+              <div class="fl_l left-navig-title" ng-show="requests.length<1" translate="no_requests"></div>
+              <div class="fl_l contact"
+                    ng-class="{ 'unver-contact': contact.accept == 0,
+                                'req-contact': contact.accept == 1}"
+                    ng-repeat="contact in requests = (user.contacts | filter: {state: 1}) | orderBy:'rate':!reverse">
+
+                    <div class="fl_l contact-pic" ng-click="createDialog(contact, $index);">
+                        <div class="contact-pic-img" ng-style="{'background-image' : 'url('+ contact.user.image +')'}"></div>
+                    </div>
+                    <div class="fl_l contact-name" title="{{contact.user.firstname+' '+contact.user.lastname}}">
+                      {{contact.user.firstname+' '+contact.user.lastname}}
+                    </div>
+                    <div class="fl_l dialog-state" id="{{contact.user.status}}"></div>
+
+                    <div id="rcontact-{{$index}}" class="fl_r contact-slider">
+                      <div class="fl_r contact-menu contact-btn-s"
+                           ng-click="setContact(contact, false, $index)"
+                           title="{{'decline'|translate}}">
+                          <span style="color: #EE3853;" aria-hidden="true" data-icon="&#xe004;"></span>
+                      </div>
+
+                      <div class="fl_r contact-menu contact-btn-s"
+                           ng-click="setContact(contact, true, $index)"
+                           title="{{'accept'|translate}}">
+                          <span style="color: #58D088;" aria-hidden="true" data-icon="&#xe003;"></span>
+                      </div>
+                    </div>
+                    
+
+                    <div class="fl_r contact-menu contact-btn"
+                         ng-click="contactMenu(contact, '#rcontact-' + $index)"
+                         title="{{'menu'|translate}}">
+                      <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe067;"></span>
+                    </div>
+              </div>
+            </div>
+          </div>
+          <div class="fl_l create-conversation" ng-click="openChooseWindow(getAddableUsers(null, user.contacts), true, 'chooseUser', createConv)" translate="c_c"></div>
+    </div>
+  <div class="wrap theme_{{user.preferences.theme}}" style="font-size: {{user.preferences.font}}">
+
+          <header class="fl_r head" id="head-width">
+
+        <div class="top_worm">
+        </div>
+
+        <div class="fl_l head-links">
+            <a href="#" class="head-link">Vspace</a>
+            <a href="/" class="head-link">Runexto</a>
+            <a href="#" class="head-link active">Hi</a>
+            <a href="#" class="head-link">YourTape</a>
+            <a href="#" class="head-link">SpyNotify</a>
+
+            <!-- <a href class="head-link fl_r" ng-if="user.me.bookmarks.length" ng-click="get_bookmarks();">YoBookmarks</a> -->
+        </div>
+
+
+      <div class="fl_r profile-info">
+        <div class="fl_l userpic">
+          <div class="userpic-img" ng-style="{'background-image' : 'url('+ user.image +')'}"></div>
+        </div>
+        <div class="fl_l profile-info-name">{{user.firstname}} {{user.lastname}}<span class="fl_r profile-info-state" id="{{user.status}}"></span></div>
+      </div>
+      </header>
+
+    <div class="fl_r right-wrap" id="right-true-area">
+
+      <div id="convers-area">
+
+        <div class="user-settings" style="display: none;">
+          <div class="section">
+            <div class="tab_1_w">
+              <div class="tab_3" ng-click="setStatus('Online')" ng-class="user.status=='Online' ? 'active' : ''"  translate="online"></div>
+              <div class="tab_3" ng-click="setStatus('Away')"   ng-class="user.status=='Away' ? 'active' : ''"    translate="away"></div>
+              <div class="tab_3" ng-click="setStatus('DND')"    ng-class="user.status=='DND' ? 'active' : ''"     translate="dnd"></div>
+              <div class="clear"></div>
+            </div>
+          </div>
+          <div id="scroll-user-settings">
+            <div class="section form">
+              <div class="section-title">{{'c_b'|translate}}</div>
+              <div class="image-container">
+                <div class="fl_l image-cell r4" ng-click="changeBackImagePreset(1)" style="background-image: url(/dialogBacks/preset/temp/1.jpg);"></div>
+                <div class="fl_l image-cell r4" ng-click="changeBackImagePreset(2)" style="background-image: url(/dialogBacks/preset/temp/2.jpg);"></div>
+                <div class="fl_l image-cell r4" ng-click="changeBackImagePreset(3)" style="background-image: url(/dialogBacks/preset/temp/3.jpg);"></div>
+                <div class="fl_l image-cell r4" ng-click="changeBackImagePreset(4)" style="background-image: url(/dialogBacks/preset/temp/4.jpg);"></div>
+                
+                <!--
+                <div class="fl_l image-row-3" style="background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-93962.jpg);"></div>
+                <div class="fl_l image-row-3" style="background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-6692.jpg);"></div>
+                -->
+
+              </div>
+              <div class="clear"></div>
+              <div class="link">
+                <div class="link-box-f">
+                  <input class="input" type="file"
+                        onchange="angular.element(this).scope().changeBackImage(this)" accept="image/x-png, image/jpeg"  />
+                  <div class="fl_l icon">
+                    <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe084;"></span>
+                  </div>
+                  {{'upload_y'|translate}}
+                </div>
+              </div>
+            </div>
+
+            <div class="section form">
+              <div class="section-title">{{'acc_s'|translate}}</div>
+
+
+              <div class="field">
+                <div class="label"><span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe032;"></span></div>
+                <div class="file-placeholder">{{'acc_s_pp'|translate}}</div>
+                <input class="input" type="file" value="Change image"
+                        onchange="angular.element(this).scope().changeProfileImage(this)" accept="image/x-png, image/jpeg"  />
+              </div>
+              <div class="field">
+                <div class="label"><span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe005;"></span></div>
+                <input class="input" type="text" placeholder="{{'firstname'|translate}}" ng-model="user.firstname" maxlength="30" />
+              </div>
+              <div class="field">
+                <div class="label"><span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe001;"></span></div>
+                <input class="input" type="text" placeholder="{{'lastname'|translate}}" ng-model="user.lastname" maxlength="30"/>
+              </div>
+              <div class="button" ng-click="changeProfileData()">{{'save'|translate}}</div>
+            </div>
+
+            <div class="section form">
+              <div class="section-title">{{'acc_s_cp'|translate}}</div>
+              <div class="field" id="old_password">
+                <div class="label"><span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe08e;"></span></div>
+                <input class="input" type="password" ng-model="old_pass" placeholder="{{'old_pass'|translate}}" />
+              </div>
+              <div class="field" id="new_password">
+                <div class="label"><span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe08c;"></span></div>
+                <input class="input" type="password" ng-model="new_pass" placeholder="{{'new_pass'|translate}}" />
+              </div>
+
+              <div class="button" ng-click="changeProfilePassword()">{{'change'|translate}}</div>
+            </div>
+
+            <div class="section">
+              <a href="/sign-out" class="link">
+                <div class="link-box">
+                  <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe065;"></span> {{'logout'|translate}}
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="fl_l dialog-window"
+            ng-repeat="active_conv in convs | filter: {active: true}" id="{{'window-' + active_conv._id}}"
+            ng-style="{'left': 310 + $index * 50, 'top': 50 + $index * 50, 'background-image': 'url('+ user.chat_background + ')'}"
+        >
+            <!--<div  class="{{'window-head head-theme-' + active_conv.theme}}" -->
+            <div class="window-head" id="{{'head-' + active_conv._id}}">
+                <div class="fl_l window-head-content">
+                    <div class="fl_l convers-avatar" ng-style="{'background-image': 'url('+ active_conv.image + ')'}" ng-click="slideConv(active_conv, 1, $index)"></div>
+                    <div class="fl_l convers-name">{{active_conv.name}}</div>
+
+                    <div class="fl_l convers-add"></div>
+
+                    <div class="fl_r convers-close" ng-click="closeConv(active_conv)">
+                      <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe082;"></span>
+                    </div>
+                    <div class="fl_r dialog-actions" ng-hide="active_conv.search">
+
+                        <div  class="fl_r convers-settings-btn" ng-click="fullscreen('window-' + active_conv._id)">
+                              <span aria-hidden="true" class="icon-size-fullscreen" id="fullscreen-icon"></span>
+                        </div>
+
+                        <div  class="fl_r convers-settings-btn"
+                              ng-click="slideConv(active_conv, 1)">
+                              <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe06c;"></span>
+                        </div>
+                        <!--
+                        <div  class="fl_r"
+                              ng-class="{ 'notification-disabled': active_conv.notification == false,
+                                          'notification-enabled': active_conv.notification == !false}"
+                              ng-click="active_conv.notification=!active_conv.notification">
+                        </div>
+                        -->
+                        <div  class="fl_r convers-search-go"
+                              ng-click="active_conv.search = true">
+                              <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe090;"></span>
+                        </div>
+
+
+                    </div>
+
+                    <div class="fl_r" ng-show="active_conv.search">
+                        <div class="fl_r search-close" ng-click="active_conv.search = false"></div>
+                        <input class="fl_r convers-search" placeholder="{{'search'|translate}}" ng-model="conv_search" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="fl_l convers-content" style="font-size: {{user.preferences.font}} px;">
+              <div class="convers-container" id="{{'container-' + active_conv._id}}">
+                <div class="fl_l item">
+                  <div class="convers-messages"  id="{{'convers-' + active_conv._id + '-scroll'}}" keep-scroll>
+                    <div
+                      scroll-item
+                      ng-repeat="msg in active_conv.messages | filter: conv_search"
+                      ng-class="{ 'my-message': msg.user._id == user._id,
+                                  'fl_r':       msg.user._id == user._id,
+
+                                  'friend-message': msg.user._id != user._id,
+                                  'fl_l':           msg.user._id != user._id
+                                }"
+                      ng-show="msg.visible">
+                        <div class="contact-pic-img" ng-class="{
+                                    'fl_r': msg.user._id == user._id,
+                                    'fl_l': msg.user._id != user._id
+                                  }"
+                        ng-style="{'background-image' : 'url('+ (msg.user._id == user._id ? user.image : msg.user.image) +')'}">
+                        </div>
+                        <message></message>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                  <div class="select-menu" ng-show="active_conv.selected!=undefined && active_conv.selected.length>0">
+                    Выбрано: {{active_conv.selected.length}}
+
+                    <div class="fl_r btn" style="margin-rigth: 16px;" title="{{'delete'|translate}}" ng-click="selectDelete(active_conv)">
+                      <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe054;"></span>
+                    </div>
+                    
+                    <div class="fl_r btn" title="{{'forward'|translate}}"ng-click="openChooseWindow(convs, false, 'chooseFw', selectForward, active_conv)">
+                      <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe051;"></span>
+                    </div>
+                    
+                    <div class="fl_r btn" title="{{'cancel'|translate}}" ng-click="deselect(active_conv)">
+                      <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe07c;"></span>
+                    </div>
+
+                    
+                  </div>
+                </div>
+                <div class="fl_l convers-settings item" id="{{'settings-' + active_conv._id + '-scroll'}}">
+                  <div class="section form">
+                    <div class="button" ng-click="slideConv(active_conv, active_conv.screen_state - 1)">
+                      &larr; {{'back'|translate}}
+                    </div>
+                  </div>
+
+                  <div class="section form">
+                    <div ng-click="active_conv.attach_mode = true; slideConv(active_conv, 2)" class="button" translate="attachments"></div>
+                  </div>
+
+                  <!--Converstion settings -->
+                  <div ng-show="active_conv.isConv" class="section form">
+                    <div class="section-title">Conversation settings</div>
+                    <div class="field">
+                      <div class="label" title="{{'name_of_conv'|translate}}">
+                        <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe04a;"></span>
+                      </div>
+                      <input type="text" ng-model="active_conv.name" placeholder="{{'name_of_conv'|translate}}" />
+                    </div>
+
+                    <div class="field">
+                      <div class="label" title="{{'image_of_conv'|translate}}">
+                        <span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe032;"></span>
+                      </div>
+                      <div class="file-placeholder">{{'image_of_conv'|translate}}</div>
+                      <input type="file" onchange="angular.element(this).scope().changeDialogImage(this, 1)"
+                             id="{{active_conv._id}}" accept="image/x-png, image/jpeg"/>
+                    </div>
+
+                    <div class="field">
+                      <div  class="label" title="{{'notifications'|translate}}"
+                            style="background-color: {{active_conv.notification ? 'rgba(88,208,136,0.7)' : 'rgba(238,56,83,0.7)'}}">
+                        <span aria-hidden="true" style="color: #fff;" data-icon="{{active_conv.notification ? '&#xe0a0;' : '&#xe0a1;'}}"></span>
+                      </div>
+                      <div class="file-placeholder">{{'notifications'|translate}}</div>
+                      <input type="checkbox" ng-model="active_conv.notification" />
+                    </div>
+
+                    <div class="button" ng-click="changeConvProp(active_conv)">{{'save'|translate}}</div>
+                  </div>
+                  <!--Converstion settings -->
+
+                  <!--Dialog settings -->
+                  <div ng-hide="active_conv.isConv" class="section form">
+                    <div class="section-title">Настроки диалога</div>
+
+                    <div class="field" style="margin-bottom: 0;">
+                      <div  class="label" title="{{'notifications'|translate}}"
+                            style="background-color: {{active_conv.notification ? 'rgba(88,208,136,0.7)' : 'rgba(238,56,83,0.7)'}}">
+                        <span aria-hidden="true" style="color: #fff;" data-icon="{{active_conv.notification ? '&#xe0a0;' : '&#xe0a1;'}}"></span>
+                      </div>
+                      <div class="file-placeholder">{{'notifications'|translate}}</div>
+                      <input type="checkbox" ng-model="active_conv.notification" />
+                    </div>
+                  </div>
+                  <!--Dialog settings -->
+
+                  <div ng-show="active_conv.isConv" class="section form">
+                    <div class="section-title">{{'members'|translate}}</div>
+                    <ul>
+                      <li ng-repeat="user in active_conv.members">
+                        {{user.firstname + ' ' + user.lastname}}
+                      </li>
+                    </ul>
+                    <div class="button" ng-click="openChooseWindow(getAddableUsers(active_conv, user.contacts), false, 'chooseUser', addMemberToConv, active_conv)">{{'add'|translate}}</div>
+                  </div>
+                  <div class="section form">
+                    <div class="button b_r" ng-click="deleteConv(active_conv)">
+                      {{active_conv.isConv?'leave_conv':'delete_dialog'|translate}}
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="fl_l item" ng-show="active_conv.attach_mode">
+                  <div class="section form">
+                    <div class="button" ng-click="slideConv(active_conv, active_conv.screen_state - 1, 2)">
+                      &larr; {{'back'|translate}}
+                    </div>
+                  </div>
+                  <div class="section form">
+                    <div class="section-title" translate="attachments"></div>
+                    <ul>
+                      <li ng-repeat="attch in active_conv.messages | filter: {isAttach: true, visible: true}">
+                        <a target="_blank" href="{{attch.attachment.url}}">{{attch.attachment.name}}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+
+                <div ng-show="active_conv.add_mode" class="fl_l item">
+                  <div class="section form">
+                    <div class="button" ng-click="slideConv(active_conv, active_conv.screen_state - 1, 1)">
+                      &larr; {{'back'|translate}}
+                    </div>
+                  </div>
+                  <div class="section form">
+                    <div class="section-title">Add to converstion</div>
+                    <div class="fl_l contact"
+                      ng-repeat="contact in contacts = getAddableUsers(active_conv, user.contacts )"
+                      ng-click="addMemberToConv(active_conv, contact.user)">
+
+                      <div class="fl_l contact-pic">
+                          <div class="contact-pic-img" ng-style="{'background-image' : 'url('+ contact.user.image +')'}"></div>
+                      </div>
+                      <div class="fl_l contact-name" title="{{contact.user.firstname+' '+contact.user.lastname}}">
+                        {{contact.user.firstname+' '+contact.user.lastname}}
+                      </div>
+                    <div class="fl_l dialog-state" id="{{contact.user.status}}"></div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="clear"></div>
+              </div>
+            </div>
+            <div class="fl_l message-input" oi-classs>
+                <textarea
+                      placeholder="{{'type_message'|translate}} {{active_conv.name}}"
+                      class="fl_l convers-input"
+                      type="text"
+                      id="inp-text"
+                      ng-model="active_conv.last_message.text"
+                      ng-keypress="active_conv.last_message.text = checkCtrlEnter($event, active_conv)?'':active_conv.last_message.text;"
+                      ng-keydown="showActivity($event, active_conv)"
+                      ng-disabled="active_conv.members.length == 1 && !active_conv.isConv"
+                  >
+                    {{active_conv.last_message.text}}
+                  </textarea>
+                  <div id="progressbar{{active_conv._id}}" style="background-color: #58D088; height: 2px; width: 0%; box-sizing: border-box;"></div>
+                <div class="fl_r attach-icon">
+                  <input type="file" class="message_attachment" ng-model="active_conv.last_message.attachment" multiple
+                         onchange="angular.element(this).scope().loadFiles(this)" id="{{active_conv._id}}" />
+                </div>
+
+
+                <div class="fl_r send-button" ng-click="send(active_conv);"></div>
+                <div class="clear"></div>
+            </div>
+
+
+        </div>
+
+      </div>
+
+    <div class="setting-page" style="display: none">
+            <div class="fl_l setting-head">
+                <div class="fl_l setting-title" translate="settings"></div>
+            </div>
+            <div class="fl_l setting-title-light" translate="mess_theme"></div>
+            <div class="theme-settings" id="scroll-theme-settings">
+
+              <div
+                  ng-repeat="theme in themes"
+                  class="fl_l choose-theme set-theme-{{theme}}"
+                  id="set-theme-{{theme}}"
+                  ng-click="setTheme(theme)"
+              >
+                  <div class="fl_r" ng-class="{'active-theme': (theme == user.preferences.theme)}"></div>
+              </div>
+
+            </div>
+            <div class="fl_l setting-title-light" translate="basic_settings"></div>
+            <div class="fl_l basic-settings" id="scroll-basic-settings">
+                <div class="fl_l select-option">
+                    <div class="option-text" translate="private_msg"></div>
+                    <select class="select" ng-model="user.preferences.isPrivate">
+                        <option value="false" translate="everyone"></option>
+                        <option value="true" translate="ver_only"></option>
+                    </select>
+                </div>
+                <div class="fl_l select-option">
+                    <div class="option-text" translate="delete_msg"></div>
+                    <select class="select" ng-model="user.preferences.message_life">
+                        <option value="24" translate="a24hrs"></option>
+                        <option value="168" translate="aweek"></option>
+                        <option value="720" translate="amonth"></option>
+                        <option value="0" translate="no_delete"></option>
+                    </select>
+                </div>
+                <div class="fl_l select-option">
+                    <div class="option-text" translate="open_chat"></div>
+                    <select class="select" ng-model="user.preferences.chat_open">
+                        <option value="1" translate="always"></option>
+                        <option value="2" translate="never"></option>
+                        <option value="3" translate="only_for_ver"></option>
+                    </select>
+                </div>
+                <div class="fl_l select-option">
+                    <div class="option-text" translate="font"></div>
+                    <select class="select" ng-model="user.preferences.font">
+                        <option value="12">12px</option>
+                        <option value="13">13px</option>
+                        <option value="14">14px</option>
+                        <option value="15">15px</option>
+                        <option value="16">16px</option>
+                        <option value="17">17px</option>
+                        <option value="18">18px</option>
+                    </select>
+                </div>
+
+                <div class="fl_l select-option">
+                    <div class="option-text" translate="profile_g_s"></div>
+                    <select class="select" ng-model="user.preferences.global">
+                        <option value="true" translate="yes">Yes</option>
+                        <option value="false" translate="no">No</option>
+                    </select>
+                </div>
+
+                <!--
+                <div class="fl_l select-option">
+                    <div class="option-text" translate="locale"></div>
+                    <select class="select" ng-model="user.preferences.locale">
+                        <option value="en">English</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                </div>
+                -->
+                <!-- <div class="clear"></div> -->
+            </div>
+            <div class="fl_l select-option">
+                <a href="#">О нас</a> 
+                <a href="#">Контакты</a>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+<span id="dummy"></span>
+
+
+<script src="js/script.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $("#scroll-dialogs").mCustomScrollbar({scrollInertia:450, theme:"dark-2"});
+    $("#scroll-search").mCustomScrollbar({scrollInertia:450, theme:"dark-2"});
+    $("#scroll-contacts").mCustomScrollbar({scrollInertia:450, theme:"dark-2"});
+    $("#scroll-requests").mCustomScrollbar({scrollInertia:450, theme:"dark-2"});
+    $("#scroll-contacts-search").mCustomScrollbar({scrollInertia:450, theme:"dark-2"});
+    $("#scroll-theme-settings").mCustomScrollbar({scrollInertia:450, theme:"dark"});
+    $("#scroll-basic-settings").mCustomScrollbar({scrollInertia:450, theme:"dark"});
+    $("#scroll-user-settings").mCustomScrollbar({scrollInertia:450, theme:"dark"});
+  });
+</script>

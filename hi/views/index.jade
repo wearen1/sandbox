@@ -1,0 +1,48 @@
+html(ng-app="project")
+  head
+    title Hi Messenger
+    meta(charset="UTF-8")
+    link(rel="stylesheet" href="css/jquery.mCustomScrollbar.css")
+
+    link(href='http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css')
+    link(href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css' rel='stylesheet' type='text/css')
+    link(rel="icon" type="image/png" href="images/favicon.png")
+
+    link(rel="stylesheet" type="text/css" href="css/simple-line-icons.css")
+    link(rel="stylesheet" type="text/css" href="css/dark.css")
+    link(rel="stylesheet" type="text/css" href="css/window.css")
+
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+
+
+    script(src="js/libs/jquery-ui.min.js")
+    script(src="js/libs/jquery.mCustomScrollbar.concat.min.js")
+    script(src="js/libs/jquery.ui.touch-punch.min.js")
+
+
+    script(type = 'text/javascript' src="/js/u.js")
+
+
+    script(src="https://code.angularjs.org/1.3.0/angular.min.js")
+    script(src="https://code.angularjs.org/1.3.0/angular-route.min.js")
+    script(src="https://code.angularjs.org/1.3.0/angular-resource.min.js")
+    script(src="https://code.angularjs.org/1.3.0/angular-sanitize.min.js")
+
+    script(src="/js/libs/angular-file-upload.min.js")
+    script(src="/js/libs/angular-translate.min.js")
+
+
+    script(src= "/js/project.js")
+    script(src= "/js/server.js")
+
+    script(src= "/js/directives.js")
+
+
+
+    if(user)
+      body
+        div(ng-view)
+    else
+      body
+        include startscreen.html
+

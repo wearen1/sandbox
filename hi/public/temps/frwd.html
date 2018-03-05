@@ -1,0 +1,50 @@
+<div class="fw-message">
+	<div class="message">
+		<img  	ng-show="mess.attachment.kind == 'jpg'"
+				class="image-message" 
+				ng-src="{{mess.attachment.url}}" 
+            	ng-click="displayImage(mess.attachment.url); selectMsg(msg, active_conv);"
+        />
+
+        <img  	ng-show="mess.attachment.kind == 'png'" 
+	            class="image-message" 
+	            ng-src="{{mess.attachment.url}}" 
+	            ng-click="displayImage(mess.attachment.url); selectMsg(msg, active_conv);"
+		/>
+
+		<div ng-bind-html="mess.text"></div>
+
+      	<div ng-show="mess.isChange">
+      		{{mess.change.kind|translate}} {{mess.change.subject}}
+      	</div>
+      
+      	<div 	ng-show="(mess.attachment.kind!=undefined && mess.attachment.kind != 'png' && mess.attachment.kind != 'jpg')" 
+      			class="attachment-message" 
+      	>
+	        <div  class="attachemnt-icon fl_l"
+	              ng-show="mess.attachment.kind == 'mp3' || mess.attachment.kind == 'm4a' || mess.attachment.kind == 'flac'" 
+	        >
+          		<span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe061;"></span>
+        	</div>
+
+	        <div  class="attachemnt-icon fl_l"
+	              ng-show="mess.attachment.kind == 'doc' || mess.attachment.kind == 'docx' || mess.attachment.kind == 'txt'"
+	        >
+          		<span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe013;"></span>
+        	</div>
+
+        	<div class="attachemnt-name fl_l">
+          		<a ng-href="{{mess.attachment.url}}" >
+            		{{mess.attachment.name}}
+          		</a>
+        	</div>
+
+        	<div class="clear"></div>
+
+      	</div>
+    </div>
+
+    <div class="my-name-time" ng-click="showUser(mess.user); selectMsg(msg, active_conv);">
+      	{{mess.user.firstname}} &#183; {{mess.diff}}
+    </div>
+</div>

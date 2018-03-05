@@ -1,0 +1,69 @@
+<div class="text-message"
+	ng-class="
+		{
+			'fl_r': msg.user._id == user._id,
+            'fl_l': msg.user._id != user._id
+		}
+	"
+	ng-style="{'background-color': (msg.isSelected ? 'rgba(208,237,254, 0.7)' : '')}"
+	ng-click="selectMsg(msg, active_conv)"
+	id="{{'msg'+msg._id}}" 
+>
+	<div class="message">
+		<img  	ng-show="msg.attachment.kind == 'jpg'"
+				class="image-message" 
+				ng-src="{{msg.attachment.url}}" 
+            	ng-click="displayImage(msg.attachment.url);selectMsg(msg, active_conv);"
+        />
+
+        <img  	ng-show="msg.attachment.kind == 'png'" 
+	            class="image-message" 
+	            ng-src="{{msg.attachment.url}}" 
+	            ng-click="displayImage(msg.attachment.url);selectMsg(msg, active_conv);"
+		/>
+
+		<div ng-bind-html="msg.text"></div>
+
+      	<div ng-show="msg.isChange">
+      		{{msg.change.kind|translate}} {{msg.change.subject}}
+      	</div>
+      	
+		<div
+	        ng-repeat="mess in msg.forward"
+	        class="forwarded {{$index==0 ? 'first' : ''}}"
+	        ng-show="msg.isForward">
+
+	        <forward></forward>
+
+	    </div>
+      
+      	<div 	ng-show="(msg.attachment.kind!=undefined && msg.attachment.kind != 'png' && msg.attachment.kind != 'jpg')" 
+      			class="attachment-message" 
+      	>
+	        <div  class="attachemnt-icon fl_l"
+	              ng-show="msg.attachment.kind == 'mp3' || msg.attachment.kind == 'm4a' || msg.attachment.kind == 'flac'" 
+	        >
+          		<span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe061;"></span>
+        	</div>
+
+	        <div  class="attachemnt-icon fl_l"
+	              ng-show="msg.attachment.kind == 'doc' || msg.attachment.kind == 'docx' || msg.attachment.kind == 'txt'"
+	        >
+          		<span aria-hidden="true" data-icon="" data-js-prompt="&amp;#xe013;"></span>
+        	</div>
+
+        	<div class="attachemnt-name fl_l">
+          		<a ng-href="{{msg.attachment.url}}" >
+            		{{msg.attachment.name}}
+          		</a>
+        	</div>
+
+        	<div class="clear"></div>
+
+      	</div>
+    </div>
+
+    <div class="my-name-time" ng-click="showUser(msg.user); selectMsg(msg, active_conv)">
+      	{{msg.user.firstname}} &#183; {{msg.diff}}
+    </div>
+</div>

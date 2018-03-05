@@ -1,0 +1,34 @@
+<div class="w-choose">
+	<div class="w-title">{{tmpTitle|translate}}</div>
+
+	<div class="element bw">
+		<input class="w-search" type="text" ng-model="tmpSearch" placeholder="{{'search'|translate}}" />
+	</div>
+
+	<div id="scrollElements">
+		<div ng-repeat="element in tmpArr | filter: tmpSearch" class="element fl_l {{(element.isSelect?'selected':'')}}" ng-click="chooseElement(element)">
+			<div class="fl_l contact-pic">
+	          	<div class="contact-pic-img" ng-style="{'background-image' : 'url('+ element.image +')'}"></div>
+	      	</div>
+	      	<div class="fl_l contact-name" title="{{element.name}}">
+	        	{{element.name}}
+	      	</div>
+	      	<div class="fl_r checkbox">
+	      		<div ng-include="'images/mark.svg'"></div>
+	      	</div>
+		</div>
+	</div>
+
+	<div class="section form b0">
+		<div class="button fl_l" ng-show="tmpSelect.length!=0" style="margin-right: 8px;" ng-click="chooseDone()">
+			{{'select'|translate}}
+		</div>
+		<div class="button b_r fl_l" ng-click="chooseDone(true)">
+			{{'cancel'|translate}}
+		</div>
+	</div>
+</div>
+
+<script>
+    $("#scrollElements").mCustomScrollbar({scrollInertia:450, theme:"dark-2"});
+</script>

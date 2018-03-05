@@ -1,0 +1,29 @@
+{
+  "name": "dialog",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bower": "*",
+    "connect-busboy": "*",
+    "connect-flash": "*",
+    "connect-memcached": "*",
+    "express": "3.4.8",
+    "fs-extra": "*",
+    "jade": "*",
+    "log4js": "^0.6.21",
+    "mongoose": "*",
+    "nconf": "*",
+    "konfig": "*",
+    "passport": "*",
+    "passport-facebook": "*",
+    "passport-local": "*",
+    "passport-vkontakte": "*",
+    "passport-twitter": "*",
+    "MD5": "*",
+    "pmx": "*",
+    "quick-login": "*"
+  }
+}

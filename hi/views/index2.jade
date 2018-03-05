@@ -1,0 +1,96 @@
+html
+  head
+    title Hi Messenger
+    meta(charset="UTF-8")
+    link(rel="stylesheet" href="style.css" type="text/css")
+    link(rel="stylesheet" href="jquery.mCustomScrollbar.css")
+    link(href='http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css')
+    link(rel="icon" type="image/png" href="images/favicon.png")
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+    script(src="js/jquery.mCustomScrollbar.concat.min.js")
+    script(type = 'text/javascript' src="/js/u.js")
+    if(user)
+      script var userID = '#{user.user._id}';
+
+      
+
+  body
+    if(user)
+      if(user.user.firstname)
+        header
+          .head-center
+            .fl_l.logo
+              .logo-image
+            .fl_l.head-links
+              a.head-link(href="#" target="_blank")#active Runexto
+              a.head-link(href="#" target="_blank") YourTape
+              a.head-link(href="#" target="_blank") YoTravel
+              a.head-link(href="/setting") Settings
+              a #{user.user.firstname}
+            .fl_r.switch-activity Away
+              span.fl_r.switch-arrow
+
+        .wrap
+          .fl_l.wrap2#content-page
+            .fl_r.left-body#left-part
+              .fl_l.search-conv-bar
+                input.fl_l.search-bar(placeholder="Search")#search-conv-input
+                .fl_r.button-new-conv(onclick="createConversation()")
+                  .new-conv-icon
+
+              #spotlight
+              .conversations#scroll-conv
+              .clear
+
+              .fl_r.new-conv
+                .create-conv-button
+                  a(href="#") Create new conversation
+
+            .fl_l.conversation-head
+              .fl_l.conv-bar
+                
+                .fl_l.conv-avatar
+                  img.fl_l.conv-avatar-prop(src="http://cs617620.vk.me/v617620779/16beb/0nX-SoYrFCU.jpg")
+
+                .fl_l.conv-name
+                .fl_l.conv-status#conv-online online
+
+                input.fl_r.search-bar(placeholder="Search this conversation")#search-this-input
+
+            .messages#content
+
+            .write
+              .fl_l.attach
+              input.fl_l.input-message(placeholder="Type your message")#message-text
+              .fl_r.send-button(onclick="send();")#submit-mess Send
+      else
+        #s_status
+        form#setting
+          h2 Settings
+          p Firstname:
+            br
+            input(type="text" value="#{user.user.firstname}")#s_firstname
+
+          p Lastname:
+            br
+            input(type="text" value="#{user.user.lastname}")#s_lastname
+
+          p EMail:
+            br
+            input(type="text" value="#{user.user.email}")#s_email
+          
+          p Profile image:
+            br
+            input(type="text" value="#{user.user.image}")#s_image
+
+          input(type="button" value="Save")#s_save
+        script(type="text/javascript" src="/js/s.js")
+
+    else
+      p Вы не авторизованы
+      a(href="/auth") Войти
+
+
+  script (function($){$(window).load(function(){$("#scroll-conv").mCustomScrollbar({scrollInertia:450});$(".messages").mCustomScrollbar({scrollInertia:450});});})(jQuery);
+  script(type = 'text/javascript' src="/js/a.js")
+  script(type = 'text/javascript' src="/js/e.js")

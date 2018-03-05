@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+  head
+    title dialog
+
+      
+
+  body
+    #container.col
+      if(user)
+        img(src="#{user.photoUrl}", alt="")
+        br
+        Имя: #{user.username}
+        br
+        ID: #{user.userID}
+        hr
+        div(style = "clear:both;")
+        #dialog(style = "overflow-y: scroll; height: 400px; width: 400px; float: left; border: 1px solid #c4c4c4;") TEST
+        #convcont(style = "height: 400px; width: 300px; float: left; border: 1px solid #c4c4c4;")
+          #form
+            input(type = "text" name="members" placeholder="email")#members
+            input(type="button" value="Написать" onclick="createConversation();")#createconv
+            #spotlight(style = "display: none;") test
+          #convs(style = "overflow-y: scroll; height: 350px; width: 300px;")
+        div(style = "clear:both;")
+        #sendform
+          input(type = "text" name="msg")#msg
+          input(type="button" value="Отправить" onclick="send();" disabled)#sendbutton
+        a(href="/sign-out", class="sign-out") Выйти
+      else
+        p Вы не авторизованы
+        a(href="/auth") Войти
+    
+  script(type = 'text/javascript' src="http://yastatic.net/jquery/1.11.1/jquery.min.js")
+  script(type = 'text/javascript' src="/js/e.js")

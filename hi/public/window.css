@@ -1,0 +1,100 @@
+window .w-choose{
+	position: absolute;
+	width: 350px;
+	max-height: 55%;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.w-title{
+  	padding: 16px;
+	font-size: 1.05em;
+  	background: rgba(21,164,250, 0.6);
+  	color: #fff;
+  	border-radius: 6px 6px 0px 0px;
+}
+
+.element {
+	display: block;
+	width: 100%;
+	padding: 12px 16px;
+	cursor: pointer;
+	box-sizing: border-box;
+
+	border-bottom: 1px solid #f0f3f5;
+}
+
+.element .contact-name{
+	color: #777;
+}
+/*
+.element.selected{
+	background-color: rgba(255,255,255, 0.9);
+}*/
+
+.element.selected .contact-name{
+	color: rgba(21,164,250, 1);
+}
+
+.element .checkbox{
+	height: 16px;
+	width: 16px;
+	background-color: #e4e8eb;
+	margin-top: 8px;
+
+	border-radius: 2px;
+
+	-webkit-transition: 0.2s ease-out 0.1s;
+     -moz-transition: 0.2s ease-out 0.1s;
+     -o-transition: 0.2s ease-out 0.1s;
+     transition: 0.2s ease-out 0.1s;
+}
+
+.element.selected .checkbox{
+	background-color: rgba(21,164,250, 1);
+}
+
+.b0 {
+	position: absolute;
+	bottom: 0px;
+  	margin-bottom: 8px;
+	background-color: rgba(255,255,255,1);
+  	border-radius: 0px 0px 6px 6px;
+}
+
+#scrollElements{
+	background-color: rgba(255,255,255,1);
+	overflow: hidden;
+
+    height: calc(100% - 153px);
+    height: -moz-calc(100% - 153px);
+    height: -webkit-calc(100% - 153px);
+}
+
+
+
+.w-search{
+	background-color: #ddd;
+	padding: 4px 8px;
+	width: 100%;
+	box-sizing: border-box;
+	border: none;
+	border-radius: 4px;
+	text-align: center;
+	color: #777;
+
+	-webkit-transition: 0.2s ease-out 0.1s;
+ 	-moz-transition: 0.2s ease-out 0.1s;
+ 	-o-transition: 0.2s ease-out 0.1s;
+ 	transition: 0.2s ease-out 0.1s;
+}
+
+.bw{
+	background-color: rgba(255,255,255,1);
+}

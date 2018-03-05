@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    title = 'dialog'
+    script(type = 'text/javascript' src="http://yastatic.net/jquery/2.1.1/jquery.min.js")
+    script(type = 'text/javascript' src="/js/e.js")
+      
+
+  body
+    #container.col
+      if(user){
+        img(src="#{user.photoUrl}", alt="")
+        br
+        Имя: #{user.username}
+        br
+        ID: #{user.userID}
+        hr
+        #dialog TEST
+        #sendform
+          input(type = "text" name="msg")#msg
+          input(type="button" value="Отправить" onclick="send();")#sendbutton
+        a(href="/sign-out", class="sign-out") Выйти
+      }else{
+        p Вы не авторизованы
+        a(href="/auth") Войти
+      }
