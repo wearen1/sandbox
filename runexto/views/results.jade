@@ -1,0 +1,640 @@
+extends layout
+
+block head
+  title #{q} - Runexto Search Engine
+  link(rel='stylesheet', href='css/jquery.mCustomScrollbar.css')
+  script(type='text/javascript', src='js/smooth-scroll.js')
+  script(type='text/javascript', src='js/jquery.sticky.js')
+  script(src='js/jquery.mCustomScrollbar.concat.min.js')
+  script(src='js/script.js')
+
+block body
+  if (results.main.vkontakte)
+    each post in results.main.vkontakte
+        .layout-vk(style='display: none;')
+          .background
+            .box-window
+              #box-wrap.fl_l.box-wrap
+                #vk-head.fl_l.box-head
+                  .fl_l.head-title
+                    #vk-head-icon.fl_l.box-head-icon
+                    | Просмотр записи
+                  #close-vk-box-button.fl_r.smooth.close-box-button
+                .fl_l.content-with-comments
+                  #box-vk-content.fl_l.box-content
+                    .fl_l.box-actions
+                      .fl_l.box-date-icon
+                      .fl_l.box-date= post.post.date
+                      .fl_r.like_repost_info.box-info
+                        #box-likeit.fl_r.like.smooth.box-btn
+                          #box-noactive-like.fl_r.smooth.like_icon
+                          #box-like-count.fl_r.smooth.like_count.box= post.post.likes
+                        #box-repostit.fl_r.repost.smooth.box-btn
+                          #box-noactive-repost.fl_r.smooth.repost_icon
+                          #box-repost-count.fl_r.smooth.repost_count.box= post.post.reposts
+                    .fl_l.content-text
+                      = post.post.text
+                    //- img.box-window-image(src='#{post.group.photo_50}')
+                    .fl_l.content-text
+                      //- | Aliquam erat volutpat. Morbi eget lectus felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam porta metus orci, quis dignissim elit congue eget. Pellentesque ut lorem eu erat tincidunt aliquet at sed justo. Curabitur tempor laoreet neque, ut efficitur orci efficitur quis. Praesent id dictum massa, in commodo dui. Mauris ac vehicula orci. Ut sapien nisi, placerat vel dapibus sed, pulvinar non nisi. Fusce in convallis ligula, sed fringilla nisi. Aliquam non mi sed mauris sodales varius id id nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus faucibus quam eget pellentesque vehicula. In vitae ex dignissim, iaculis ante non, dignissim sem. Morbi eu fermentum dolor. Mauris finibus hendrerit tellus.
+                    .clear
+                    .fl_l.box-post-comments
+                      #box-vk-title.fl_l.box-comments-title #{post.post.comments} комментария
+                      //
+                         COMMENT 
+                      .fl_l.box-comment
+                        .fl_l.comment-avatar
+                          img.comm-img(src='images/test/vlad.jpg', width='50px')
+                        .fl_l.comment-content
+                          a#vk-comment-name.fl_l.comment-name(href='#') Vlad Simonov
+                          .fl_l.comment-date 5 минут назад
+                          .fl_l.comment-text
+                            = post.post.text
+                      //
+                         COMMENT 
+                      .fl_l.box-comment
+                        .fl_l.comment-avatar
+                          img.comm-img(src='images/test/vlad.jpg', width='50px')
+                        .fl_l.comment-content
+                          a#vk-comment-name.fl_l.comment-name(href='#') Vlad Simonov
+                          .fl_l.comment-date 5 минут назад
+                          .fl_l.comment-text Что ты мни всёёё врёёёшь?!
+                  .fl_l.comment-box
+                    .fl_l.input-shadow
+                    input#vk-comment.fl_l.box-input(placeholder='Комментировать')
+                #box-vk-info.fl_r.box-info-author
+                  .author-avatar
+                    img.box-avatar(src='#{post.group.photo_50}', width='100px')
+                  #vk-name.fl_l.box-name= post.group.name
+                  .fl_l.box-type
+                    if (post.group.type == 'page')
+                      | Публичная страница
+                  .clear
+                  .follow-button
+                    button#vk-btn.follow-btn Подписаться
+                  .fl_r.author-info
+                    .author-info-title информация
+                    .clear
+                    #vk-count.fl_l.author-info-count
+                      = post.group.members_count
+                      span.author-info-label  подписчиков
+                    .clear
+                    //- #vk-count.fl_l.author-info-count
+                    //-   | 245 200
+                    //-   span.author-info-label  постов
+                    //- .clear
+                    //- #vk-count.fl_l.author-info-count
+                    //-   | 112
+                    //-   span.author-info-label  альбомов
+                    //- .clear
+                    //- #vk-count.fl_l.author-info-count
+                    //-   | 19
+                    //-   span.author-info-label  видеозаписей
+  //
+     fb box window 
+  #layout-fb(style='display: none;')
+    .background
+      .box-window
+        #box-wrap.fl_l.box-wrap
+          #fb-head.fl_l.box-head
+            .fl_l.head-title
+              #fb-head-icon.fl_l.box-head-icon
+              | Просмотр записи
+            #close-fb-box-button.fl_r.smooth.close-box-button
+          .fl_l.content-with-comments
+            #box-fb-content.fl_l.box-content
+              .fl_l.box-actions
+                .fl_l.box-date-icon
+                .fl_l.box-date вчера в 18:52
+                .fl_r.like_repost_info.box-info
+                  #box-likeit-fb.fl_r.like.smooth.box-btn
+                    #box-noactive-like-fb.fl_r.smooth.like-icon-fb
+                    #box-like-count-fb.fl_r.smooth.like_fb_count.box 91552
+                  #box-repostit-fb.fl_r.repost.smooth.box-btn
+                    #box-noactive-repost-fb.fl_r.smooth.repost-icon-fb
+                    #box-repost-count-fb.fl_r.smooth.repost_count.box 6549
+              .fl_l.content-text
+                | Мы мудаки, теперь официально.
+              img.box-window-image(src='http://cs619116.vk.me/v619116834/10b9f/T1EMatPBNjo.jpg')
+              .fl_l.content-text
+                | А Роберто хуисос
+              .clear
+              .fl_l.box-post-comments
+                #box-vk-title.fl_l.box-comments-title 2 комментария
+                //
+                   COMMENT 
+                .fl_l.box-comment
+                  .fl_l.comment-avatar
+                    img.comm-img(src='images/test/vlad.jpg', width='50px')
+                  .fl_l.comment-content
+                    a#vk-comment-name.fl_l.comment-name(href='#') Vlad Simonov
+                    .fl_l.comment-date 5 минут назад
+                    .fl_l.comment-text
+                      | Я родился в 98 году и сразу оказался в гетто. Родителей у меня не было поэтому меня ростили папа Бузират и мама Марихуана. Попал в рабство в возрасте 8 лет, далее 2 года я был гладиатором и сражался за еду с циганскими детьми. Влюбился в цыганку по имени Семечка, но мне пришлось убить её. Я стоял на окровавленой арене и кричал "ЦЕЗАРЬ, ЦЕЗАРЬ Я ОТОМЩУ". Потом меня удочерил депутат Справедливой России Петр Афанасьевич Пикапопенко и теперь я его сын, хожу в школу и делаю свой реп про житуху и район. Люблю реп, траву свэг и россию. Всем риспект.
+                //
+                   COMMENT 
+                .fl_l.box-comment
+                  .fl_l.comment-avatar
+                    img.comm-img(src='images/test/vlad.jpg', width='50px')
+                  .fl_l.comment-content
+                    a#vk-comment-name.fl_l.comment-name(href='#') Vlad Simonov
+                    .fl_l.comment-date 5 минут назад
+                    .fl_l.comment-text Что ты мни всёёё врёёёшь?!
+            .fl_l.comment-box
+              .fl_l.input-shadow
+              input#vk-comment.fl_l.box-input(placeholder='Комментировать')
+          #box-fb-info.fl_r.box-info-author
+            .author-avatar
+              img.box-avatar(src='images/test/mdk_vk.jpg', width='100px')
+            #fb-name.fl_l.box-name MDK
+            .fl_l.box-type страница
+            .clear
+            .follow-button
+              button#fb-btn.follow-btn Подписаться
+            .fl_r.author-info
+              .author-info-title информация
+              .clear
+              #fb-count.fl_l.author-info-count
+                | 5 151 436
+                span.author-info-label  подписчиков
+              .clear
+              #fb-count.fl_l.author-info-count
+                | 245 200
+                span.author-info-label  постов
+              .clear
+              #fb-count.fl_l.author-info-count
+                | 112
+                span.author-info-label  альбомов
+              .clear
+              #fb-count.fl_l.author-info-count
+                | 19
+                span.author-info-label  видеозаписей
+  //
+     vk box window 
+  #layout-wiki(style='display: none;')
+    .background
+      .box-window
+        #box-wrap.fl_l.box-wrap
+          #wiki-head.fl_l.box-head
+            #wiki-head-title.fl_l.head-title
+              #wiki-head-icon.fl_l.box-head-icon
+              | Просмотр статьи
+            #close-wiki-box-button.fl_r.smooth.close-box-button
+          .fl_l.content-with-comments
+            #box-wiki-content.fl_l.box-content
+              .fl_l.box-wiki-title MDK (сообщество ВКонтакте)
+              .fl_l.content-text
+                | MDK, также МДК — одно из самых популярных сообществ «ВКонтакте» с числом подписчиков более 4,9 млн чел (на май 2014 года) и месячной аудиторией в 12 млн чел (на август 2013 года). Неоднократно обвинялось в экстремизме и ксенофобии.
+              .fl_l.wiki-tag(name='tagname1') Краткие сведения
+              #wiki-content-text.fl_l.content-text
+                p
+                  | Сообщество было основано в апреле 2011 года Дмитрием Трачуком и Робертo Панчвидзе (Енотовым). Большая часть записей в группе — картинки и демотиваторы на злободневные темы. Контент создают как пользователи, так и администрация сообщества. Робертo Панчвидзе является официальным лицом сообщества, он родом из Самары, по состоянию на 2013 год учился в Москве на психологическом факультете РГГУ.
+                p
+                  | По мнению экспертов, содержание некоторых сообщений группы «МДК» попадает под определение экстремистской деятельности, посты крайне нетолерантны, часто используется матерная лексик. Нередки националистические выходк. Отмечается, что по охвату аудитории МДК превосходит большинство интернет-изданий.
+                p
+                  | В октябре 2013 года после размещения в группе нецензурной картинки по случаю теракта в Волгограде депутат от «Единой России» Михаил Маркелов с трибуны Государственной Думы потребовал привлечь к ответственности Павла Дуров. Павел Дуров написал официальный ответ-опровержение депутату, а администраторы группы 7 ноября 2013 года объявили о подаче на Маркелова в суд с требованием 14 тысяч рублей в счёт убытков, «причинённых нашей организации в результате распространения сведений, порочащих её деловую репутацию» и извинений в крупнейших СМИ.
+                p
+                  | После крушения самолёта в Казани, унёсшего жизни 50 человек, от имени сообщества появилось сообщение, что из-за отсутствия онлайн-трансляции трагедии «стынет попкорн». Данный пост вызвал возмущение как у парламентариев (депутат Госдумы Валерий Трапезников предложил отправить «моральных уродов» на общественные работы), так и у рядовых жителей Казани и интернет-пользователей.
+                p
+                  | По словам директора Центра актуальной политики Андрея Татаринова, участники сообщества измываются «над терактами и падениями самолётов, а любимая их „бытовая“ тема — секс с родной сестрой».
+                p
+                  | На сервисе Change.org (англ.)русск. создана петиция руководству сайта «ВКонтакте» с требованием закрыть скандальную группу по причине установления обстановки национальной напряжённости в России. Авторы петиции отмечают, что сообщество занимается пропагандой наркотиков, оскорбляет представителей национальных меньшинств, использует в своих постах ненормативную лексику; при этом основной аудиторией группы являются школьники.
+              .fl_l.wiki-tag(name='tagname2') «Поколение МДК»
+              #wiki-content-text.fl_l.content-text
+                p
+                  | Рост популярности сообщества совпал с появлением подростковой субкультуры спальных районов и окраин крупных городов, которую многие назвали «поколением МДК». Это поколение России наступившего XXI века, которое ходит в торговые центры, чисто одевается, чьи семьи живут в кредит. Это школьники и студенты, полные искусственности, деланности, наглости и цинизма, которые упиваются чёрным юмором в сети.
+              .fl_l.wiki-tag(name='tagname3') Собственники и руководство
+              #wiki-content-text.fl_l.content-text
+                p
+                  | Товарный знак «МДК» принадлежит ООО «Сарафанка», генеральным директором которого является сооснователь сообщества — Дмитрий Аладышев. Ему принадлежит 34 % ООО «МДК». Дмитрию Трачуку и Роберто Панчвидзе принадлежит по 33 % компании.
+                p Адрес компании 127206, город Москва, проезд Астрадамский, 3.
+              .fl_l.wiki-tag(name='tagname4') Другая информация
+              #wiki-content-text.fl_l.content-text
+                p
+                  | 27 июня 2013 года группа была заблокирована руководством соцсети из-за спама со ссылкой на сообщество. Руководство паблика заявляет, что стало жертвой шантажистов, сделавших подставную рекламу и вымогавших 200 тысяч рублей. И хотя изначально речь шла о блокировке на 1,5-2 месяца, уже 29 июня сообщество было разблокировано.
+                p
+                  | В рамках предвыборной кампании на пост мэра Москвы «МДК» бесплатно разместило на своём профиле фотографию Алексея Навального.
+                p
+                  | С июля по август 2013 года группа имела представительство в социальной сети «Одноклассники», но его пришлось закрыть из-за обвинений в плагиате со стороны администрации группы и несоблюдения руководством соцсети договорённостей по поводу видеорекламы.
+                p
+                  | Есть приложения для смартфонов и планшетов. В частности, приложение для iOS является одним из самых популярных в русскоязычном App Store.
+                p
+                  | После запуска сайтом «ВКонтакте» собственной биржи рекламных постов МДК стало самой дорогой площадкой соцсети: за размещение рекламы в нём придётся заплатить 170 тысяч рублей (на середину декабря 2013 года).
+                p
+                  | 17 декабря 2013 года МДК зарегистрировало свой бренд. Под этим именем будут выходить фирменные сувениры и одежда. Кроме того, регистрация товарного знака позволит основателям бороться с сообществами и компаниями, которые пытаются нажиться на их бренде.
+              .clear
+          #box-wiki-info.fl_r.box-info-author
+            #content-wiki-noborder.fl_r.content-wiki
+              .wiki-content-title содержание
+              .clear
+              a.fl_l.content-item(href='#', onclick='$(\'div[name=tagname1]\')[0].scrollIntoView()') 1. Краткие сведения
+              a.fl_l.content-item(href='#', onclick='$(\'div[name=tagname2]\')[0].scrollIntoView()') 2. «Поколение МДК»
+              a.fl_l.content-item(href='#', onclick='$(\'div[name=tagname3]\')[0].scrollIntoView()') 3. Собственники и руководство
+              a.fl_l.content-item(href='#', onclick='$(\'div[name=tagname4]\')[0].scrollIntoView()') 4. Другая информация
+  //
+     HEADER 
+  header
+    #toppage.head-center
+      .fl_l.head-links
+        a#active.head-link(href='#', target='_blank') Runexto
+        a.head-link(href='#', target='_blank') YourTape
+        a.head-link(href='#', target='_blank') YoTravel
+        a.head-link(href='#', target='_blank') GTS
+        a.head-link(href='/bookmark/list') Bookmarks
+      .fl_r.auth-link
+        a#open-auth-box.head-link(href='#') Авторизоваться
+        #auth-box(style='display: none;')
+          #close-auth-box.title Отменить
+          #auth-page-1(style='display: block;')
+            .step-title Авторизуйтесь через социальные сети
+            .fl_l.social-auth-link
+              a.fl_l.social-link.fb(href='#')
+              a.fl_l.social-link.vk(href='/oauth/vkontakte', target='_blank')
+              a.fl_l.social-link.tw(href='/oauth/twitter', target='_blank')
+              a.fl_l.social-link.inst(href='#')
+              a.fl_l.social-link.lastfm(href='#')
+            .clear
+            .info
+              | Чтобы пользоваться поиском в полную
+              | силу, авторизуйтесь через максимальное
+              | количество социальных сетей.
+            .fl_l.actions_steps
+              #1to2.fl_r.auth-next Далее
+          #auth-page-2(style='display: none;')
+            .step-title Основная информация
+            .auth-general-inputs
+              input#first-name.auth-input.top-borders(placeholder='Введите ваше имя')
+              input#last-name.auth-input.bottom-borders(placeholder='Введите вашу фамилию')
+            .clear
+            .info
+              | Пожалуйста, указывайте настоящие данные.
+              | Это упростит работу.
+              | Хотя, это просто текст, который напишет Кирилл.
+              .import-area(onclick='importcheck()')
+                .fl_l.point(style='margin: 12px 0px;')
+                  #import_check
+                .fl_l.label Импорт данных из соц. сетей
+            .fl_l.actions_steps
+              #2to3.fl_r.auth-next Далее
+              #2to1.fl_l.auth-prev Назад
+          #auth-page-3(style='display: none;')
+            .step-title Основная информация
+            .auth-general-inputs
+              textarea.interests-area(placeholder='Ваши интересы')
+            .clear
+            .info
+              | Будет пиздато, если вы введете настоящую инфу.
+              | Не будьте хуйлом, пожалуйста. Спасибо.
+            .fl_l.actions_steps
+              #3to4.fl_r.auth-next Далее
+              #3to2.fl_l.auth-prev Назад
+          #auth-page-4(style='display: none;')
+            .step-title Другие настройки
+            .auth-general-inputs
+              .fl_l.input_imitation yourtape.com/
+              input#link-input.fl_l.auth-input(placeholder='link')
+              .clear
+              //
+                <div id="error" style="display: none">Логин занят</div>
+              .fl_l.photo-label Выберите фото:
+              button.upload-photo Загрузить фотографию
+              .border-or или
+              a.import-photo(href='#')
+                .center импортировать из соц.сетей
+            .clear
+            .info
+              | Здесь будет текст о последнем шаге регистрации.
+            .fl_l.actions_steps
+              .fl_r.auth-finish Finish
+              #4to3.fl_l.auth-next Назад
+  .wrap
+    #fixed-floating.left-fixed
+      a#nodecoration(href='#toppage', data-scroll='', data-options='easing: easeOutCubic')
+        #up(style='display: none;') Вверх
+      .notif_center
+        .fl_l.smooth.notif
+          .fl_l.message_icon
+          .fl_l.triangle
+          #message.fl_l.count 10
+        .fl_l.smooth.notif
+          .fl_l.feedback_icon
+          .fl_l.triangle
+          #message.fl_l.count 2
+        .clear
+        .border-notif
+        .fl_l.smooth.settings
+          .fl_l.settings_icon
+    .fl_l.left_part
+      .input_area
+        a(href='main-page.html')
+          .fl_l.logo
+        form(style='padding: 0; margin: 0', action="/")
+          .fl_l.input
+            input#search(name='q', value='#{q}')
+          button.fl_r.search_button GO
+      .fl_l.total_page
+        .result_title Статьи
+        if (results.head.wiki)
+          .fl_l.result
+            .fl_l.icon
+              #wikipedia.fl_r.result_icon_image
+            #complete.fl_l.result_item.wiki(onclick='openWIKImodal()')
+              if (results.head.wiki.Image)
+                #wiki.fl_l.result_item_image
+                  img#wiki_image.item_image(src='#{results.head.wiki.Image.source}')
+              #wiki-info.fl_l.basic_info_post
+                .fl_l.public_name= results.head.wiki.Text.$t
+                .fl_l.post_text= results.head.wiki.Description.$t
+                .clear
+                .public_link(style='margin-top: 6px;')
+                  .fl_l.link_icon
+                  .fl_l.link
+                    a(href='#{decodeURIComponent(results.head.wiki.Url.$t)}')= decodeURIComponent(results.head.wiki.Url.$t)
+              .clear
+        .clear
+        .result_title(style='margin-top: 26px;') Сообщества по запросу
+        if (results.head.vkontakte)
+          each group in results.head.vkontakte
+            .fl_l.result.vkontakte
+              .fl_l.icon
+                #vk.fl_r.result_icon_image
+              #top.fl_l.result_item
+                .fl_l.result_item_image
+                  img.item_image(src='#{group.photo}')
+                .fl_l.basic_info
+                  .public_name= group.name
+                  .type_item страница
+                  .link
+                    a(href='http://#{group.screen_name}')
+                      | http://vk.com#{group.screen_name}
+                .fl_r.follow_actions
+                  .fl_r.vk_count
+                    = group.members_count
+                    | подписчиков
+                  .fl_r.follow.vk-follow
+                    a(href='#{group.screen_name}') Подписаться
+                .clear
+                .border
+              .fl_r.actions_load
+                a(href="#")
+                  .arrow.vkontakte
+                a(href="#")
+                  .arrow.down.vkontakte
+        //- .fl_l.result
+        //-   .fl_l.icon
+        //-     #facebook.fl_r.result_icon_image
+        //-   #center.fl_l.result_item
+        //-     .fl_l.result_item_image
+        //-       img.item_image(src='images/test/mdk_vk.jpg')
+        //-     .fl_l.basic_info
+        //-       .public_name Саша Грей МДК поймет
+        //-       .type_item Страница Facebook
+        //-       .link
+        //-         a(href='#') facebook.com/pashadurovmudak
+        //-     .fl_r.follow_actions
+        //-       .fl_r.fb_count
+        //-         | 3 987 291 лайков
+        //-       .fl_r.follow.fb-follow
+        //-         a(href='#') Подписаться
+        //-     .clear
+        //-     .border
+        //-   .fl_r.actions_load
+        //-     a(href='#')
+        //-       .arrow
+        //-     a(href='#')
+        //-       .arrow.down
+        if (results.head.twitter)
+          each group in results.head.twitter
+            .fl_l.result.twitter
+              .fl_l.icon
+                #twitter.fl_r.result_icon_image
+              #bottom.fl_l.result_item
+                .fl_l.result_item_image
+                  img.item_image(src='#{group.profile_image_url}')
+                .fl_l.basic_info
+                  .public_name= group.name
+                  .type_item профиль Twitter
+                  .link
+                    a(href='https://twitter.com/#{group.screen_name}')
+                      | https://twitter.com/#{group.screen_name}
+                .fl_r.twitter_count.right
+                  .twitter_digit
+                    = group.followers_count
+                  .twitter_count_type подписч.
+                .fl_r.twitter_count.left
+                  .twitter_digit
+                    = group.statuses_count
+                  .twitter_count_type твитов
+                .fl_r.follow.tw-follow
+                  a(href='#') Подписаться
+                .clear
+              .fl_r.actions_load
+                a(href="#")
+                  .arrow.twitter
+                a(href="#")
+                  .arrow.down.twitter
+
+        .clear
+        .result_title(style='margin-top: 26px;') Твиты
+        .fl_l.tweet_results
+          .fl_l.icon
+            #twitter.fl_r.result_icon_image
+          #tweet-area.fl_l.tweet_result_item
+            #two-tweets-height.fl_l
+              if results.main.twitter
+                each tweet in results.main.twitter.statuses
+                  .fl_l.one_tweet
+                    .fl_l.result_item_image
+                      img.item_image(src='#{tweet.user.profile_image_url}')
+                    #first-tweet-height.fl_l.basic_info_post
+                      .fl_l.public_name= tweet.user.name
+                      .fl_l.time(style='margin-top: 1px;') 
+                      - var then = new Date(tweet.created_at)
+                      - var now = Date.now()
+                        = Math.floor((now - then) / 60000)
+                        |  минут назад
+                      .clear
+                      .fl_r.actions(style='margin: -20px;')
+                        //- a(href='#')
+                          //- .refresh(title='Index date: 1.09.14 at 7:00am')
+                        a(href='/bookmark/add/' + encodeURIComponent('https://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}'))
+                          .bookmark
+                      .fl_l.post_text
+                        = tweet.text.trim()
+
+                      .clear
+                      .fl_l.like_repost_info(style='margin-top: 8px;')
+                        .fl_r.like
+                          .fl_r.favorite_icon
+                          .fl_r.favorite_count
+                            = tweet.favorite_count
+                        .fl_r.retweet
+                          .fl_r.retweet_icon
+                          .fl_r.retweet_count
+                            = tweet.retweet_count
+                      .clear
+                      .public_link(style='margin-top: 6px;')
+                        .fl_l.link_icon
+                        .fl_l.link
+                          a(href='https://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}')
+                            | https://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}
+                    .clear
+                    #tweets-border.border
+                //
+                  /FIRST TWEET/
+             
+        .clear
+        .result_title(style='margin-top: 26px;') Посты / Твиты
+        if (results.main.vkontakte)
+          - var i = 0
+          each post in results.main.vkontakte
+            .fl_l.result.vk
+              .fl_l.icon
+                #vk.fl_r.result_icon_image
+              #top.fl_l.result_item(onclick='openVKmodal(#{i})')
+                - i++
+                .fl_l.result_item_image
+                  img.item_image(src='#{post.group.photo_50}')
+                .fl_l.basic_info_post
+                  .fl_l.public_name= post.group.name
+                  .fl_l.time(style='margin-top: 1px;')= post.post.date
+                  .fl_r.like_repost_info
+                    .fl_r.like
+                      .fl_r.like_icon
+                      .fl_r.like_count= post.post.likes
+                    .fl_r.repost
+                      .fl_r.repost_icon
+                      .fl_r.repost_count= post.post.reposts
+                  .fl_l.post_text
+                    = post.post.text.trim().slice(0, 170)
+                    div(style='margin-top: 10px;')
+                      a.readmore(href='#') Читать далее
+                  .clear
+                  .public_link(style='margin-top: 6px;')
+                    .fl_l.link_icon
+                    .fl_l.link
+                      a(href='http://vk.com/#{post.group.screen_name}?w=wall#{post.post.from_id}_#{post.post.id}')
+                        | http://vk.com/#{post.group.screen_name}?w=wall#{post.post.from_id}_#{post.post.id}
+                .clear
+                .border
+              .fl_r.actions
+                a(href='/reindex/#{post.post.id}')
+                  .refresh(title='Index date: 1.09.14 at 7:00am')
+                a(href='/bookmark/add/' + encodeURIComponent('http://vk.com/#{post.group.screen_name}?w=wall#{post.post.from_id}_#{post.post.id}'))
+                  .bookmark
+        //- .fl_l.result
+        //-   .fl_l.icon
+        //-     #facebook.fl_r.result_icon_image
+        //-   #bottom.fl_l.result_item(onclick='openFBmodal()')
+        //-     .fl_l.result_item_image
+        //-       img.item_image(src='images/test/mdk_vk.jpg')
+        //-     .fl_l.basic_info_post
+        //-       .fl_l.public_name #MDK (18+)
+        //-       .fl_l.time(style='margin-top: 1px;') 16 часов назад
+        //-       .fl_r.like_repost_info
+        //-         .fl_r.like
+        //-           .fl_r.like_fb_icon
+        //-           .fl_r.like_fb_count 91552
+        //-         .fl_r.retweet
+        //-           .fl_r.share_icon
+        //-           .fl_r.share_count 6549
+        //-       .fl_l.post_text
+        //-         | Мы мудаки, официально теперь.
+        //-       .clear
+        //-       .public_link(style='margin-top: 6px;')
+        //-         .fl_l.link_icon
+        //-         .fl_l.link
+        //-           a(href='#') tilalkashtoli.com/post00000
+        //-     .clear
+        //-   .fl_r.actions
+        //-     a(href='#')
+        //-       .refresh(title='Index date: 1.09.14 at 7:00am')
+        //-     a(href='#')
+        //-       .bookmark
+    #fixed-right.fl_r.right_part
+      .fl_l.advance_search
+        #advance.fl_l.item(onclick='open_advance()')
+          .fl_l.name_item Расширенный поиск
+          #icon_advance.fl_r.icon_item
+          .clear
+          #advance_search_options(style='display: none;')
+            .test_content Здесь будут опции
+        #live.fl_l.item(onclick='open_live()')
+          .fl_l.name_item Живой поиск
+          #icon_live.fl_r.icon_item
+          .clear
+          #live_search_options(style='display: none;')
+            .test_content Здесь будут опции
+      .fl_l.search_options
+        .fl_l.option_item(onclick='check(\'all\')')
+          .fl_l.name_item Все результаты
+          .fl_r.point
+            #all_check
+        .fl_l.option_item(onclick='check(\'vk\')')
+          .fl_l.name_item ВКонтакте
+          .fl_r.point
+            #vk_check.checked
+        .fl_l.option_item(onclick='check(\'fb\')')
+          .fl_l.name_item Facebook
+          .fl_r.point
+            #fb_check
+        .fl_l.option_item(onclick='check(\'tw\')')
+          .fl_l.name_item Twitter
+          .fl_r.point
+            #tw_check.checked
+        .fl_l.option_item(onclick='check(\'inst\')')
+          .fl_l.name_item Instagram
+          .fl_r.point
+            #inst_check.checked
+        .fl_l.option_item(onclick='check(\'ytb\')')
+          .fl_l.name_item Youtube
+          .fl_r.point
+            #ytb_check
+        .clear
+        #option.border
+        .fl_l.option_item(onclick='check(\'communities\')')
+          .fl_l.name_item Сообщества
+          .fl_r.point
+            #communities_check
+        .fl_l.option_item(onclick='check(\'blogers\')')
+          .fl_l.name_item Блогеры
+          .fl_r.point
+            #blogers_check
+        .fl_l.option_item(onclick='check(\'events\')')
+          .fl_l.name_item Встречи
+          .fl_r.point
+            #events_check
+  script.
+    smoothScroll.init({
+    speed: 700,
+    easing: 'easeInOutCubic',
+    offset: 0,
+    updateURL: false,
+    callbackBefore: function ( toggle, anchor ) {},
+    callbackAfter: function ( toggle, anchor ) {}
+    });
+  script.
+    $(document).ready(function(){
+    $("#fixed-floating").sticky({topSpacing:0});
+    });
+  script.
+    (function($){
+    $(window).load(function(){
+    $("#box-vk-content").mCustomScrollbar({scrollInertia:450});
+    $("#tweet-area").mCustomScrollbar({scrollInertia:450});
+    $("#box-fb-content").mCustomScrollbar({scrollInertia:450});
+    });
+    })(jQuery);
+
+block footer
+  .clear
+  footer#resilt-page
+    .footer-links
+      .fl_l.footer-wrap
+        a.fl_l.footer-link(href='#') о нас
+        a.fl_l.footer-link(href='#') о Runexto
+        a.fl_l.footer-link(href='#') вакансии
+        a.fl_l.footer-link(href='#') пользовательское соглашение
+        a.fl_l.footer-link(href='#') язык
+        .fl_r.footer-copy
+          | Runexto © 2014

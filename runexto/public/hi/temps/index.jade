@@ -1,0 +1,78 @@
+html(ng-app="project")
+  head
+    title Hi Messenger
+    meta(charset="UTF-8")
+    link(rel="stylesheet" href="style.css" type="text/css")
+    link(rel="stylesheet" href="jquery.mCustomScrollbar.css")
+
+
+    link(rel="stylesheet" type="text/css" href="js/sweet-alert.css")
+    link(rel="stylesheet" type="text/css" href="js/example.css")
+
+    link(href='http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css')
+    link(rel="icon" type="image/png" href="images/favicon.png")
+
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+
+    script(src="js/jquery-ui.min.js")
+    script(src="js/jquery.mCustomScrollbar.concat.min.js")
+
+    script(type = 'text/javascript' src="/js/u.js")
+
+
+    script(src="https://code.angularjs.org/1.3.0/angular.min.js")
+    script(src="https://code.angularjs.org/1.3.0/angular-route.min.js")
+    script(src="https://code.angularjs.org/1.3.0/angular-resource.min.js")
+
+    script(src="/js/angular-file-upload.min.js")
+
+
+
+    script(src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.2/src/scrollglue.js")
+
+
+    script(src= "/js/project.js")
+    script(src= "/js/server.js")
+    
+    script(src= "/js/directives.js")
+    if(user)
+      script var userID = '#{user.user._id}';
+
+      
+
+  body(onresize="resize()")
+    if(user)
+      if(user.user.firstname)
+        div(ng-view)
+
+      else
+        #s_status
+        form#setting
+          h2 Settings
+          p Firstname:
+            br
+            input(type="text" value="#{user.user.firstname}")#s_firstname
+
+          p Lastname:
+            br
+            input(type="text" value="#{user.user.lastname}")#s_lastname
+
+          p EMail:
+            br
+            input(type="text" value="#{user.user.email}")#s_email
+          
+          p Profile image:
+            br
+            input(type="text" value="#{user.user.image}")#s_image
+
+          input(type="button" value="Save")#s_save
+        script(type="text/javascript" src="/js/s.js")
+
+    else
+      p Вы не авторизованы
+      a(href="/auth") Войти
+
+
+  //script (function($){$(window).load(function(){$("#scroll-conv").mCustomScrollbar({scrollInertia:450});$(".messages").mCustomScrollbar({scrollInertia:450});});})(jQuery);
+  //script(type = 'text/javascript' src="/js/a.js")
+  //script(type = 'text/javascript' src="/js/e.js")

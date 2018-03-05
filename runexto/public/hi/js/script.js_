@@ -1,0 +1,49 @@
+$(document).ready(function(){
+    document.getElementById('change-state').addEventListener('click', function() { 
+        $('.change-state-switch').fadeIn(150);
+    }, false);
+});
+
+$(document).ready(function(){
+    document.getElementById('set-online').addEventListener('click', function() { 
+        $('.profile-info-state').removeAttr('id');
+        $('.profile-info-state').attr('id', 'online');
+        $('.change-state-switch').fadeOut(150);
+        document.getElementById('state-text').innerHTML = "Online";
+    }, false);
+});
+
+$(document).ready(function(){
+    document.getElementById('set-away').addEventListener('click', function() { 
+        $('.profile-info-state').removeAttr('id');
+        $('.profile-info-state').attr('id', 'away');
+        $('.change-state-switch').fadeOut(150);
+        document.getElementById('state-text').innerHTML = "Away";
+    }, false);
+});
+
+$(document).ready(function(){
+    document.getElementById('set-dnd').addEventListener('click', function() { 
+        $('.profile-info-state').removeAttr('id');
+        $('.profile-info-state').attr('id', 'dnd');
+        $('.change-state-switch').fadeOut(150);
+        document.getElementById('state-text').innerHTML = "DND";
+    }, false);
+});
+
+function resize(){
+    document.getElementById('right-wrap-width').style.width = (document.body.clientWidth - 310) + "px";
+}
+
+$(document).ready(init);
+
+function init(){
+  $("#window-1").draggable({
+      containment:'parent',
+      handle: "#head-1"
+  });
+  $("#window-2").draggable({
+      containment:'parent',
+      handle: "#head-2"
+  });
+}

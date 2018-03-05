@@ -1,0 +1,244 @@
+<html ng-app="runexto">
+<head>
+    <title>Runexto</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic">
+
+    <link rel="icon" href="images/favicon.png">
+    <link rel="stylesheet" href="build/css/bundle.css">
+    <!-- <link rel="stylesheet" href="css/start.css"> -->
+
+     <script src="js/lib/other/lodash.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="js/lib/jquery/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="js/lib/jquery/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+     <!-- <script src="js/lib/jquery/jquery.sticky.js" type="text/javascript" charset="utf-8"></script> -->
+     <script src="js/lib/jquery/jquery.mCustomScrollbar.concat.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="js/lib/jquery/smooth-scroll.js" type="text/javascript" charset="utf-8"></script>
+
+     <script src="js/lib/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="js/lib/angular/angular-cookies.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="js/lib/angular/angular-ui-router.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="js/lib/angular/angular-ui-utils.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="js/lib/angular/angular-file-upload.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="js/lib/angular/angular-resource.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="js/lib/angular/angular-sanitize.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="js/lib/angular/angular-animate.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="js/lib/angular/ngStorage.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="js/lib/angular/angular-translate.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/angular/angular-translate-loader-static-files.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/angular/angular-translate-storage-local.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/angular/angular-translate-storage-cookie.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="js/lib/ext/matchMedia.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/ext/matchMedia.addListener.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/ext/sticky.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/factories/index.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/directives/index.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="js/controllers/auth.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/controllers/index.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/controllers/search.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/controllers/bookmark.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/controllers/login.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="js/filters/index.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body id='mybody' ng-controller="AuthCtrl">
+    <div id="bg">
+    </div>
+
+<header>
+    <div class="head-center" id="toppage">
+
+       <!--  <div class="top_worm">
+        </div> -->
+
+        <div class="fl_l head-links">
+            <a href="/" class="header-link header-logo">Runexto</a>
+            <a href="#" class="header-link">Hi</a>
+            <a href="#" class="header-link">YourTape</a>
+            <a href="#" class="header-link">Vspace</a>
+            <a href="#" class="header-link">SpyNotify</a>
+
+            <!-- <a href class="head-link fl_r" ng-if="user.me.bookmarks.length" ng-click="get_bookmarks();">YoBookmarks</a> -->
+        </div>
+
+        <!-- <a href class="head-link fl_r"  ng-if="user.me && !user.me.error">Выход</a> -->
+
+        <div class="fl_r head-links" ng-if="!user.me">
+            <a href class="header-link" ng-click="doAuth();" ui-sref="login">
+                Войти
+            </a>
+        </div>
+
+        <div class="fl_r head-links" ng-if="user.me">
+            <a href class="header-link" ng-if="user.me" ng-click="showUserBox($event);">
+                {{user.me.personal.name + ' ' + user.me.personal.surname}}
+            </a>
+
+            <!--<a href class="head-link fl_r maximize-btn" ng-click="toggleFullScreen();"></a>-->
+
+            <div id="user-box" style="display: none;right:0;top: 53px;">
+                <div class="title" ng-click="closeUserBox($event)" translate="registration.close"></div>
+
+                <div id="auth-page-1" style="display: block">
+                    <div class="step-title" translate="registration.authorization_through">
+                    </div>
+                    <div class="fl_l social-auth-link" style="margin-left:10%;">
+                        <a auth-modal href ng-click="openWindow('/oauth/facebook');" class="fl_l social-link fb"
+                           ng-class="user.session.fb?'':'inactive'"></a>
+                        <a auth-modal href ng-click="openWindow('/oauth/vkontakte');" class="fl_l social-link vk"
+                           ng-class="user.session.vk?'':'inactive'"></a>
+                        <a auth-modal href ng-click="openWindow('/oauth/twitter');" class="fl_l social-link tw"
+                           ng-class="user.session.tw?'':'inactive'"></a>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="info" translate="registration.authorization_invite">
+                    </div>
+
+                    <div class="fl_l actions_steps">
+                        <div class="fl_r auth-next" ng-click="logout();" translate="registration.exit"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="head-links fl_r" ng-if="user.me">
+          <a ui-sref="bookmarks" class="header-link" translate="header.bookmarks"></a>
+        </div>
+
+
+        <!-- header.bookmarksv> -->
+
+    </div>
+</header>
+
+<div class="smooth right-menu-call" id="show-settings">
+    <div class="menu-lines-icon">
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+        <div class="menu-line" style="margin-bottom: 0px"></div>
+    </div>
+</div>
+
+<div class="setting-page" style="display: none;">
+    <!-- <div style="padding-top:42px;background-color:#fff;z-index:-1"></div> -->
+
+    <div class="fl_l setting-head">
+        <!-- <div class="fl_l setting-title" translate="settings.title"></div> -->
+        <div class="fl_r settings-close" id="close-settings"></div>
+    </div>
+    <div>
+      <div class="fl_l setting-title-light collapsible" id="theme-select" ng-click="toggleCollapsible('scroll-settings', 'icon_item_rev', 'icon_item');" translate="settings.theme" style="width: 70%;">
+      </div>
+      <div class="fl_r icon_item" style="margin: 16px;cursor:pointer;" id="scroll-settings-mark" ng-click="toggleCollapsible('scroll-settings', 'icon_item_rev', 'icon_item');"></div>
+    </div>
+
+    <div class="theme-settings" id="scroll-settings" style="display:block">
+        <div class="fl_l choose-theme set-theme-0" id="set-theme-0" ng-click="user.settings.theme = 0"></div>
+        <div class="fl_l choose-theme set-theme-1" id="set-theme-1" ng-click="user.settings.theme = 1"></div>
+        <div class="fl_l choose-theme set-theme-2" id="set-theme-2" ng-click="user.settings.theme = 2">
+            <div class="fl_r active-theme"></div>
+        </div>
+        <div class="fl_l choose-theme set-theme-3" id="set-theme-3" ng-click="user.settings.theme=3"></div>
+        <div class="fl_l choose-theme set-theme-4" id="set-theme-4" ng-click="user.settings.theme=4"></div>
+        <div class="fl_l choose-theme set-theme-5" id="set-theme-5" ng-click="user.settings.theme=5"></div>
+        <div class="fl_l choose-theme set-theme-6" id="set-theme-6" ng-click="user.settings.theme=6"></div>
+        <div class="fl_l choose-theme set-theme-7" id="set-theme-7" ng-click="user.settings.theme=7"></div>
+        <div class="fl_l choose-theme set-theme-8" id="set-theme-8" ng-click="user.settings.theme=8"></div>
+        <div class="fl_l choose-theme set-theme-9" id="set-theme-9" ng-click="user.settings.theme=9"
+             style="margin-bottom: 0px;"></div>
+    </div>
+    <div class="clear"></div>
+
+    <div class="fl_l" id="static_pages" style="position:absolute;top: 84%;text-align: center;">
+        <div class="footer-links">
+        <div class="fl_l footer-wrap">
+            <a ui-sref="about_us" class="footer-link" translate="footer.about_us"></a>
+            <br/>
+            <a href="/welcome" class="footer-link" translate="footer.about_runexto" target="_self"></a>
+            <a ui-sref="vacancy" class="footer-link" translate="footer.vacancy"></a>
+            <a ui-sref="agreement" class="footer-link" translate="footer.user_agreement"></a>
+
+            </div>
+        </div>
+    </div>
+
+    <!--
+    <div class="fl_l setting-title-light collapsible" id="lang-select" ng-click="toggleCollapsible('lang-settings');" translate="settings.lang.title" style="width: 100%;"></div>
+    <div class="theme-settings" id="lang-settings" style="display:none">
+        <div class="fl_l setting-title-light selectable hoverable" ng-click="user.settings.lang='ru'" translate="settings.lang.ru"></div>
+        <div class="fl_l setting-title-light selectable hoverable" ng-click="user.settings.lang='en'" translate="settings.lang.en"></div>
+    </div> -->
+
+</div>
+
+<div ui-view id="view">
+</div>
+
+<div class="clear"></div>
+
+<!-- <footer>
+    <div class="footer-links">
+        <div class="fl_l footer-wrap">
+            <a href="#" class="fl_l footer-link" translate="footer.about_us"></a>
+            <a href="/welcome" class="fl_l footer-link" translate="footer.about_runexto" target="_self"></a>
+            <a href="#" class="fl_l footer-link" translate="footer.vacancy"></a>
+            <a href="#" class="fl_l footer-link" translate="footer.user_agreement"></a>
+
+            <div class="fl_r footer-copy">Runexto &copy; 2014</div>
+            </div>
+        </div>
+</footer> -->
+
+</body>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        smoothScroll.init({
+            speed:          700,
+            easing:         'easeInOutCubic',
+            offset:         0,
+            updateURL:      false,
+            callbackBefore: function (toggle, anchor) {
+            },
+            callbackAfter:  function (toggle, anchor) {
+            }
+        });
+        $("#scroll-settings").mCustomScrollbar({scrollInertia: 450, theme: "dark"});
+    });
+</script>
+
+<script type="text/javascript">
+    function check(type) {
+        if ($('#' + type + '_check').attr('class') == null)
+            $('#' + type + '_check').attr('class', 'checked');
+        else
+            $('#' + type + '_check').removeAttr('class');
+    }
+
+    $(document).ready(function () {
+        // 274 x 100
+
+        document.getElementById('show-settings').addEventListener('click', function () {
+            $('.setting-page').show("slide", {direction: "left", easing: 'easeOutCubic'}, 600);
+            // $(window).click(function(e){
+            //     console.log(e);
+            //     if (e.originalEvent.target.className !== 'setting-page')
+            //         $('.setting-page').hide("slide", {direction: "left", easing: 'easeInOutCubic'}, 500);
+            // });
+        }, false);
+
+        document.getElementById('close-settings').addEventListener('click', function () {
+            $('.setting-page').hide("slide", {direction: "left", easing: 'easeInOutCubic'}, 500);
+        }, false);
+
+    });
+</script>
+
+</html>

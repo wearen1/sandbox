@@ -1,0 +1,94 @@
+$(document).ready(function(){
+    document.getElementById('change-state').addEventListener('click', function() { 
+        $('.change-state-switch').fadeIn(150);
+    }, false);
+});
+
+$(document).ready(function(){
+    document.getElementById('set-online').addEventListener('click', function() { 
+        $('.profile-info-state').removeAttr('id');
+        $('.profile-info-state').attr('id', 'online');
+        $('.change-state-switch').fadeOut(150);
+        document.getElementById('state-text').innerHTML = "Online";
+    }, false);
+});
+
+$(document).ready(function(){
+    document.getElementById('set-away').addEventListener('click', function() { 
+        $('.profile-info-state').removeAttr('id');
+        $('.profile-info-state').attr('id', 'away');
+        $('.change-state-switch').fadeOut(150);
+        document.getElementById('state-text').innerHTML = "Away";
+    }, false);
+});
+
+$(document).ready(function(){
+    document.getElementById('set-dnd').addEventListener('click', function() { 
+        $('.profile-info-state').removeAttr('id');
+        $('.profile-info-state').attr('id', 'dnd');
+        $('.change-state-switch').fadeOut(150);
+        document.getElementById('state-text').innerHTML = "DND";
+    }, false);
+});
+
+function resize(){
+    document.getElementById('right-wrap-width').style.width = (document.body.clientWidth - 310) + "px";
+    var optimal = ( document.body.clientHeight - 200 ) / 5;
+    document.getElementById('scroll-dialogs').style.height = optimal * 3 + "px";
+    document.getElementById('scroll-contacts').style.height = optimal * 2 + "px";
+}
+
+$(document).ready(init);
+
+function init(){
+  $("#window-1").draggable({
+      containment:'parent',
+      handle: "#head-1"
+  });
+  $("#window-2").draggable({
+      containment:'parent',
+      handle: "#head-2"
+  });
+}
+
+/* CHOOSE THEME */
+
+function SetTheme(id){
+    $('.active-theme').remove();
+    $('#set-theme-' + id ).append('<div class="fl_r active-theme"></div>');
+    
+    swal("Good job!", "Selected theme now is active.", "success");
+    setTimeout( function () {$('.wrap').attr('class', 'wrap theme_' + id);}, 100);
+}
+
+
+$(document).ready(function(){
+    document.getElementById('show-settings').addEventListener('click', function() { 
+        $('.setting-page').show("slide", { direction: "right", easing: 'easeOutBounce' }, 500);
+    }, false);
+});
+
+$(document).ready(function(){
+    document.getElementById('close-settings').addEventListener('click', function() { 
+        $('.setting-page').hide("slide", { direction: "right", easing: 'easeOutBounce' }, 500);
+    }, false);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

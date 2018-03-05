@@ -1,0 +1,11 @@
+development:
+production:
+default:
+  tw:
+    id: twitter_id
+    secret: twitter_secret
+    v: 1.1
+  vk:
+    v: 5.24
+  fb:
+    v: 2.2

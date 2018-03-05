@@ -1,0 +1,1193 @@
+<script type="text/javascript" src="runexto/search/search.js"></script>
+<!-- vk box window -->
+<div id="layout-vk" style="display: none" >
+  <div class="background" ng-click="vkBackgroundClick($event);">
+    <div class="box-window">
+      <div class="fl_l box-wrap" id="box-wrap">
+        <div class="fl_l box-head" id="vk-head">
+          <div class="fl_l head-title">
+            <div class="fl_l box-head-icon" id="vk-head-icon">
+            </div>
+            Просмотр записи
+
+          </div>
+          <div class="fl_r smooth close-box-button" id="close-vk-box-button">
+          </div>
+        </div>
+        <div class="fl_l content-with-comments" style="width: 100% !important;">
+          <div class="fl_l box-content" id="box-vk-content">
+            <div class="fl_l box-actions">
+              <div class="fl_l box-date-icon">
+              </div>
+              <!-- <div class="fl_l box-date" ng-bind="getNiceDate(data.vkPreview.date)"> -->
+              <div class="fl_l box-date" ng-bind="data.vkPreview.date">
+              </div>
+              <div class="fl_r like_repost_info box-info">
+                <div class="fl_r like smooth box-btn" id="box-likeit" ng-click="addVKLike();">
+                  <div class="fl_r smooth like_icon" id="box-noactive-like">
+                  </div>
+                  <div class="fl_r smooth like_count box" id="box-like-count" ng-bind="data.vkPreview.likes">
+                  </div>
+                </div>
+                <div class="fl_r repost smooth box-btn" id="box-repostit" ng-click="addVKRepost();">
+                  <div class="fl_r smooth repost_icon" id="box-noactive-repost">
+                  </div>
+                  <div class="fl_r smooth repost_count box" id="box-repost-count" ng-bind="data.vkPreview.reposts">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fl_l content-text" ng-bind="data.vkPreview.text">
+            </div>
+            <!--
+<img ng-show="data.vkPreview.items[0].attachments[0].photo" ng-src="{{data.vkPreview.attachments[0].photo.photo_130}}" class="box-window-image">
+</img>
+-->
+            <!--
+<div class="fl_l content-text">
+</div>
+-->
+            <div class="clear">
+            </div>
+            <div class="fl_l box-post-comments">
+              <div class="fl_l box-comments-title" id="box-vk-title" ng-bind="data.vkPreview.comments.count + ' комментариев'">
+              </div>
+
+              <!-- COMMENT -->
+              <div class="fl_l box-comment" ng-repeat="comment in data.vkPreview.comments.items">
+                <div class="fl_l comment-avatar">
+                  <img ng-src="{{comment.author.photo_50}}" width="50px" class="comm-img">
+                </div>
+                <div class="fl_l comment-content">
+                  <a href="#" class="fl_l comment-name" id="vk-comment-name" ng-bind="comment.author.first_name + ' ' + comment.author.last_name">
+                  </a>
+                  <div class="fl_l comment-date" ng-bind="comment.date">
+                  </div>
+                  <div class="fl_l comment-text" ng-bind="comment.text">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fl_l comment-box">
+            <div class="fl_l input-shadow">
+            </div>
+            <textarea id="vk-comment" class="fl_l box-input" placeholder="Комментировать" ng-model="comment_message" ng-keypress="addVKComment($event);" style="width:450px;resize:none;padding:10px;">
+            </textarea>
+            <button class="follow-btn fl_l" style="border-radius: 0;" ng-click="addVKComment();">Отправить</button>
+
+          </div>
+        </div>
+        <div class="fl_r box-info-author" id="box-vk-info">
+          <div class="author-avatar">
+            <img ng-src="{{data.vkPreview.group.photo}}" width="100px" class="box-avatar">
+          </div>
+          <div class="fl_l box-name" id="vk-name" ng-bind="data.vkPreview.group.name">
+          </div>
+          <div class="fl_l box-type" ng-bind="data.vkPreview.group.activity">
+          </div>
+          <div class="clear">
+          </div>
+          <div class="follow-button">
+            <a ng-href="{{data.vkPreview.href}}" style="text-decoration: none" target="_blank">
+              <button class="follow-btn" id="vk-btn">
+                Перейти
+              </button>
+            </a>
+
+          </div>
+          <div class="fl_r author-info">
+            <div class="author-info-title" style="float:left;text-decoration:underline;cursor:pointer" onclick="$('#vkLinks').show(1000);$('#vkPreviewGroupInfo').hide(1000);">
+              ссылки
+            </div>
+
+            <div class="author-info-title" style="float:left; margin-left: 10px;">
+              /
+            </div>
+
+            <div class="author-info-title" style="float:left; margin-left: 10px; text-decoration:underline;cursor:pointer" onclick="$('#vkLinks').hide( 1000);$('#vkPreviewGroupInfo').show(1000);" >
+              информация
+            </div>
+
+            <div class="clear">
+            </div>
+
+            <div id="vkLinks" ng-repeat="link in data.vkPreview.post.links" style="width:200px;word-wrap: break-word;word-break: break-all;">
+              <a ng-href="{{link}}" target="_blank" ng-bind="$index + 1 + '. ' + link" style="color:#000;">
+              </a>
+            </div>
+
+            <div style="display:none" id="vkPreviewGroupInfo">
+
+              <div class="fl_l author-info-count" id="vk-count">
+                <span class="author-info-label">
+                  {{data.vkPreview.group.members_count || 0}} подписчиков
+                </span>
+              </div>
+              <div class="clear">
+              </div>
+              <div class="fl_l author-info-count" id="vk-count">
+                <span class="author-info-label">
+                  {{data.vkPreview.group.posts_count || 0}} постов
+                </span>
+              </div>
+              <div class="clear">
+              </div>
+              <div class="fl_l author-info-count" id="vk-count">
+                <span class="author-info-label">
+                  {{data.vkPreview.group.albums_count || 0}} альбомов
+                </span>
+              </div>
+              <div class="clear">
+              </div>
+              <div class="fl_l author-info-count" id="vk-count">
+
+                <span class="author-info-label">
+                  {{data.vkPreview.group.videos_count || 0}} видеозаписей
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- fb box window -->
+<div id="layout-fb" style="display: none;position: absolute;top:0;">
+  <div class="background" ng-click="fbBackgroundClick($event);">
+    <div class="box-window">
+      <div class="fl_l box-wrap" id="box-wrap">
+        <div class="fl_l box-head" id="fb-head">
+          <div class="fl_l head-title">
+            <div class="fl_l box-head-icon" id="fb-head-icon">
+            </div>
+            Просмотр записи
+          </div>
+          <div class="fl_r smooth close-box-button" id="close-fb-box-button">
+          </div>
+        </div>
+        <div class="fl_l content-with-comments">
+          <div class="fl_l box-content" id="box-fb-content">
+            <div class="fl_l box-actions">
+              <div class="fl_l box-date-icon">
+              </div>
+              <div class="fl_l box-date" ng-bind="getNiceDate(data.fbPreview.created_time)">
+              </div>
+              <div class="fl_r like_repost_info box-info">
+                <div class="fl_r like smooth box-btn" id="box-likeit-fb">
+                  <div class="fl_r smooth like-icon-fb" id="box-noactive-like-fb">
+                  </div>
+                  <div class="fl_r smooth like_fb_count box" id="box-like-count-fb">
+                    91552
+                  </div>
+                </div>
+                <div class="fl_r repost smooth box-btn" id="box-repostit-fb">
+                  <div class="fl_r smooth repost-icon-fb" id="box-noactive-repost-fb">
+                  </div>
+                  <div class="fl_r smooth repost_count box" id="box-repost-count-fb">
+                    6549
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fl_l content-text" ng-bind="data.fbPreview.description">
+            </div>
+
+            <!--<img ng-src="{{data.fbPreview.icon}}" ng-show="data.fbPreview.icon">-->
+            <!--
+<img ng-src="data.fbPreview.icon" class="box-window-image">
+</img>
+-->
+            <!--
+<div class="fl_l content-text">
+А Роберто хуисос
+</div>
+-->
+            <div class="clear">
+            </div>
+            <div class="fl_l box-post-comments">
+              <div class="fl_l box-comments-title" id="box-vk-title" ng-bind="data.fbPreview.comments.data.length + ' комментариев'">
+              </div>
+
+              <!-- COMMENT -->
+              <div class="fl_l box-comment" ng-repeat="comment in data.fbPreview.comments.data">
+                <div class="fl_l comment-avatar">
+                  <img src="images/test/vlad.jpg" width="50px" class="comm-img">
+
+                </div>
+                <div class="fl_l comment-content">
+                  <a href="#" class="fl_l comment-name" id="vk-comment-name" ng-bind="comment.from.name">
+                  </a>
+                  <div class="fl_l comment-date" ng-bind="comment.created_time">
+                  </div>
+                  <div class="fl_l comment-text" ng-bind="comment.message">
+                  </div>
+                </div>
+              </div>
+
+              <!-- COMMENT -->
+              <!--
+<div class="fl_l box-comment">
+<div class="fl_l comment-avatar">
+<img src="images/test/vlad.jpg" width="50px" class="comm-img">
+</img>
+</div>
+<div class="fl_l comment-content">
+<a href="#" class="fl_l comment-name" id="vk-comment-name">
+Vlad Simonov
+</a>
+<div class="fl_l comment-date">
+5 минут назад
+</div>
+<div class="fl_l comment-text">
+Что ты мни всёёё врёёёшь?!
+</div>
+</div>
+</div>
+-->
+
+            </div>
+          </div>
+          <div class="fl_l comment-box">
+            <div class="fl_l input-shadow">
+            </div>
+            <input id="vk-comment" class="fl_l box-input" placeholder="Комментировать" disabled>
+            <div class="follow-btn">Отправить</div>
+          </div>
+        </div>
+        <div class="fl_r box-info-author" id="box-fb-info">
+          <div class="author-avatar">
+            <img ng-src="{{data.fbPreview.from.picture}}" width="100px" class="box-avatar">
+
+          </div>
+          <div class="fl_l box-name" id="fb-name" ng-bind="data.fbPreview.from.name.slice(0, 20)" title="{{data.fbPreview.description}}">
+          </div>
+          <div class="fl_l box-type">
+            группа
+          </div>
+          <div class="clear">
+          </div>
+          <div class="follow-button">
+            <button class="follow-btn" id="fb-btn" disabled>
+              Подписаться
+            </button>
+          </div>
+          <div class="fl_r author-info">
+            <div class="author-info-title">
+              информация
+            </div>
+            <div class="clear">
+            </div>
+            <div class="fl_l author-info-count" id="fb-count">
+              <span class="author-info-label">
+                подписчиков
+              </span>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="fl_l author-info-count" id="fb-count">
+              <span class="author-info-label">
+                постов
+              </span>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="fl_l author-info-count" id="fb-count">
+              <span class="author-info-label">
+                альбомов
+              </span>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="fl_l author-info-count" id="fb-count">
+              <span class="author-info-label">
+                видеозаписей
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="layout-wiki" style="display: none">
+  <div class="background" ng-click="wikiBackgroundClick($event);">
+    <div class="box-window">
+      <div class="fl_l box-wrap" id="box-wrap">
+        <div class="fl_l box-head" id="wiki-head">
+          <div class="fl_l head-title" id="wiki-head-title">
+            <div class="fl_l box-head-icon" id="wiki-head-icon">
+            </div>
+            Просмотр статьи
+          </div>
+          <div class="fl_r smooth close-box-button" id="close-wiki-box-button">
+          </div>
+        </div>
+        <div class="fl_l content-with-comments" style="width:100%">
+          <div class="fl_l box-content" id="box-wiki-content">
+            <div class="fl_l box-wiki-title" ng-bind="data.wiki.title" style="width:100%">
+            </div>
+            <img class="fl_l" ng-src="{{data.wiki.image}}" style="max-height: 200px;max-width: 200px;margin-left:30px">
+
+            <div class="fl_l content-text" ng-bind-html="data.wiki.full?data.wiki.content:data.wiki.summary">
+            </div>
+            <a href='#' class="fl_l" style="color: #777;" ng-click="data.wiki.full = true;" ng-if="!data.wiki.full">Подробно</a>
+            <!--
+<div class="fl_l wiki-tag" name="tagname1">
+Краткие сведения
+</div>
+-->
+            <div class="fl_l content-text" id="wiki-content-text" ng-bind-html="data.wikiPreview.data">
+            </div>
+
+            <div class="clear">
+            </div>
+          </div>
+        </div>
+        <div class="fl_r box-info-author" id="box-wiki-info" style="display:none">
+          <div class="fl_r content-wiki" id="content-wiki-noborder">
+            <!--<div class="wiki-content-title">-->
+              <!--Ссылки-->
+            <!--</div>-->
+            <div class="clear">
+            </div>
+            <!--
+<a href="#" >
+</a>
+-->
+            <!-- <a target="_blank" class="fl_l content-item" ng-href="{{data.wiki.Url.$t}}"> -->
+              <!-- {{data.wiki.Url.$t}} -->
+              <div style="width: 100%; height:400px;overflow:auto" id="link-box">
+                <div ng-repeat="link in data.wikiPreview.links" ng-init="applyScroll()">
+                  <a ng-href="{{link.href}}" ng-bind="link.title" target="_blank" style="color:#000;"></a>
+                </div>
+              </div>
+
+              <div class="follow-button" style="margin: 10px 0 0 0">
+                <a ng-href="{{data.wiki.url}}" target="_blank">
+                <button class="follow-btn" id="wiki-btn" ng-href="{{ data.wiki.url }}">
+                  Перейти
+                </button>
+                </a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="left-fixed" id="fixed-floatin" style="position: fixed;">
+    <a href data-scroll="" id="nodecoration">
+      <div id="up" translate="notifications.up" style="display:none" >
+      </div>
+    </a>
+
+    <!-- <div class="notif_center"> -->
+
+      <!-- <div class="fl_l smooth notif">
+        <div class="fl_l message_icon">
+        </div>
+        <div class="fl_l triangle">
+        </div>
+        <div class="fl_l count" id="message">
+          0
+        </div>
+      </div>
+      <div class="fl_l smooth notif">
+        <div class="fl_l feedback_icon">
+        </div>
+        <div class="fl_l triangle">
+        </div>
+        <div class="fl_l count" id="message">
+          0
+        </div>
+      </div>
+      <div class="clear">
+      </div>
+      <div class="fl_l smooth conf">
+        <div class="fl_l conf_icon">
+        </div>
+      </div> -->
+
+    <!-- </div> -->
+
+  </div>
+
+  <div class="fl_l left_part" style="margin-top: 0px">
+    <div class="input_area">
+      <a href="/">
+        <div class="fl_l logo">
+        </div>
+      </a>
+      <div class="fl_l input">
+        <input autocomplete="off" ng-class="searchHash?('search search-hash'):('search search-zoom')" ng-model="query" ng-keypress="ExecQuerySearch($event);" id="search">
+      </div>
+      <button class="fl_r search_button" ng-click="ExecQuerySearch();">
+        GO
+      </button>
+    </div>
+    <div class="clear">
+    </div>
+    <div class="fl_l source_select_block" style="padding: 5px 0 5px 20px;margin: 0 0 0 141px;width:494px;">
+      {{ 'settings.search_by.title' | translate }}
+      <!-- <div style="padding-right:40px;float:left"> -->
+
+      <!-- </div> -->
+      <input id="s_1" type="radio" name="s_partition" value="groups" checked style="margin-left: 60px;" ng-model="user.settings.search.sources.posts_of">
+      <label class="radiolabel" for="s_1" onselectstart="return false;" onselect="return false;" translate="settings.search_by.communities">
+      </label>
+      <!-- <input id="s_2" type="radio" name="s_partition" value="bloggers" style="margin-left: 40px;" ng-model="user.settings.search.sources.posts_of" disabled>
+      <label class="radiolabel" for="s_2" onselectstart="return false;" onselect="return false;">
+        Блоггерам
+      </label>
+       -->
+      <input id="s_3" type="radio" name="s_partition" value="people" style="margin-left: 60px;" ng-model="user.settings.search.sources.posts_of" >
+      <label class="radiolabel" for="s_3" onselectstart="return false;" onselect="return false;" translate="settings.search_by.people">
+      </label>
+    </div>
+
+    <div class="fl_l total_page">
+
+      <!--
+<div class="result_title" ng-if="!data.wiki && !data.groups && !data.statuses || !user.settings.search.sources.all">
+Не найдено
+</div>
+-->
+
+
+      <!--
+<img ng-src="/images/notfound.jpg" ng-if="!data.wiki && !data.groups && !data.statuses || !user.settings.search.sources.all">
+-->
+
+      <div class="fl_l result" ng-if="data.wiki && user.settings.search.sources.wiki" style="margin-top:40px">
+
+        <!--
+<div class="close-block" ng-click="toggleBlock($event)">
+</div>
+-->
+
+        <div class="fl_l icon">
+          <div class="fl_r result_icon_image wikipedia">
+          </div>
+        </div>
+        <div class="fl_l result_item wiki complete" ng-click="show_wiki_preview($event);">
+          <div class="result_title" ng-if="data.wiki" translate="search.results.blocks_titles.wiki_article">
+          </div>
+          <div class="border" style="padding-bottom:20px">
+          </div>
+          <div class="fl_l result_item_image" id="wiki">
+            <img class="item_image" src="/images/logo_wiki.png" id="wiki_image" style="width: 100px;height:115px">
+
+          </div>
+          <div class="fl_l basic_info_post" id="wiki-info">
+            <div class="fl_l public_name" ng-bind="data.wiki.title">
+              <!-- {{ data.wiki.title }} -->
+            </div>
+            <div class="fl_l post_text" ng-bind-html="data.wiki.short_summary || data.wiki.summary">
+              <!-- {{ data.wiki.Description.$t.trim() }} -->
+            </div>
+            <div class="clear">
+            </div>
+            <div class="public_link" style="margin-top: 6px;">
+              <div class="fl_l link_icon">
+              </div>
+              <div class="fl_l link">
+                <a target="_blank" ng-href="{{data.wiki.url}}" ng-bind="data.wiki.url | wikiUrl">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="clear">
+          </div>
+        </div>
+      </div>
+      <div class="clear">
+      </div>
+
+      <!--
+<div class="result_title" style="margin-top: 26px;">
+</div>
+-->
+      <div style="margin-top: 40px;">
+        <div class="fl_l result" ng-if="data.vk_event && user.settings.search.types.events" ng-animate="'animate'" >
+
+          <div class="fl_l top-icon">
+            <div class="fl_r result_icon_image vkontakte">
+            </div>
+          </div>
+          <div ng-class="'fl_l result_item ' + (data.fb_event?'top':'complete')">
+
+            <div class="result_title" ng-if="data.vk_event" translate="search.results.blocks_titles.events">
+            </div>
+
+            <div class="border" style="padding-bottom:20px">
+            </div>
+
+            <div class="fl_l result_item_image">
+              <img class="item_image" ng-src="{{data.vk_event.photo}}" style="width: 50px;height:50px">
+
+            </div>
+            <div class="fl_l basic_info">
+              <div class="public_name">
+                {{data.vk_event.name | title}}
+                <!--<br/>-->
+              </div>
+
+              <div style="font-weight:400;color:#ccc;font-size: 14px;">
+                {{ data.vk_event.start_date }}
+              </div>
+
+              <div class="type_item">
+                событие
+              </div>
+              <div class="link">
+                <a target="_blank" ng-href="http://vk.com/{{data.vk_event.screen_name}}">
+                  http://vk.com/{{data.vk_event.screen_name}}
+                </a>
+              </div>
+            </div>
+            <div class="fl_r follow_actions">
+              <div class="fl_r vk_count">
+                {{data.vk_event.members_count}} подписч.
+              </div>
+              <div class="fl_r follow vk-follow" disabled style="margin-top:12px;">
+                <a target="_blank" ng-href="http://vk.com/{{data.vk_event.screen_name}}">
+                  Перейти
+                </a>
+              </div>
+            </div>
+
+            <div class="clear">
+            </div>
+            <div class="border">
+            </div>
+          </div>
+
+          <div class="fl_r top-actions_load non-selectable">
+            <a href ng-click="vkEventUp();" ng-if="data.vk_event != data.vk_events[0]" >
+              <div class="arrow">
+              </div>
+            </a>
+
+            <div style="padding-bottom: 9px" ng-if="data.vk_event == data.vk_events[0]"></div>
+
+            <a href ng-if="data.vk_event != data.vk_events[data.vk_events.length - 1]" ng-click="vkEventDown();">
+              <div class="arrow down">
+              </div>
+            </a>
+          </div>
+          <div class="clear"></div>
+
+
+        </div>
+
+        <div class="fl_l result" ng-if="data.fb_event && user.settings.search.types.events" ng-animate="'animate'" style="margin-bottom: 40px">
+
+          <div class="fl_l top-icon">
+            <div class="fl_r result_icon_image facebook">
+            </div>
+          </div>
+          <div ng-class="'fl_l result_item ' + (data.vk_event?'bottom':'complete')">
+
+            <div class="result_title" ng-if="data.fb_event && !data.vk_event">
+              События
+            </div>
+
+            <div class="border" style="padding-bottom:20px">
+            </div>
+
+            <div class="fl_l result_item_image">
+              <img class="item_image" ng-src="{{}}" style="width: 50px;height:50px">
+
+            </div>
+            <div class="fl_l basic_info">
+              <div class="public_name">
+                {{data.fb_event.name | title}}
+                <!--<br/>-->
+              </div>
+
+              <div style="font-weight:400;color:#ccc;font-size: 14px;">
+                {{ data.fb_event.start_time }}
+              </div>
+
+              <div class="type_item">
+                событие
+              </div>
+              <div class="link">
+                <a target="_blank" ng-href="http://facebook.com/{{data.fb_event.id}}">
+                  http://facebook.com/{{data.fb_event.id}}
+                </a>
+              </div>
+            </div>
+            <div class="fl_r follow_actions">
+              <div class="fl_r vk_count">
+                <!--{{data.vk_event.members_count}} подписч.-->
+              </div>
+              <div class="fl_r follow vk-follow" disabled style="margin-top:12px;">
+                <a target="_blank" ng-href="http://facebook.com/{{data.fb_event.id}}">
+                  Перейти
+                </a>
+              </div>
+            </div>
+
+            <div class="clear">
+            </div>
+            <div class="border">
+            </div>
+          </div>
+
+          <div class="fl_r top-actions_load non-selectable">
+            <a href ng-click="fbEventUp();" ng-if="data.fb_event != data.fb_events[0]" >
+              <div class="arrow">
+              </div>
+            </a>
+
+            <div style="padding-bottom: 9px" ng-if="data.fb_event == data.fb_events[0]"></div>
+
+            <a href ng-if="data.fb_event != data.fb_events[data.fb_events.length - 1]" ng-click="fbEventDown();">
+              <div class="arrow down">
+              </div>
+            </a>
+          </div>
+          <div class="clear"></div>
+
+
+        </div>
+        <div class="clear" style="margin-top:40px" ng-if="data.vk_event && user.settings.search.types.events || data.fb_event && user.settings.search.types.events"></div>
+
+        <div class="fl_l result" ng-if="data.group.vkontakte && user.settings.search.sources.vk" ng-animate="'animate'">
+
+
+          <div class="fl_l top-icon">
+            <div class="fl_r result_icon_image vkontakte">
+            </div>
+          </div>
+          <div ng-class="((data.group.facebook || data.group.twitter)?'top':'complete') + ' fl_l result_item'">
+
+            <div class="result_title" ng-if="data.group.vkontakte" translate="search.results.blocks_titles.communities">
+            </div>
+            <div class="border" style="padding-bottom:20px">
+            </div>
+
+            <div class="fl_l result_item_image">
+              <img class="item_image" ng-src="{{data.group.vkontakte.photo}}">
+
+            </div>
+            <div class="fl_l basic_info">
+              <div class="public_name">
+                {{data.group.vkontakte.name}}
+              </div>
+              <div class="type_item">
+                {{data.group.vkontakte.type?'страница':'группа'}}
+              </div>
+              <div class="link">
+                <a target="_blank" ng-href="http://vk.com/{{data.group.vkontakte.screen_name}}">
+                  http://vk.com/{{data.group.vkontakte.screen_name}}
+                </a>
+              </div>
+            </div>
+            <div class="fl_r follow_actions">
+              <div class="fl_r vk_count">
+                {{data.group.vkontakte.members_count}} подписч.
+              </div>
+              <div class="fl_r follow vk-follow" disabled style="margin-top:12px;">
+                <a target="_blank" ng-href="http://vk.com/{{data.group.vkontakte.screen_name}}">
+                  Перейти
+                </a>
+              </div>
+            </div>
+
+            <div class="clear">
+            </div>
+            <div class="border">
+            </div>
+          </div>
+
+          <div class="fl_r top-actions_load non-selectable">
+            <a href ng-click="vkUp();" ng-if="data.group.vkontakte != data.groups.vkontakte[0]" >
+              <div class="arrow">
+              </div>
+            </a>
+
+            <div style="padding-bottom: 9px" ng-if="data.group.vkontakte == data.groups.vkontakte[0]"></div>
+
+            <a href ng-if="data.group.vkontakte != data.groups.vkontakte[data.groups.vkontakte.length - 1]" ng-click="vkDown();">
+              <div class="arrow down">
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="fl_l result" ng-if="data.group.facebook && user.settings.search.sources.fb" ng-animate=" 'animate' ">
+          <div ng-class="((data.group.vkontakte && user.settings.search.sources.vk)?'':'top-') + 'icon fl_l'">
+            <div class="fl_r result_icon_image facebook">
+            </div>
+          </div>
+
+          <div ng-class="((data.group.vkontakte && user.settings.search.sources.vk)?((data.group.twitter && user.settings.search.sources.tw)?'middle':'bottom'):(data.group.twitter && user.settings.search.sources.tw?'top':'complete')) + ' fl_l result_item'">
+            <div ng-if="!(data.group.vkontakte && user.settings.search.sources.vk)">
+              <div class="result_title" translate="search.results.blocks_titles.communities">
+              </div>
+              <div class="border" style="padding-bottom:20px">
+              </div>
+            </div>
+
+            <div class="fl_l result_item_image">
+              <img class="item_image" ng-src="{{data.group.facebook.icon}}">
+            </img>
+          </div>
+          <div class="fl_l basic_info">
+            <div class="public_name" ng-bind="data.group.facebook.name">
+            </div>
+            <div class="type_item">
+              Группа Facebook
+            </div>
+            <div class="link">
+              <a ng-href="{{'https://facebook.com/groups/' + data.group.facebook.id}}" ng-bind="'https://facebook.com/groups/' + data.group.facebook.id" target="_blank">
+              </a>
+            </div>
+          </div>
+          <div class="fl_r follow_actions">
+            <!--
+<div class="fl_r fb_count">
+3 987 291 лайков
+</div>
+-->
+            <div class="fl_r follow fb-follow" style="margin-top: 50px;">
+              <a ng-href="{{'https://facebook.com/groups/' + data.group.facebook.id}}" target="_blank">
+                Перейти
+              </a>
+            </div>
+          </div>
+          <div class="clear">
+          </div>
+          <div class="border">
+          </div>
+        </div>
+        <div ng-class="(data.group.vkontakte?'':'top-') + 'actions_load fl_r non-selectable'">
+          <a href ng-if="data.group.facebook != data.groups.facebook[0]" ng-click="fbUp();">
+            <div class="arrow">
+            </div>
+          </a>
+
+          <div style="padding-bottom: 9px" ng-if="data.group.facebook == data.groups.facebook[0]"></div>
+
+
+          <a href ng-if="data.group.facebook != data.groups.facebook[data.groups.facebook.length - 1]" ng-click="fbDown();">
+            <div class="arrow down">
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="fl_l result" ng-if="data.group.twitter">
+
+        <div ng-class="((data.group.vkontakte || data.group.facebook)?'':'top-') + 'icon fl_l'">
+          <div class="fl_r result_icon_image twitter">
+          </div>
+        </div>
+        <div ng-class="((data.group.vkontakte && user.settings.search.sources.vk || data.group.facebook && user.settings.search.sources.fb)?'bottom':'complete') + ' fl_l result_item'">
+
+          <div ng-if="!(data.group.vkontakte && user.settings.search.sources.vk || data.group.facebook && user.settings.search.sources.fb)">
+            <div class="result_title" translate="search.results.blocks_titles.communities">
+            </div>
+            <div class="border" style="padding-bottom:20px">
+            </div>
+          </div>
+
+          <div class="fl_l result_item_image">
+            <img class="item_image" ng-src="{{data.group.twitter.profile_image_url}}">
+          </img>
+        </div>
+        <div class="fl_l basic_info">
+          <div class="public_name">
+            {{data.group.twitter.name}}
+          </div>
+          <div class="type_item">
+            профиль Twitter
+          </div>
+          <div class="link">
+            <a target="_blank" ng-href="http://twitter.com/{{data.group.twitter.screen_name}}">
+              http://twitter.com/{{data.group.twitter.screen_name}}
+            </a>
+          </div>
+        </div>
+        <div class="fl_r twitter_count right">
+          <div class="twitter_digit">
+            {{data.group.twitter.followers_count}}
+          </div>
+          <div class="twitter_count_type">
+            подписч.
+          </div>
+        </div>
+        <div class="fl_r twitter_count left">
+          <div class="twitter_digit">
+            {{data.group.twitter.statuses_count}}
+          </div>
+          <div class="twitter_count_type">
+            твитов
+          </div>
+        </div>
+        <div class="fl_r follow tw-follow" style="margin-top:5px">
+          <a ng-href="http://twitter.com/{{data.group.twitter.screen_name}}" target="_blank">
+            Перейти
+          </a>
+        </div>
+        <div class="clear">
+        </div>
+      </div>
+      <div ng-class="((data.group.vkontakte || data.group.facebook)?'':'top-') + 'actions_load fl_r non-selectable'">
+        <a href ng-click="twUp();" ng-if="data.group.twitter != data.groups.twitter[0]">
+          <div class="arrow">
+          </div>
+        </a>
+        <div style="padding-bottom: 9px" ng-if="data.group.twitter == data.groups.twitter[0]"></div>
+        <a href ng-click="twDown();" ng-if="data.group.twitter != data.groups.twitter[data.groups.twitter.length - 1]">
+          <div class="arrow down">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+    <div class="clear">
+    </div>
+
+  <div class="fl_l tweet_results" ng-if="data.statuses.length !==0 && user.settings.search.sources.tw" style="display:none">
+    <!--
+<div class="close-block" ng-click="toggleBlock($event)">
+</div>
+-->
+
+    <div class="fl_l top-icon">
+      <div class="fl_r result_icon_image twitter">
+      </div>
+    </div>
+
+    <div class="fl_l result_item top">
+      <div class="result_title" translate="search.results.blocks_titles.tweets">
+      </div>
+      <div class="border">
+      </div>
+    </div>
+
+
+    <div class="fl_l tweet_result_item bottom" id="tweet-area">
+
+      <div class="fl_l one_tweet" ng-repeat="(id, status) in data.statuses" tweet-repeat>
+
+        <div class="fl_l result_item_image">
+          <img class="item_image" ng-src="{{status.user.profile_image_url}}">
+
+      </div>
+      <div class="fl_l basic_info_post" id="first-tweet-height">
+        <div class="fl_l public_name">
+          {{ status.user.name }}
+        </div>
+        <div class="fl_l time" style="margin-top: 1px;">
+          {{ getNiceDate(status.created_at)}}
+        </div>
+        <div class="clear">
+        </div>
+        <div class="fl_r actions" style="margin: 0px;">
+          <!--
+<a href="#">
+<div class="refresh" title="Index date: 1.09.14 at 7:00am">
+</div>
+</a>
+-->
+          <bookmark link="{{'https://twitter.com/'+status.user.screen_name+'/status/'+status.id_str}}" />
+          <!--
+<a href ng-click="add_bookmark(', $event);">
+<div class="bookmark">
+</div>
+</a>
+-->
+        </div>
+        <div class="fl_l post_text">
+          {{ status.text.trim() }}
+        </div>
+        <div class="clear">
+        </div>
+        <div class="fl_l like_repost_info" style="margin-top: 8px;">
+          <div class="fl_r like">
+            <div class="fl_r favorite_icon">
+            </div>
+            <div class="fl_r favorite_count">
+              {{ status.favorite_count }}
+            </div>
+          </div>
+          <div class="fl_r retweet">
+            <div class="fl_r retweet_icon">
+            </div>
+            <div class="fl_r retweet_count">
+              {{ status.retweet_count }}
+            </div>
+          </div>
+        </div>
+        <div class="clear">
+        </div>
+        <div class="public_link" style="margin-top: 6px;">
+          <div class="fl_l link_icon">
+          </div>
+          <div class="fl_l link">
+            <a target="_blank" ng-href="https://twitter.com/{{status.user.screen_name}}/status/{{status.id_str}}">
+              https://twitter.com/{{ status.user.screen_name }}/status/{{ status.id_str}}
+            </a>
+          </div>
+        </div>
+
+      </div>
+      <div class="clear">
+      </div>
+      <div class="border" id="tweets-border" ng-init="tweetScroll();">
+      </div>
+    </div>
+    <!--/FIRST TWEET/-->
+
+
+  </div>
+</div>
+<div class="clear">
+</div>
+<!--
+<div class="close-block" ng-clixck="toggleBlock($event)">
+</div>
+-->
+<div style="margin-top: 40px;" ng-if="user.settings.search.types.posts">
+<!--<div class="fl_l result" ng-repeat="post in data.posts" ng-if="data.posts && (post.author.source == 0 && user.settings.search.sources.vk || post.author.source == 1 && user.settings.search.sources.fb)" ng-animate="'animate'">-->
+<div class="fl_l result" ng-repeat="post in data.posts" ng-if="data.posts" ng-animate="'animate'">
+<!--   <div ng-if="(post.group.source == 0 && user.settings.search.sources.vk || post.group.source == 1 && user.settings.search.sources.fb)"> -->
+
+    <div ng-class="(($index == 0)?'top-':'') + 'icon fl_l'">
+      <div ng-class="'fl_r result_icon_image ' + ((post.author.source=='fb')?'fl_r facebook':'fl_r vkontakte')">
+      </div>
+    </div>
+    <div ng-click="showPostPreview($index)" ng-class="(($index == 0)?'top':(($index == data.posts.length - 1)?'bottom':'middle')) + ' fl_l result_item'">
+      <div ng-if="$index == 0">
+        <div class="result_title" style="margin-top: 0;" ng-if="data.posts">
+          Посты
+        </div>
+        <div class="border" style="padding-bottom:20px">
+        </div>
+      </div>
+
+      <div class="fl_l result_item_image">
+        <img class="item_image" ng-src="{{post.author.info.photo}}" style="max-width:64px;max-height:64px;">
+    </div>
+    <div class="fl_l basic_info_post">
+      <div style="width:100%;float:left">
+        <div class="fl_l public_name" ng-bind="post.author.info.name || post.author.info.screen_name | title">
+        </div>
+        <div class="fl_l time" style="margin-top: 1px;" ng-bind="post.date">
+        </div>
+        <div class="fl_r like_repost_info">
+          <div class="fl_r like">
+            <div ng-class="(post.author.source=='fb')?'fl_r like_fb_icon':'fl_r like_icon'">
+            </div>
+            <div ng-class="(post.author.source=='fb')?'fl_r like_fb_count':'fl_r like_count'" ng-bind="post.likes">
+            </div>
+          </div>
+          <div class="fl_r repost">
+            <div ng-class="(post.author.source=='fb')?'fl_r share_icon':'fl_r repost_icon'">
+            </div>
+            <div ng-class="(post.author.source=='fb')?'fl_r share_count':'fl_r repost_count'" ng-bind="post.reposts || post.comments">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl_l post_text" ng-bind-html="post.text.length>
+  250?(post.text.slice(0, 250) + '...'):post.text | highlight:query:false">
+    <div style="margin-top: 10px;">
+      <!--
+  <a href="#" class="readmore">
+  Читать далее
+</a>
+  -->
+    </div>
+      </div>
+      <div class="clear">
+      </div>
+      <div class="public_link" style="margin-top: 6px;">
+        <div class="fl_l link_icon">
+        </div>
+        <div class="fl_l link">
+          <a target="_blank" ng-href="{{ post.href }}" ng-bind="post.href">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="clear">
+    </div>
+    <div class="border">
+    </div>
+  <!-- </div> -->
+</div>
+<div ng-class="($index == 0)?'fl_r top-actions_load':'fl_r actions'">
+  <!--<a href="#">-->
+    <!--<div class="refresh" title="Index date: 1.09.14 at 7:00am">-->
+    <!--</div>-->
+  <!--</a>-->
+  <bookmark link="{{ post.href }}" ng-if="user.me"/>
+</div>
+</div>
+</div>
+</div>
+
+<div class="fl_l result" ng-if="query" style="margin:40px 0 40px 33px;">
+  <div class="fl_l icon">
+    <div class="fl_r result_icon_image">
+    </div>
+  </div>
+  <div class="fl_l result_item wiki complete" style="height: 50px;">
+    <div class="fl_l result_item_image">
+      <img class="item_image google" src="/images/google_icon.png">
+    </img>
+  </div>
+  <div class="fl_l basic_info_post" id="wiki-info">
+    <div class="fl_l public_name" translate="search.results.blocks_titles.google">
+    </div>
+    <div class="fl_l post_text">
+    </div>
+    <div class="clear">
+    </div>
+    <div class="public_link" style="margin-top: 6px;">
+      <div class="fl_l link_icon">
+      </div>
+      <div class="fl_l link">
+        <a ng-href="https://www.google.ru/?#q={{query}}" target="_blank" style="max-width:460px;">
+          https://www.google.ru/?#q={{query | title }}
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="clear">
+  </div>
+</div>
+</div>
+<div class="clear">
+</div>
+</div>
+<div class="fl_r right_part" id="fixed-right" style="margin-top: 0px">
+
+<!--   <div class="fl_l advance_search">
+    <div class="fl_l item" id="advance" onclick="open_advance()">
+      <div class="fl_l name_item" translate="settings.extended_search">
+      </div>
+      <div class="fl_r icon_item" id="icon_advance">
+      </div>
+      <div class="clear">
+      </div>
+      <div id="advance_search_options" style="display: none">
+        <div class="test_content">
+          Здесь будут опции
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="fl_l search_options" id="search_options">
+    <checkbox title="settings.sources.wiki" name="wiki"/>
+    <checkbox title="settings.sources.events" name="events"/>
+    <checkbox title="settings.sources.communities" name="groups" ng-style="{{ me.error?('disable'):'' }} "/>
+    <checkbox title="settings.sources.tweets" name="tweets"/>
+    <checkbox title="settings.sources.posts" name="posts"/>
+    <div class="clear"></div>
+    <div class="border"></div>
+    <checkbox title="settings.sources.vk" name="vk"/>
+    <checkbox title="settings.sources.fb" name="fb"/>
+  </div>
+</div>
+</div>
+
+
+<script>
+
+  $(document).ready(function(){
+    var a = $('#show-settings'),
+        bp = $('#fixed-right');
+
+    var topY = bp.offset().top + bp.outerHeight(),
+        curY;
+
+//     $(document).scroll(function(){
+//       topY = bp.offset().top + bp.outerHeight();
+//       curY = a.offset().top + $(window).scrollTop();
+
+// //      console.log(a.scrollTop());
+// //      console.log(a.css('marginTop'));
+
+//       if (curY <= topY)
+//         a.css('marginTop', '110px');
+//       else
+//       if (curY > topY && parseInt(a.css('marginTop').slice(0, -2)) >= 0 ) {
+//         var b = curY - topY;
+
+//         a.css({marginTop: 110 - (b>110?110:b)});
+//        a.css('marginTop', '100px');
+//        a.css('position', 'absolute');
+
+//       }
+//     });
+  });
+
+  var up_slided = false;
+
+  // $('#view').scroll(
+  //   _.throttle(function(){
+
+  //   if ($('.source_select_block').offset().top <= 0){
+  //     if (!up_slided){
+  //       $('#up').show("slide", {direction: "up", easing: 'easeOutCubic'}, 450);
+  //       up_slided = !up_slided;
+  //     }
+  //     $('#search_options').css({
+  //       opacity: 0.7
+  //     });
+  //   } else {
+  //     if (up_slided){
+  //       $('#up').hide("slide", {direction: "up", easing: 'easeOutCubic'}, 450);
+  //       up_slided = !up_slided;
+  //       // $('#nodecoration').css({display: 'none'});
+  //     }
+
+  //     $('#search_options').css({
+  //       opacity: 1
+  //     });
+  //   }
+  // }, 100));
+
+  $(document).ready(function(){
+    $('#nodecoration').click(function(){
+      $('#view').mCustomScrollbar("scrollTo", "top", {
+        scrollEasing:"easeOut",
+        scrollInertia: 2000
+      });
+    });
+
+    // $("#fixed-floating").sticky({
+    //   topSpacing:0});
+
+    // $("#search_options").sticky({
+    //   topSpacing:0});
+
+
+    $('#box-wiki-content').mCustomScrollbar({
+      scrollInertia:450});
+
+
+    $("#box-vk-content").mCustomScrollbar({
+      scrollInertia:450}
+                                         );
+
+    $("#box-fb-content").mCustomScrollbar({
+      scrollInertia:450}
+                                         );
+
+  }
+                   );
+</script>

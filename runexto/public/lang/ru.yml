@@ -1,0 +1,68 @@
+search:
+  invitation: Что Вам интересно?
+  results:
+    blocks_titles:
+      google: 'Если по запросу ничего не нашлось, попробуйте найти в Google:'
+      wiki_article: Wiki - статья
+      events: События
+      communities: Сообщества
+      tweets: Твиты
+settings:
+  search_by:
+    title: Поиск по
+    communities: Сообществам
+    people: Людям
+  title: Настройки
+  theme: Выберите тему
+  lang:
+    title: Выберите язык
+    ru: Русский
+    en: Английский
+  extended_search: Расширенный поиск
+  sources:
+    wiki: Википедия
+    events: Поиск событий
+    communities: Поиск сообществ
+    tweets: Поиск твитов
+    posts: Поиск записей
+    vk: Вконтакте
+    fb: Фейсбук
+footer:
+  about_us: О нас
+  about_runexto: О Runexto
+  vacancy: Вакансии
+  user_agreement: Пользовательское соглашение
+header:
+  bookmarks: Закладки
+notifications:
+  up: Вверх
+registration:
+  authorize:
+    title: Авторизоваться
+    invite: Авторизуйтесь через социальные сети
+    by_pass_short: По логину/паролю
+    by_pass_long: Авторизация по логину/паролю
+    input_login: Введите логин
+    input_pass: Введите пароль
+    enter: Войти
+    key_invalidated: Ключ устарел, авторизуйтесь, пожалуйста, снова.
+    key_valid: Вы авторизованы.
+  register:
+    title: Зарегистрироваться
+    back: Назад
+    next: Далее
+    basic_info: Основная информация
+    name: Введите ваше имя
+    surname: Введите вашу фамилию
+    actual: Пожалуйста, указывайте настоящие данные. Это упростит пользование сервисом.
+    interests: Ваши интересы
+    actual_two: Другим пользователям будет удобно вас искать, если вы введете верную информацию.
+    other: Другие настройки
+    password: Пароль
+    pick_photo: 'Выберите фото:'
+    finish: Закончить
+  register_invite: Авторизуйтесь через социальные сети
+  close: Закрыть
+  authorization_through: 'Вы авторизованы через следующие социальные сети:'
+  authorization_invite: 'Чтобы воспользоваться всеми возможностями поиска, авторизуйтесь через максимальное количество социальных сетей.'
+  exit: Выход из системы

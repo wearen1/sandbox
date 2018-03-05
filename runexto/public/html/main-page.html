@@ -1,0 +1,150 @@
+<html>
+<head>
+    <title>Runexto Search Engine</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+    <body>
+        
+        <!-- HEADER -->
+        
+        <header>
+            <div class="head-center">
+                <div class="fl_l head-links">
+                    <a href="#" target="_blank" id="active" class="head-link">Runexto</a>
+                    <a href="#" target="_blank" class="head-link">YourTape</a>
+                    <a href="#" target="_blank" class="head-link">YoTravel</a>
+                    <a href="#" target="_blank" class="head-link">GTS</a>
+                </div>
+                <div class="fl_r auth-link">
+                    <a href="#" class="head-link" id="open-auth-box">Авторизоваться</a>
+                    <div id="auth-box" style="display: none;">
+                        <div id="close-auth-box" class="title">Отменить</div>
+                        <div id="auth-page-1" style="display: block">
+                            <div class="step-title">Авторизуйтесь через социальные сети</div>
+                            <div class="fl_l social-auth-link">
+                                <a href="#" class="fl_l social-link fb"></a>
+                                <a href="#" class="fl_l social-link vk"></a>
+                                <a href="#" class="fl_l social-link tw"></a>
+                                <a href="#" class="fl_l social-link inst"></a>
+                                <a href="#" class="fl_l social-link lastfm"></a>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="info">
+                                Чтобы пользоваться поиском в полную
+                                силу, авторизуйтесь через максимальное
+                                количество социальных сетей.
+                            </div>
+                            <div class="fl_l actions_steps">
+                                <div class="fl_r auth-next" id="1to2">Далее</div>
+                            </div>
+                        </div>
+                        
+                        <div id="auth-page-2" style="display: none">
+                            <div class="step-title">Основная информация</div>
+                            <div class="auth-general-inputs">
+                                <input id="first-name" class="auth-input top-borders" placeholder="Введите ваше имя">
+                                <input id="last-name" class="auth-input bottom-borders" placeholder="Введите вашу фамилию">
+                            </div>
+                            <div class="clear"></div>
+                            <div class="info">
+                                Пожалуйста, указывайте настоящие данные. 
+                                Это упростит работу. 
+                                Хотя, это просто текст, который напишет Кирилл.
+                                <div class="import-area" onclick="importcheck()">
+                                    <div style="margin: 12px 0px;" class="fl_l point">
+                                        <div id="import_check"></div>
+                                    </div>
+                                    <div class="fl_l label">Импорт данных из соц. сетей</div>
+                                </div>
+                            </div>
+                            <div class="fl_l actions_steps">
+                                <div class="fl_r auth-next" id="2to3">Далее</div>
+                                <div class="fl_l auth-prev" id="2to1">Назад</div>
+                            </div>
+                        </div>
+                        
+                        <div id="auth-page-3" style="display: none">
+                            <div class="step-title">Основная информация</div>
+                            <div class="auth-general-inputs">
+                                <textarea class="interests-area" placeholder="Ваши интересы"></textarea>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="info">
+                                Будет пиздато, если вы введете настоящую инфу.
+                                Не будьте хуйлом, пожалуйста. Спасибо.
+                            </div>
+                            <div class="fl_l actions_steps">
+                                <div class="fl_r auth-next" id="3to4">Далее</div>
+                                <div class="fl_l auth-prev" id="3to2">Назад</div>
+                            </div>
+                        </div>
+                        
+                        <div id="auth-page-4" style="display: none">
+                            <div class="step-title">Другие настройки</div>
+                            <div class="auth-general-inputs">
+                                <div class="fl_l input_imitation">yourtape.com/</div>
+                                <input class="fl_l auth-input" id="link-input" placeholder="link">
+                                <div class="clear"></div>
+                                <!--<div id="error" style="display: none">Логин занят</div>-->
+                                <div class="fl_l photo-label">Выберите фото:</div>
+                                <button class="upload-photo">Загрузить фотографию</button>
+                                <div class="border-or">или</div>
+                                <a class="import-photo" href="#"><div class="center">импортировать из соц.сетей</div></a>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="info">
+                                Здесь будет текст о последнем шаге регистрации.
+                            </div>
+                            <div class="fl_l actions_steps">
+                                <div class="fl_r auth-finish">Finish</div>
+                                <div class="fl_l auth-next" id="4to3">Назад</div>
+                            </div>
+                        </div>
+                    </div>   
+               
+            </div>
+        </header>
+        <div class="logo-big"></div>
+            <div class="search-input-area">
+                <div class="fl_l wrap2">
+                    <input class="fl_l search-input" placeholder="Input your request here">
+                    <button class="fl_r search-go">GO</button>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <footer>
+                <div class="footer-links">
+                    <div class="fl_l footer-wrap">
+                        <a href="#" class="fl_l footer-link">о нас</a>
+                        <a href="#" class="fl_l footer-link">о Runexto</a>
+                        <a href="#" class="fl_l footer-link">вакансии</a>
+                        <a href="#" class="fl_l footer-link">пользовательское соглашение</a>
+                        <a href="#" class="fl_l footer-link">язык</a>
+                        <div class="fl_r footer-copy">Runexto &copy; 2014</a>
+                    </div>
+                </div>
+            </footer>
+    </body>
+</html>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

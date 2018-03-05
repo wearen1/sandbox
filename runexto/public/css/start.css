@@ -1,0 +1,137 @@
+html {
+    background: rgba(0,0,0,0.8);
+}
+
+body {
+  transition: opacity 0.5s linear;
+}
+
+.fl_l {
+    float: left;
+}
+
+.fl_r {
+    float: right;
+}
+
+.header-link {
+    font-weight: 400;
+    font-size: 14px;
+    padding: 12px 22px 14px 22px;
+    color: #000;
+    text-decoration: none;
+}
+
+.header-link:hover{
+  color: #00c27f;
+}
+
+.header-logo {
+  text-decoration: none;
+  color: #fff;
+  background: #00c27f;
+}
+
+.header-logo:hover{
+  text-decoration: none;
+  color: #fff;
+  background: #05c584;
+}
+
+.header-logo:active{
+  text-decoration: none;
+  color: #fff;
+  background: #00be7a;
+}
+
+
+
+.footer-link {
+  font-weight: 400;
+  font-size: 14px;
+  padding: 6px 13px 5px 15px;
+  /*padding: 6px 22px 14px 22px;*/
+  color: #000;
+  text-decoration: none;
+}
+
+.footer-link:hover{
+  color: #00c27f;
+}
+
+.footer-logo {
+  text-decoration: none;
+  color: #fff;
+  background: #00c27f;
+}
+
+.footer-logo:hover{
+  text-decoration: none;
+  color: #fff;
+  background: #05c584;
+}
+
+.footer-logo:active{
+  text-decoration: none;
+  color: #fff;
+  background: #00be7a;
+}
+
+/*a {
+    color: inherit;
+    text-decoration: none;
+}*/
+
+.head-link:hover {
+    color: #00c27f;
+}
+
+input.search-input::-webkit-input-placeholder {
+  color: #00c27f;
+  transition: padding 0.5s ease;
+  margin-left: 0;
+  line-height: 22px;
+}
+
+input.search-input:focus::-webkit-input-placeholder {
+    line-height: 120px;
+    padding-left: -100px;
+    transition: padding 0.5s ease;
+}
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', Tahoma, sans-serif;
+    background: #f8f8f8;
+    overflow: hidden;
+}
+
+.static-page{
+  width:  80%;
+  height: 50%;
+  /*background-color: #fff;*/
+  margin: 5% 10% auto;
+  display:block
+}
+
+.page-links{
+  display: block;
+  height: 100%;
+  width: 20%;
+  background-color: #ccc;
+}
+
+.page-content{
+  width: 75%;
+  margin: 0 0 0 5px;
+  height: 100%;
+  background-color: #fff
+}
+
+/*header {
+    height: 43px;
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0px 1px rgba(0,0,0,0.1);
+    position: absolute;
+    width: 100%;
+}*/

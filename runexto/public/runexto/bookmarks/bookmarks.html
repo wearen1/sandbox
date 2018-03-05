@@ -1,0 +1,42 @@
+<div class="fl_l result" style="margin-top:40px;margin-left: 20%">
+
+    <div class="fl_l result_item wiki complete" ng-click="show_wiki_preview($event);">
+        <div class="result_title">
+            Закладки
+        </div>
+
+        <div class="border" style="padding-bottom:20px">
+        </div>
+
+        <div ng-repeat="(id, bookmark) in bookmarks track by $index">
+            <!--<div class="border" style="padding-bottom:20px">-->
+            <!--</div>-->
+
+            <!--{{bookmark}}-->
+
+            <div class="fl_l basic_info_post">
+                <div class="fl_l public_name">
+                    <!-- {{ data.wiki.title }} -->
+                </div>
+                <div class="fl_l post_text">
+                    <!-- {{ data.wiki.Description.$t.trim() }} -->
+                </div>
+                <div class="clear">
+                </div>
+                <div class="public_link" style="margin-top: 6px;">
+                    <div class="fl_l link_icon">
+                    </div>
+                    <div class="fl_l link">
+                        <a target="_blank" ng-href="{{bookmark}}" ng-bind="bookmark">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="clear">
+</div>

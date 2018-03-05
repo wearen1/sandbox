@@ -1,0 +1,304 @@
+<link rel="stylesheet" href="hi/style.css">
+
+<div class="smooth right-menu-call"  id="show-settings">
+    <div class="menu-settings-icon">
+        <div class="settings-icon"></div>
+    </div>
+</div>
+<div class="smooth left-menu-call" id="compact-mode-menu" onclick="goFull()" style="display: none">
+    <div class="menu-arrow-icon">
+        <div class="arrow-icon"></div>
+    </div>
+</div>
+
+<div class="fl_l left-navig-call" style="display: none" id="compact-mode-menu">
+    <div class="fl_l userpic-compact-mode">
+        <img src="{{user.image}}" class="userpic-img"></img>
+    </div>
+</div>
+
+  <div class="fl_l left-navig" id="full-mode-menu">
+    <div class="fl_l profile-info">
+      <div class="fl_l userpic">
+          <img src="{{user.image}}" class="userpic-img"></img>
+      </div>
+      <div class="fl_l profile-info-name">{{user.firstname}} {{user.lastname}}<span class="fl_r profile-info-state" id="{{user.status}}"></span></div>
+      <div id="change-state">
+          <div class="fl_r arrow"></div>
+          <div class="fl_r status" id="state-text">{{user.status}}</div>
+      </div>
+      <div class="change-state-switch" style="display: none;">
+          <div class="state-item" ng-click="setStatus('Online')" id="set-online">Online</div>
+          <div class="state-item" ng-click="setStatus('Away')" id="set-away">Away</div>
+          <div class="state-item" ng-click="setStatus('DND')" id="set-dnd">Do not disturb</div>
+      </div>
+    </div>
+
+    <div class="fl_l top-search">
+        <input class="top-input" id="global-search" ng-model="global_search" placeholder="Global search">
+    </div>
+
+
+
+    <div class="fl_l left-navig-title" ng-hide="global_search_result.length>0">Recent conversations</div>
+    <div class="fl_l left-navig-title" ng-show="global_search_result.length>0">Global Search Result</div>
+
+    <div class="fl_l dialogs" id="scroll-dialogs">
+
+      <div class="fl_l contact" 
+              ng-repeat="contact in global_search_result | orderBy:'rate':!reverse"
+              ng-click="addcontact(contact)">
+
+            <div class="fl_l contact-pic">
+                <img class="contact-pic-img" src="{{contact.image}}"></img>
+            </div>
+            <div class="fl_l contact-name">{{contact.firstname+' '+contact.lastname}}<span class="fl_r dialog-state" id="{{contact.status}}"></span></div>
+      </div>
+
+      <div class="fl_l dialog"
+          ng-repeat="conv in convs | orderBy:'update':!reverse"
+          ng-click="conv.active = true"
+          ng-hide="global_search_result.length>0">
+
+          <div class="fl_l left-dialog">
+              <img class="dialog-pic" src="{{conv.image}}"></img>
+          </div>
+          <div class="fl_r right-dialog">
+              <div class="fl_l dialog-info">
+                  
+                  <div class="fl_l dialog-name">{{conv.name}}
+                    <span class="fl_r dialog-state" id="{{conv.status}}"></span>
+                  </div>
+                  
+                  <div class="fl_r dialog-date" ng-show="conv.unread == 0">{{conv.messages[conv.messages.length-1].diff}}</div><!-- Счетчик сообщений -->
+                  <div class="fl_r dialog-date" id="count-messages" ng-show="conv.unread != 0">{{conv.unread}} new</div>
+
+                  <div class="fl_l dialog-text">
+                    <span class="fl_l" id="{{conv.messages[conv.messages.length-1].state}}"></span>
+                    {{conv.messages[conv.messages.length-1].text}}
+                    <span ng-show="conv.messages[conv.messages.length-1].attachment.url.length>0">Attach: {{conv.messages[conv.messages.length-1].attachment.name}}</span>
+                  </div>
+              
+              </div>
+          </div>
+      </div>
+      </div>
+
+      <div class="fl_l left-navig-title">Contacts</div>
+          <div class="fl_l contacts" id="scroll-contacts">
+            <div class="fl_l contact" 
+              ng-class="{'selected-contact': contact.select == true,
+                          'unver-contact': contact.accept == 0,
+                          'req-contact': contact.accept == 1}"
+              ng-repeat="contact in user.contacts | orderBy:'rate':!reverse">
+
+                  <div class="fl_l contact-pic" ng-click="createDialog(contact, $index);">
+                      <img class="contact-pic-img" src="{{contact.user.image}}"></img>
+                  </div>
+                  <div class="fl_l contact-name" ng-click="createDialog(contact, $index);">
+                    {{contact.user.firstname+' '+contact.user.lastname}}
+                      <span ng-show="contact.accept == 1"> (запрос)</span>
+                      <span ng-show="contact.accept == 0"> (неп.)</span>
+                    <span class="fl_r dialog-state" id="{{contact.user.status}}"></span>
+                  </div>
+                  <div class="fl_r" ng-click="contact.select=!contact.select">x</div>
+            </div>
+          </div>
+          <div class="fl_l create-conversation" ng-click="createConv()">
+                Create conversation
+          </div>
+    </div>
+  <div class="wrap theme_{{user.preferences.theme}}" style="font-size: {{user.preferences.font}}">
+
+    <div class="fl_r right-wrap" id="right-true-area">
+
+<!--       <header class="fl_l head" id="head-width">
+          <a href="#"><div class="fl_l logo"></div></a>
+          <a href="#"><div class="fl_l head-link">Runexto</div></a>
+          <a href="#"><div class="fl_l head-link">Yourtape</div></a>
+          <a href="#"><div class="fl_l head-link">Tourun</div></a>
+          <a onclick="goCompact()" id="switch-mode">
+              <div class="fl_r switch-mode" id="compact-mode"></div>
+              <div class="fl_r switch-text" id="compact-text">Compact mode</div>
+          </a>
+      </header> -->
+
+      <div id="convers-area">
+
+        <div class="fl_l dialog-window"
+        ng-repeat="active_conv in convs | filter: {active: true}" id="{{'window-' + $index}}">
+            <div class="{{'window-head head-theme-' + active_conv.theme}}" id="{{'head-' + $index}}">
+                <div class="fl_l window-head-content">
+                    <img class="fl_l convers-avatar" src="{{active_conv.image}}"></img>
+                    <div class="fl_l convers-name">{{active_conv.name}}</div>
+
+                    <div class="fl_l convers-add"></div>
+
+                    <div class="fl_r convers-close" ng-click="active_conv.active = false"></div>
+                    <div class="fl_r dialog-actions" ng-hide="active_conv.search" id="dialog-actions-{{$index}}">
+                        <div class="fl_r convers-attach-list" ng-click="active_conv.attach_mode=!active_conv.attach_mode">
+                          </div>
+                        <div class="fl_r" ng-class="{ 'notification-disabled': active_conv.notification == false,
+                                                      'notification-enabled': active_conv.notification == !false}"
+                                          ng-click="active_conv.notification=!active_conv.notification"></div>
+                        <div class="fl_r convers-search-go" ng-click="active_conv.search = true"></div>
+                    </div>
+                    <div class="fl_r" ng-show="active_conv.search">
+
+                        <div class="fl_r search-close" ng-click="active_conv.search = false"></div>
+                        <input class="fl_r convers-search" placeholder="Search" ng-model="conv_search" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="fl_l convers-content" style="font-size: {{user.preferences.font}} px;" scroll-glue="glued" id="{{'convers-' + $index + '-scroll'}}">
+                <ul  ng-show="active_conv.attach_mode == true">
+                  <li ng-repeat="attch in active_conv.messages | filter: {isAttach: true}">
+                    <a target="_blank" href="{{attch.attachment.url}}">{{attch.attachment.name}}</a>
+                  </li>
+                </ul>
+
+                <div
+                    ng-hide="active_conv.attach_mode == true"
+                    ng-repeat="msg in active_conv.messages | filter: conv_search"
+                    ng-class="{ 'my-message': msg.user._id == user._id,
+                                'fl_r':       msg.user._id == user._id,
+
+                                'friend-message': msg.user._id != user._id,
+                                'fl_l':           msg.user._id != user._id
+                              }">
+
+                    <div class="my-name"
+                      ng-class="{
+                                'fl_r': msg.user._id == user._id,
+                                'fl_l': msg.user._id != user._id
+                              }">
+                      <span class="time"
+                        ng-class="{
+                                'fl_l': msg.user._id == user._id,
+                                'fl_r': msg.user._id != user._id
+                              }">{{msg.diff}}</span>{{msg.user.firstname}}
+                    </div>
+                    <div class="clear"></div>
+                    <div class="text-message"
+                      ng-class="{
+                                'fl_r': msg.user._id == user._id,
+                                'fl_l': msg.user._id != user._id
+                              }">
+                        <div class="message">
+                          {{msg.text}}
+                          <img ng-show="msg.attachment.kind == 'jpg'" class="image-message" src="{{msg.attachment.url}}">
+                          <img ng-show="msg.attachment.kind == 'png'" class="image-message" src="{{msg.attachment.url}}">
+                        </div>
+                    </div>
+
+                <div class="clear"></div>
+                </div>
+        
+                <div class="clear"></div>    
+            </div>
+            <div class="fl_l message-input" oi-classs>
+                <textarea placeholder="Type your message for {{active_conv.name}}" class="fl_l convers-input" type="text" id="inp-text" ng-model="active_conv.last_message.text">{{active_conv.last_message.text}}</textarea>
+
+
+
+                <div class="fl_r attach-icon">
+                  <input type="file" class="message_attachment" ng-model="active_conv.last_message.attachment" multiple
+                         onchange="angular.element(this).scope().loadFiles(this)" id="{{active_conv._id}}" />
+                </div>
+
+
+                <div class="fl_r send-button" ng-click="send(active_conv, $index); active_conv.last_message.text = '';">Send</div>
+                <div class="clear"></div>
+            </div>
+
+            
+        </div>
+
+      </div>
+
+    </div>
+    </div>
+    <div class="setting-page" style="display: none">
+            <div class="fl_l setting-head">
+                <div class="fl_l setting-title">Settings</div>
+                <div class="fl_r settings-close" id="close-settings"></div>
+            </div>
+            <div class="fl_l setting-title-light">Choose messenger's theme</div>
+            <div class="theme-settings" id="scroll-theme-settings">
+
+              <div
+                  ng-repeat="theme in themes"
+                  class="fl_l choose-theme set-theme-{{theme}}" 
+                  id="set-theme-{{theme}}" 
+                  ng-click="setTheme(theme)"
+              >
+                  <div class="fl_r" ng-class="{'active-theme': (theme == user.preferences.theme)}"></div>
+              </div>
+              
+            </div>
+            <div class="fl_l setting-title-light">Basic settings</div>
+            <div class="fl_l basic-settings" id="scroll-basic-settings">
+                <div class="fl_l select-option">
+                    <div class="option-text">Who can send me private messages</div>
+                    <select class="select" ng-model="user.preferences.isPrivate">
+                        <option value="false">Everyone</option>
+                        <option value="true">Verified only</option>
+                    </select>
+                </div>
+                <div class="fl_l select-option">
+                    <div class="option-text">Delete messages after</div>
+                    <select class="select" ng-model="user.preferences.message_life">
+                        <option value="24">After 24 hours</option>
+                        <option value="168">After week</option>
+                        <option value="720">After month</option>
+                        <option value="0">Do not delete</option>
+                    </select>
+                </div>
+                <div class="fl_l select-option">
+                    <div class="option-text">Open a chat when receiving a message</div>
+                    <select class="select" ng-model="user.preferences.chat_open">
+                        <option value="1">Always</option>
+                        <option value="2">Never</option>
+                        <option value="3">Only for verified</option>
+                    </select>
+                </div>
+                <div class="fl_l select-option">
+                    <div class="option-text">Font size</div>
+                    <select class="select" ng-model="user.preferences.font">
+                        <option value="12">12px</option>
+                        <option value="13">13px</option>
+                        <option value="14">14px</option>
+                        <option value="15">15px</option>
+                        <option value="16">16px</option>
+                        <option value="17">17px</option>
+                        <option value="18">18px</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+
+</div>
+<span id="dummy"></span>
+
+<script>
+  $(document).ready(function(){
+    $("#scroll-dialogs").mCustomScrollbar({scrollInertia:450, theme:"dark-2"});
+    $("#scroll-contacts").mCustomScrollbar({scrollInertia:450, theme:"dark-2"});
+    $("#scroll-contacts-search").mCustomScrollbar({scrollInertia:450, theme:"dark-2"});
+    $("#scroll-theme-settings").mCustomScrollbar({scrollInertia:450, theme:"dark"});
+    var optimal = ( document.body.clientHeight - 250 ) / 12;
+    document.getElementById('scroll-dialogs').style.height = optimal * 8 + "px";
+    document.getElementById('scroll-contacts').style.height = optimal * 4 + "px";
+    document.getElementById('right-true-area').style.width = (document.body.clientWidth - 310) + "px";
+  });
+</script>
+<script>
+    //console.log("0");
+    //document.getElementById('head-width').style.width = (document.body.clientWidth- 310) + "px";
+</script>
+<!-- <script src="js/sweet-alert.js"></script> -->
+<script src="/hi/js/script.js"></script>

@@ -1,0 +1,132 @@
+html{
+  min-height: 580px;
+}
+
+body {
+  margin: 0 auto;
+  overflow: hidden;
+  min-height: 580px;
+}
+
+.welcome-bg {
+  background-image: url(/images/star_cluster_blurred.png);
+  background-size: stretch;
+  width: 100%;
+  height: 50%;
+  /*height: 288px;*/
+  z-index: 1;
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
+.logo-block {
+  position: absolute;
+  display: block;
+  left: 50%;
+  margin: 0 auto;
+}
+
+.logo-welcome {
+  left: -50%;
+  top: 80px;
+  background-image: url(/images/logo_big.png);
+  position: relative;
+  z-index: 2;
+  background-repeat: no-repeat;
+  width: 373px;
+  height: 118px;
+}
+
+.logo-desc {
+  color: #fff;
+  z-index: 2;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  position: relative;
+  top: 100px;
+  left: -50%;
+}
+
+.wheel {
+  width: 580px;
+  display: table;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 3%;
+  margin-bottom: 4%;
+}
+
+.wheel-element {
+  float: left;
+  text-align: center;
+}
+
+.wheel-title {
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  transition: color 0.386s linear;
+}
+
+.wheel-content {
+  margin-top: 15px;
+  width: 270px;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.wheel-right {
+  font-family: 'PT Sans', sans-serif;
+  margin: 70px 0 0 6%;
+  /*text-align: right;*/
+  width: 20%;
+  float: left;
+
+}
+
+.wheel-left {
+  font-family: 'PT Sans', sans-serif;
+  margin: 70px 6% 0 0;
+  width: 20%;
+  float: left;
+}
+
+.wheel-left > a, .wheel-right > a {
+  cursor: pointer;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.start-block{
+  display: table;
+  margin: 0 auto;
+}
+
+.start-btn{
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 0px solid rgba(0,0,0,0.15);
+  outline: none;
+  padding-top: 6px;
+  width: 200px;
+  height: 50px;
+  color: #fff;
+  background-color: #00c27f;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  transition: all 0.386s ease-in-out;
+}
+
+.start-btn:hover {
+    background: #05c787;
+}
+
+.start-btn:active {
+    background: #00be77;
+}

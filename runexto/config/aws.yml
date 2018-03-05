@@ -1,0 +1,6 @@
+development:
+production:
+default:
+  id: aws_id
+  region: aws_region
+  key: aws_key

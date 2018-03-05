@@ -1,0 +1,22 @@
+<div class="logo-big"></div>
+    <div class="search-input-area">
+        <div class="fl_l wrap2">
+            <input class="fl_l search-input" autocomplete="off" placeholder="{{ 'search.invitation' | translate}}" ng-model="query" ng-keypress="ExecQuerySearch($event)">
+            <button class="fl_r search-go" ng-click="ExecQuerySearch()">GO</button>
+        </div>
+        <div class="fl_l source_select_block" hidden>
+                Поиск по:
+                <input id="s_1" type="radio" name="s_partition" value="groups" checked style="margin-left: 40px;" ng-model="conf.search.sources.posts_of">
+                <label class="radiolabel" for="s_1">
+                    Сообществам
+                </label>
+                <input id="s_2" type="radio" name="s_partition" value="bloggers" style="margin-left: 40px;" ng-model="conf.search.sources.posts_of">
+                <label class="radiolabel" for="s_2">
+                    Блоггерам
+                </label>
+                <input id="s_3" type="radio" name="s_partition" value="people" style="margin-left: 40px;" ng-model="conf.search.sources.posts_of">
+                <label class="radiolabel" for="s_3">
+                    Людям
+                </label>
+        </div>
+    </div>

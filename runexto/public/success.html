@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Success
+	</title>
+</head>
+<script type="text/javascript">
+
+window.onload = function(){
+	if (window.opener && window.opener.parent){
+		window.opener.parent.postMessage('ok', '*');
+		window.close();
+	} else {
+		window.location.href = 'http://runexto.com/';
+	}
+}
+</script>
+<body>
+
+</body>
+</html>

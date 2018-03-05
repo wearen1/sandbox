@@ -1,0 +1,90 @@
+extend layout
+
+block title
+  title Runexto Search Engine
+
+block head-scripts
+  script(src='js/script.js')
+
+block content
+  body(ng-view="index")
+    header
+      .head-center
+        .fl_l.head-links
+          a.active.head-link(href='#', target='_blank') Runexto
+          a.head-link(href='#', target='_blank') YourTape
+          a.head-link(href='#', target='_blank') YoTravel
+          a.head-link(href='#', target='_blank') GTS
+        .fl_r.auth-link
+          a#open-auth-box.head-link(href='#') Авторизоваться
+          #auth-box(style='display: none;')
+            #close-auth-box.title Отменить
+            #auth-page-1(style='display: block;')
+              .step-title Авторизуйтесь через социальные сети
+              .fl_l.social-auth-link
+                a.fl_l.social-link.fb(href='#')
+                a.fl_l.social-link.vk(href='#')
+                a.fl_l.social-link.tw(href='#')
+                a.fl_l.social-link.inst(href='#')
+                a.fl_l.social-link.lastfm(href='#')
+              .clear
+              .info
+                | Чтобы пользоваться поиском в полную
+                | силу, авторизуйтесь через максимальное
+                | количество социальных сетей.
+              .fl_l.actions_steps
+                #1to2.fl_r.auth-next Далее
+            #auth-page-2(style='display: none;')
+              .step-title Основная информация
+              .auth-general-inputs
+                input#first-name.auth-input.top-borders(placeholder='Введите ваше имя')
+                input#last-name.auth-input.bottom-borders(placeholder='Введите вашу фамилию')
+              .clear
+              .info
+                | Пожалуйста, указывайте настоящие данные.
+                | Это упростит работу.
+                | Хотя, это просто текст, который напишет Кирилл.
+                .import-area(onclick='importcheck()')
+                  .fl_l.point(style='margin: 12px 0px;')
+                    #import_check
+                  .fl_l.label Импорт данных из соц. сетей
+              .fl_l.actions_steps
+                #2to3.fl_r.auth-next Далее
+                #2to1.fl_l.auth-prev Назад
+            #auth-page-3(style='display: none;')
+              .step-title Основная информация
+              .auth-general-inputs
+                textarea.interests-area(placeholder='Ваши интересы')
+              .clear
+              .info
+                | Будет пиздато, если вы введете настоящую инфу.
+                | Не будьте хуйлом, пожалуйста. Спасибо.
+              .fl_l.actions_steps
+                #3to4.fl_r.auth-next Далее
+                #3to2.fl_l.auth-prev Назад
+            #auth-page-4(style='display: none;')
+              .step-title Другие настройки
+              .auth-general-inputs
+                .fl_l.input_imitation yourtape.com/
+                input#link-input.fl_l.auth-input(placeholder='link')
+                .clear
+                //
+                  <div id="error" style="display: none">Логин занят</div>
+                .fl_l.photo-label Выберите фото:
+                button.upload-photo Загрузить фотографию
+                .border-or или
+                a.import-photo(href='#')
+                  .center импортировать из соц.сетей
+              .clear
+              .info
+                | Здесь будет текст о последнем шаге регистрации.
+              .fl_l.actions_steps
+                .fl_r.auth-finish Finish
+                #4to3.fl_l.auth-next Назад
+    .logo-big
+    .search-input-area
+      .fl_l.wrap2
+        form
+          input.fl_l.search-input(placeholder='Input your request here', ng-model="query")
+          button(ng-click="ExecQueryFn").fl_r.search-go GO
+

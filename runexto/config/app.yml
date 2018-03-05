@@ -1,0 +1,28 @@
+development:
+  port: 4000
+  redis:
+    host: localhost
+    port: 6379
+  mongo: localhost
+
+production:
+  port: 4000
+  redis:
+    host: localhost
+    port: 6379
+  mongo: 178.62.225.85
+  cookie_secret: 14CD746D-B1B8-4B9C-8A33-A8447735BF3C
+
+
+# production:
+#   port: 8081
+#   redis:
+#     host: runexto.frxufj.ng.0001.euc1.cache.amazonaws.com
+#     port: 6379
+#   mongo: 178.62.225.85
+#   cookie_secret: 14CD746D-B1B8-4B9C-8A33-A8447735BF3C
+
+default:
+  port: 8081
+  mongo: 172.31.12.112
+  cookie_secret: 14CD746D-B1B8-4B9C-8A33-A8447735BF3C
