@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                :integer          not null, primary key
+#  nick              :string
+#  email             :string
+#  password          :string
+#  first_name        :string
+#  last_name         :string
+#  avatar            :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  external_token_id :integer
+#  notification_id   :integer
+#  status            :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nick: MyString
+  email: MyString
+  password: MyString
+  first_name: MyString
+  last_name: MyString
+  avatar: MyString
+
+two:
+  nick: MyString
+  email: MyString
+  password: MyString
+  first_name: MyString
+  last_name: MyString
+  avatar: MyString

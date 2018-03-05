@@ -1,0 +1,33 @@
+<div class="body">
+    <div class="icon">
+        <div class="item anm_150ms" ng-include="'css/images/link.svg'"></div>
+        <div class="throbber s16"></div>
+    </div>
+    <input type="text" class="url" ng-model="options.url" placeholder="source link..." ng-keypress="options.onKeyPress($event)" />
+    <div class="line"></div>
+    <div class="error red"></div>
+</div>
+<div class="preview">
+    <div class="fl_l s36 r_100 b_image image" ng-style="{'background-image': 'url(' + options.data.image + ')'}"></div>
+    <div class="fl_l info">
+        <div class="item" ng-repeat="item in options.data.feeds">
+            <div class="fl_l source">
+                <div class="title" ng-model="item.title" contenteditable>{{item.title}}</div>
+                <div class="description">{{item.url}}</div>
+            </div>
+            <div class="fl_r check" ng-show="options.data.feeds.length > 1" ng-click="item.isSelected = !item.isSelected">
+                <div ng-include="'css/images/check.svg'" ng-show="item.isSelected"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <div class="fl_r button r_4 ok" translate="add" ng-click="options.add(close)" ng-hide="options.block"></div>
+
+    <div class="fl_r loader" ng-show="options.block">
+        <div class="throbber s16"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div render="done"></div>

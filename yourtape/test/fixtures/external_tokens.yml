@@ -1,0 +1,39 @@
+# == Schema Information
+#
+# Table name: external_tokens
+#
+#  id               :integer          not null, primary key
+#  vk_id            :string
+#  vk_access_token  :string
+#  fb_id            :string
+#  fb_access_token  :string
+#  fb_refresh_token :string
+#  tw_id            :string
+#  tw_token         :string
+#  tw_token_secret  :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  user_id          :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vk_id: MyString
+  vk_access_token: MyString
+  fb_id: MyString
+  fb_access_token: MyString
+  fb_refresh_token: MyString
+  tw_id: MyString
+  tw_token: MyString
+  tw_token_secret: MyString
+
+two:
+  vk_id: MyString
+  vk_access_token: MyString
+  fb_id: MyString
+  fb_access_token: MyString
+  fb_refresh_token: MyString
+  tw_id: MyString
+  tw_token: MyString
+  tw_token_secret: MyString

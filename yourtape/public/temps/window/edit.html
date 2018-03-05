@@ -1,0 +1,29 @@
+<div class="body w_edit">
+    <div class="info flex_center">
+        <div class="b_image s32 r_100" ng-style="{'background-image': 'url(' + options.item.image + ')'}"></div>
+        <input class="input r_4" type="text" ng-model="options.item.name" />
+    </div>
+
+    <div class="clear"></div>
+    <div class="tags fl_r">
+        <input
+                class="input r_4"
+                ng-keypress="pre(options.addTag, $event);"
+                ng-disabled="options.item.tags.length >= 5"
+                placeholder="{{'add_tag'|translate}}"
+        />
+        <div class="fl_l tag anm_150ms" ng-repeat="tag in options.item.tags">
+            <div class="tag-close" ng-click="pre(options.removeTag, $index)" ng-include="'css/images/close_2.svg'"></div>
+            #{{tag}}
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div class="fl_r button ok r_4" translate="save" ng-click="pre(options.save, close)" ng-hide="options.block"></div>
+    <div class="fl_r button grey r_4" translate="cancel" ng-click="pre(close)" ng-hide="options.block"></div>
+
+    <div class="fl_r loader" ng-show="options.block">
+        <div class="throbber s16"></div>
+    </div>
+    <div class="clear"></div>
+</div>

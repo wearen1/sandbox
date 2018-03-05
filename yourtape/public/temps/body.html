@@ -1,0 +1,135 @@
+<div class="main">
+    <div class="top">
+        <div class="fl_l link">Vspace</div>
+        <div class="fl_l link">Runexto</div>
+        <div class="fl_l link">Hi</div>
+        <div class="fl_l link active">YourTape</div>
+        <div class="fl_l link">SpyNotify</div>
+
+        <div class="fl_r profile-info">
+            <div class="fl_l userpic">
+                <div class="userpic-img" ng-style="{'background-image' : 'url('+ user.avatar +')'}"></div>
+            </div>
+            <div class="fl_l profile-info-name">{{user.first_name}} {{user.last_name}}<span class="fl_r profile-info-state" id="{{user.status}}"></span></div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <div class="wide">
+            <div class="fl_l tab_container">
+                <div    class="tab item fl_l"
+                        ng-class="tabs.state == $index ? 'active' : ''"
+                        ng-repeat="tab in tabs.items"
+                        ng-click="tabs.changeTab($index)">
+                    {{tab.name|translate}}
+                </div>
+            </div>
+            <div class="fl_r feed_info flex_center" ng-if="tabs.items[tabs.state].feed.info">
+                <div class="fl_l b_image s16 r_100" ng-style="{'background-image': 'url(' + tabs.items[tabs.state].feed.info.user.image + ')'}"></div>
+                <div class="fl_l name"> {{ tabs.items[tabs.state].feed.info.user.name }} </div>
+                <div class="flex_r">
+                    <div class="fl_l stats">
+                        <div class="value">{{tabs.items[tabs.state].feed.info.feeds_count}}</div>
+                        <div class="label">Feeds</div>
+                    </div>
+                    <div class="fl_l stats">
+                        <div class="value">{{tabs.items[tabs.state].feed.info.sub_count}}</div>
+                        <div class="label">Followers</div>
+                    </div>
+                    <div class="fl_l sub {{tabs.items[tabs.state].feed.info.isSub?'red':'green'}}" ng-click="tabs.items[tabs.state].feed.sub()">
+                        {{tabs.items[tabs.state].feed.info.isSub?'unfollow':'follow'|translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div class="wide height">
+        <div class="fl_l left">
+            <div class="sub_menu">
+                <div class="item">
+                    <input type="text" class="sub_search" ng-model="tabs.items[tabs.state].search" placeholder="search..."/>
+                </div>
+                <div id="sub_list" ng-class="{'full_size': (!tabs.items[tabs.state].editable)}">
+                    <div class="item" ng-show="!tabs.items[tabs.state].feeds || tabs.items[tabs.state].feeds.length == 0">Nothing</div>
+                    <div    class="item"
+                            ng-repeat="(source_id, item) in (tabs.items[tabs.state].filteredFeeds = (tabs.items[tabs.state].feeds | filterHash: tabs.items[tabs.state].filterFeed))"
+                            ng-class="{'active': source_id === tabs.items[tabs.state].sample.source_id}"
+                    >
+                        <div    class="fl_l select r_100 anm_150ms"
+                                ng-class="{'enable':(tabs.items[tabs.state].state == 1), 'selected': (item.selected)}"
+                                ng-click="item.selected = !item.selected">
+                        </div>
+                        <div    class="fl_l b_image s24 r_100"
+                                ng-style="{'background-image': 'url(' + item.image + ')'}">
+                        </div>
+                        <div    class="fl_l name anm_150ms"
+                                ng-class="{'enable':(tabs.items[tabs.state].state == 1)}"
+                                ng-click="(tabs.items[tabs.state].state == 1)?(item.selected = !item.selected):tabs.items[tabs.state].chooseFeed(source_id, item)">
+                            {{item.name}}
+                        </div>
+                        <div    class="fl_r edit anm_150ms"
+                                ng-include="'css/images/edit.svg'"
+                                ng-class="{'enable':(tabs.items[tabs.state].state == 1)}"
+                                ng-click="edit(item)">
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="item actions" ng-show="tabs.items[tabs.state].state == 0 && tabs.items[tabs.state].editable">
+                    <div class="fl_l w50" ng-click="openSourceWindow()" translate="add"></div>
+                    <div class="fl_r w50" ng-click="tabs.items[tabs.state].state = 1" translate="edit"></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="item actions" ng-show="tabs.items[tabs.state].state == 1 && tabs.items[tabs.state].editable">
+                    <div class="fl_l w50 red" translate="delete" ng-click="tabs.items[tabs.state].deleteFeeds()"></div>
+                    <div class="fl_r w50" ng-click="tabs.items[tabs.state].state = 0" translate="done"></div>
+                    <div class="clear"></div>
+                </div>
+                <!-- <div class="new-group item drop" ng-show="sub_menu.state == 2" ui-sortable ng-model="sub_menu.new_group">
+                    drop to create group
+                </div> -->
+            </div>
+            <div class="tags-container">
+                <div    class="fl_l tag-item r_4 anm_150ms"
+                        ng-repeat="item in tabs.items[tabs.state].tags | orderBy: tag"
+                        ng-class="{'active': tabs.items[tabs.state].sample.tags.inArray(null, item)}"
+                        ng-click="tabs.items[tabs.state].chooseTag(item)"
+                >
+                    #{{item}}
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div    class="tag-item"
+                    translate="suggestion_title"
+                    ng-if="tabs.items[tabs.state].suggestions && tabs.items[tabs.state].feed.isHideSuggestions"
+                    ng-click='tabs.items[tabs.state].feed.toggle()'>
+
+            </div>
+        </div>
+        <div class="fl_l right" id="content">
+            <div class="posts-loader" ng-show="!tabs.items[tabs.state].isReady">
+                <div class="throbber s16"></div>
+            </div>
+            <div class="post suggestions" ng-if="tabs.items[tabs.state].suggestions && !tabs.items[tabs.state].feed.isHideSuggestions">
+                <div class='close' ng-click='tabs.items[tabs.state].feed.toggle()' ng-include="'css/images/close.svg'"></div>
+                <div class="head" translate="suggestion_title"></div>
+                <div class="user" ng-repeat="(user_id, item) in tabs.items[tabs.state].suggestions" ng-click="tabs.items[tabs.state].openFeed(user_id, item)">
+                    <div class="b_image s72 r_100" ng-style="{'background-image': 'url(' + item.avatar + ')'}"></div>
+                    <div class="name">
+                        <div class="first">{{ item.first_name }}</div>
+                        <div class="last">{{ item.last_name }}</div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="post" ng-if="tabs.items[tabs.state].filteredPosts.length == 0 && tabs.items[tabs.state].isReady">
+                {{tabs.items[tabs.state].getPlaceholder()}}
+            </div>
+            <post ng-repeat="post in (tabs.items[tabs.state].filteredPosts = (tabs.items[tabs.state].posts | filter: tabs.items[tabs.state].filterPost | orderBy: '-published'))"></post>
+        </div>
+    </div>
+</div>
+<div class="overlay"></div>
+<div render="done"></div>

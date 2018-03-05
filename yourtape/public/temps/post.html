@@ -1,0 +1,33 @@
+<div class="post">
+
+    <div class="info flex_center">
+        <div class="b_image s24 r_100" style="background-image: url('{{tabs.items[tabs.state][(tabs.items[tabs.state].sources?'sources':'feeds')][post.source_id].image}}')"></div>
+        <a class="user-name" style="margin-left: 8px;" ng-href="{{ tabs.items[tabs.state][(tabs.items[tabs.state].sources?'sources':'feeds')][post.source_id].site_url }}" target="_blank">{{tabs.items[tabs.state][(tabs.items[tabs.state].sources?'sources':'feeds')][post.source_id].name}}</a>
+
+        <div class="source time-difference">
+            <span class="original">
+                <!--<a href="{{post.source.original}}" translate="original"></a>-->
+                <!-- 7 min -->
+            </span>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="text">
+        <div class="title">
+            <a target="_blank" ng-href=" {{ post.url }} ">{{ post.title }}</a>
+        </div>
+        {{post.summary}}
+    </div>
+
+    <div class="actions">
+        <span class="icon" ng-click="bookmark(post)" data-icon="&#xe09b;" data-js-prompt="&#xe09b;"> book</span>
+        <span class="icon" ng-click="share(post.id)" data-icon="&#xe068;" data-js-prompt="&#xe068;"> rec</span>
+        <div class="fl_r flex_center" ng-if="tabs.items[tabs.state].sources">
+            <div class="b_image s16 r_100" ng-style="{'background-image': 'url(' + tabs.items[tabs.state].feeds[post.from_id].image + ')'}"></div>
+            <div class="name">{{ tabs.items[tabs.state].feeds[post.from_id].name }}</div>
+        </div>
+        <!-- <span class="fl_r" ng-click="comments(post)" translate="comments"></span> -->
+        <div class="clear"></div>
+    </div>
+</div>

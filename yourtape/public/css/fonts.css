@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "Roboto Medium";
+    src: url("fonts/Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Helvetica Neue Light";
+    src: url("fonts/OpenSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Bold";
+    src: url("fonts/helvetica-neue-bold.ttf");
+}
+
+@font-face {
+    font-family: "Helvetica Neue Medium";
+    src: url("fonts/HelveticaNeueCyr-Medium.otf");
+}
+
+
+@font-face {
+    font-family: "Roboto BoldCondensed";
+    src: url("fonts/Roboto-BoldCondensed.ttf");
+}

@@ -1,0 +1,127 @@
+.post {
+    font-family: "Helvetica Neue Light", sans-serif;
+    /*margin: 8px 0;*/
+
+    width: 100%;
+    height: auto;
+
+    background-color: rgba(255,255,255,0.7);
+    padding: 24px;
+    box-sizing: border-box;
+    /*border-radius: 4px;*/
+    border-bottom: 1px solid rgba(31, 31, 31, 0.2);
+}
+
+    .post .title a{
+        color: black;
+        text-decoration: none;
+    }
+
+    .post .title a:visited {
+        text-decoration: none;
+    }
+
+    .post .user-name {
+        color: black;
+        text-decoration: none;
+    }
+
+    .post .user-name:visited{
+        text-decoration: none;
+    }
+
+    .post .info{
+        font-size: 0.9em;
+        margin-bottom: 16px;
+        color: #222;
+    }
+
+    .post .title {
+        font-size: 1.5em;
+        line-height: 1.5;
+        margin-bottom: 8px;
+        color: #111;
+        letter-spacing: -1px;
+    }
+
+    .post .text{
+        font-size: 0.85em;
+        line-height: 1.5em;
+        color: #444;
+    }
+
+    .post .source {
+        /*margin-top: 24px;*/
+        margin-left: auto;
+        font-size: 0.8em;
+        color: #444;
+    }
+
+        .post .source a{
+            color: #444;
+            text-decoration: none;
+        }
+
+    .post .actions {
+        margin-top: 24px;
+        /*margin-left: auto;*/
+        font-size: 0.8em;
+        color: #444;
+    }
+
+        .post .actions .icon {
+            /*font-size: 1.2em;*/
+            margin-right: 4px;
+            cursor: pointer;
+        }
+
+        .post .actions .icon:hover {
+            color: rgb(78, 144, 224);
+        }
+
+        .post .actions .name {
+            margin-left: 4px;
+        }
+
+post:nth-child(2) .post{
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+post:last-child .post{
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom: none;
+}
+
+.suggestions {
+    text-align: center;
+    font-size: 0.8em;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+}
+
+.suggestions .close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.suggestions .head {
+    margin-bottom: 8px;
+}
+
+.suggestions .user, .suggestions .b_image {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.suggestions .user {
+    margin: 0 8px;
+}
+
+.posts-loader {
+    padding: 16px;
+    text-align: center;
+}

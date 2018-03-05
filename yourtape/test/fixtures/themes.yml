@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: themes
+#
+#  id         :integer          not null, primary key
+#  css_url    :string
+#  js_url     :string
+#  params     :json
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  css_url: MyString
+  js_url: MyString
+  params: 
+
+two:
+  css_url: MyString
+  js_url: MyString
+  params: 

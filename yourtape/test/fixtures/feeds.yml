@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: feeds
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  source_id  :integer
+#  tags       :text             default([]), is an Array
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  name       :string
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: MyString
+  title: MyString
+  site_url: MyString
+  description: MyString
+  image: MyString
+  user_id: 
+
+two:
+  url: MyString
+  title: MyString
+  site_url: MyString
+  description: MyString
+  image: MyString
+  user_id: 

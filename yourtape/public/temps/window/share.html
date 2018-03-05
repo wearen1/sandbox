@@ -1,0 +1,45 @@
+<div class="body w_share">
+    <div class="search">
+        <div class="fl_l" ng-include="'/css/images/search.svg'"></div>
+        <input class="fl_l" type="text" ng-model="options.search" placeholder="{{'search'|translate}}" />
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="selected-list list" ng-show="options.selected.length > 0">
+    <div    class="b_image s32 r_100"
+            ng-repeat="user in options.selected"
+            style="background-image: url('{{user.avatar}}')"
+            ng-click="pre(options.moveTo, options.selected, $index, options.friends)">
+        <div class="s32">
+            <div ng-include="'css/images/close.svg'"></div>
+        </div>
+    </div>
+</div>
+<div class="section" translate="recommend_title" ng-show="options.friends.length > 0"></div>
+<div class="friends-list list">
+    <div    class="user flex_center"
+            ng-repeat="user in options.friends | filter: options.search | orderBy: 'last_name'"
+            ng-click="pre(options.moveTo, options.friends, options.friends.indexOf(user), options.selected)"
+    >
+        <div class="b_image s24 r_100" style="background-image: url('{{user.avatar}}')"></div>
+        <div class="user-name" style="margin-left: 8px;">{{user.first_name + ' ' + user.last_name}}</div>
+    </div>
+</div>
+<div class="body w_share">
+    <div    class="fl_r button grey r_4"
+            ng-class="{'ok': options.selected.length > 0}"
+            translate="recommend"
+            ng-click="pre(options.share, close)"
+            ng-hide="options.block">
+    </div>
+    <div    class="fl_r button grey r_4"
+            translate="cancel"
+            ng-click="pre(close)"
+            ng-hide="options.block">
+    </div>
+    <div class="fl_r loader" ng-show="options.block">
+        <div class="throbber s16"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div render="done"></div>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="12" height="9" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 4335 4335"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke-width:1083.73;stroke-linecap:round;stroke-linejoin:round}
+   ]]>
+  </style>
+ </defs>
+ <g>
+  <line class="str0" x1="0" y1="1084" x2="2167" y2= "3251" />
+  <line class="str0" x1="2167" y1="3251" x2="4335" y2= "1084" />
+ </g>
+</svg>

@@ -1,0 +1,11 @@
+!!!
+%html{'ng-app' => 'yourtape'}
+  %head{:lang => 'en'}
+    %meta{:charset => 'UTF-8'}
+    %title YourTape
+
+    = stylesheet_link_tag    'tape', :media => 'all'
+    = javascript_include_tag 'tape'
+    = csrf_meta_tags
+  %body
+    = yield

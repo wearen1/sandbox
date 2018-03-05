@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: preferences
+#
+#  id                  :integer          not null, primary key
+#  user_id             :integer
+#  theme_id            :integer
+#  background_image_id :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  background_image_id: 
+  theme_id: 
+
+two:
+  background_image_id: 
+  theme_id: 
