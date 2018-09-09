@@ -1,0 +1,185 @@
+doctype html
+html
+  head
+    title SpyNotify
+    meta(charset='utf-8')
+    meta(name="viewport" content="width=400,initial-scale=1,maximum-scale=1")
+
+    //- link(rel='stylesheet', href='//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic')
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/bower_components/normalize.css/normalize.css')
+    link(rel='stylesheet', href='/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css')
+    link(rel='stylesheet', href='/bower_components/gridster.js/dist/jquery.gridster.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+
+    script(type='text/javascript', src='/js/rgbcolor.js')
+    script(type='text/javascript', src='/socket.io/socket.io.js')
+    script(type='text/javascript', src='/bower_components/jquery/dist/jquery.min.js')
+    script(type='text/javascript', src='/bower_components/moment/min/moment.min.js')
+    script(type='text/javascript', src='/bower_components/moment/locale/ru.js')
+    script(type='text/javascript', src='/bower_components/jquery-ui/jquery-ui.min.js')
+    script(type='text/javascript', src='/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')
+    script(type='text/javascript', src='/bower_components/gridster.js/dist/jquery.gridster.with-extras.min.js')
+    script(type='text/javascript', src='/bower_components/initial.js/dist/initial.min.js')
+    script(type='text/javascript', src='/bower_components/ios7-blur-html5/js/html2canvas.js')
+    script(type='text/javascript', src='/bower_components/ios7-blur-html5/js/StackBlur.js')
+    script(type='text/javascript', src='/bower_components/Blur.js/blur.js')
+    script(type='text/javascript', src='/bower_components/jquery-backstretch/jquery.backstretch.min.js')
+    script(type='text/javascript', src='/bower_components/packery/dist/packery.pkgd.min.js')
+    script(type="text/javascript" src="bower_components/jquery-stylesheet/jquery.stylesheet.js")
+    script(type="text/javascript" src="/js/index.js")
+ body
+  header
+    div.header-center
+      .top_worm
+      .fl_l.header-links
+        a Vspace
+        a Runexto
+        a YourTape
+        a.active.visible SpyNotify
+        a Hi
+      .fl_r.header-links
+        a.visible Войти
+  #bgs
+  .shadow.invisible
+  .view.clear
+    .panel.centered.horizontally.top
+      .fl_l.logo-container.offset.bottom.m
+        .logo.spynotify.fl_l
+        .add-spy.fl_l
+          i.fa.fa-plus-square-o.fl_l(style="position:relative")
+          div
+            .create-text
+      .activity-log.centered.horizontally.fl_l(title='Последние изменения')
+        //- .item.offset.top.m
+        //-   img.text-avatar(data-name="Lenta").fl_l
+        //-   a.name.fl_l(href="http://lenta.ru", target="_blank") Lenta
+        //-   .time.fl_r 10 минут назад
+        //-   .desc.fl_l Изменилось 20% содержимого страницы
+        //-   .border.fl_l
+        //- .item
+        //-   img.text-avatar(data-name="Forbes").fl_l
+        //-   a.name.fl_l(href="http://forbes.ru", target="_blank") Forbes
+        //-   .time.fl_r 8 минут назад
+        //-   .desc.fl_l Изменился элемент "комментарий"
+        //-   .border.fl_l
+        //- .item
+        //-   img.text-avatar(data-name="Habrahabr").fl_l
+        //-   a.name.fl_l(href="http://Habrahabr.ru", target="_blank") Habrahabr
+        //-   .time.fl_r 5 минут назад
+        //-   .desc.fl_l Появился новый элемент "статья"
+        //-   .border.fl_l
+        //- .item
+        //-   img.text-avatar(data-name="IFMO").fl_l
+        //-   a.name.fl_l(href="http://ifmo.ru", target="_blank") Ifmo
+        //-   .time.fl_r только что
+        //-   .desc.fl_l(title="Появился новый элемент 'расписание'") Появился новый элемент "расписание"
+        //-   .border.fl_l
+      .settings-panel.centered.horizontally(title='Фильтры')
+        .clear
+        #filter-active.fl_r
+          .fl_l.offset.left
+            | Только активные
+          i.fa.fa-toggle-off.fl_r.offset.left.s(style="position:relative; color: red")
+        #filter-type-pages.fl_r
+          .fl_l.offset.left
+            | Страницы
+          i.fa.fa-toggle-off.fl_r.offset.left.s(style="position:relative; color: red")
+        #filter-type-elements.fl_r
+          .fl_l.offset.left
+            | Элементы
+          i.fa.fa-toggle-off.fl_r.offset.left.s(style="position:relative; color: red")
+
+      .offset.top.s.fl_l.fullwidth
+      .clear.offset.top.s
+    #grid-table.panel.bottom.grid-container.content-transparent.centered.horizontally
+      #create-spy.panel.middle.grid-container.content-visible.centered.horizontally.attached(style="display: none")
+        .type-select.offset.top.m
+          div Выберите тип
+          .centered.horizontally
+            .items
+              .item.fl_l#webpage
+                .webpage
+                | Веб-страница
+              .item.fl_l#webelement
+                .webelement
+                | Веб-элемент
+              //- .item.fl_l
+              //-   .websocial
+              //-   | Социальные сети
+            .items-desc
+              .webpage.hidden
+                | Позволяет отслеживать изменения страницы
+              .webelement.hidden
+                | Позволяет отслеживать изменения выбранного элемента на странице
+            #type.next.centered.horizontally.hidden
+              | Далее
+        .configure-page.offset.top.m.hidden
+          .fl_l.fullwidth
+            .back(data-current-step="page")
+              .fl_r Назад
+              i.fa.fa-arrow-circle-o-left.fl_l
+            .clear
+            div Укажите настройки
+            .centered.horizontally.offset.top.l
+              .items
+                .item.fl_l.active
+                  .spy-url
+                    input.fl_r#spy-name(type="text", placeholder="favorite page")
+                    label.fl_l(for="spy-name") Название шпиона
+                br
+                .item.fl_l.active
+                  .spy-url
+                    input.fl_r#spy-url(type="text", placeholder="http://example.com")
+                    label.fl_l(for="spy-url") Адрес страницы
+                br
+                .item.fl_l.active
+                  .spy-interval
+                    select.fl_r#spy-interval
+                      option(value="15m", selected) Раз в 15 минут
+                      option(value="1h") Раз в час
+                      option(value="1d") Раз в сутки
+                      option(value="1w") Раз в неделю
+
+                    label.fl_l(for="spy-interval") Интервал отслеживания
+
+                br
+                .item.fl_l.active
+                  .spy-notify
+                    .fl_l Оповещение по e-mail
+                    i.fa.fa-toggle-off.fl_r.offset.left.s(style="position:relative; color: red")
+                br
+                .item.fl_l.active.offset.top.m
+                  .complete.centered.horizontally
+                    .centered.horizontally.vertically
+                      #ready.offset.top.m Готово
+
+                      //- i.fa.fa-check.fl_l(style="position:relative; color: white")
+
+
+
+                //- .item.fl_l
+                //-   .window-selector
+                //-     | Открыть окно
+
+                //- .item.fl_l
+                //-   .spy-selected
+                //-     | Выбранные элементы
+                //-     ul
+                //-       li item.text
+                //-       li item.text
+                //-       li item.text
+
+
+
+
+        //- iframe#testFrame(width=600, height=400, sandbox="allow-same-origin allow-scripts allow-forms")
+        //- | create spy
+      .grid.offset.l
+        //- .item
+        //-   .info
+        //-     i.fa.fa-remove.delete
+        //-     i.fa.fa-gear.settings
+        //-   .bg
+        //-   .desc
+        //-   .title.centered.horizontally National Research University IFMO

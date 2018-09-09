@@ -1,0 +1,246 @@
+@require 'panel'
+
+grid-height = 410px
+
+.grids
+  position relative
+
+.grid-container
+  // border none
+
+  position relative
+  height grid-height
+  max-height grid-height
+  border-width 0px 1px 1px 1px
+
+  &.hidden
+    display none
+
+  &.content-transparent
+    background none !important
+    padding 14px
+
+    &:after
+      @extends .panel
+
+
+      border-radius 0 0 4px 4px
+      margin 0
+      padding 0
+      background-color white
+      z-index 1
+      content ''
+      position absolute
+      width 100%
+      height 100%
+      // width 450px
+      // height grid-height
+      opacity 0.5
+      top -1px
+      left -1px
+
+  &.content-visible
+    @extends .panel
+
+    padding 14px
+    margin auto
+    // border-radius 0 0 4px 4px
+    z-index 1
+    background-color white
+    opacity 0.5
+
+  &.hovering:hover
+    @extends .blurred
+
+  &.attached
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: calc(100% - 28px);
+    height: 100%;
+    display: none;
+
+.grid
+  // border 1px solid #ccc
+  width auto
+  height 100%
+  max-height 410px
+  min-height 410px
+  margin-right 12px
+
+  & .item
+    background-repeat no-repeat
+    background-size contain
+    transition all 1s easeOutExpo
+    transition width 0.1s linear
+    transition height 0.1s linear
+    background-color: white
+    z-index 2
+    width 120px
+    height 120px
+    opacity 0.6
+    border-radius 4px
+
+    &.active
+      opacity 1
+
+    &.disabled
+      &>.title
+        background-color #2d2d2d
+
+    &:hover
+      opacity 0.85
+      cursor pointer
+    &:active
+      opacity 1
+
+    &.new
+      // animation swinging 0.2s 3 ease-in-out
+      transform-origin center center
+      opacity 0.85
+      border-width 2px
+      border-type solid
+
+    &.x2
+      transition width 0.1s linear
+      transition height 0.1s linear
+      width 240px
+      height 240px
+
+    .info
+      display none
+      height 25px
+      margin-top 40px
+      margin-right 3px
+      // background-color gray
+
+      & div
+        color theme-bg-color
+        cursor pointer
+        width 25px
+        height 25px
+        font-weight lighter
+        // opacity 0.5
+
+        &:hover
+          font-weight bolder
+
+          // opacity 0.8
+
+      // .status
+      //   color rgb(66, 66, 137)
+
+      // .delete
+      //   color #C0392B
+
+      // .settings
+      //   color orange
+
+    .title
+      transition color 0.8s
+      color white
+      word-break break-all
+      pointer-events none
+      // margin-top 3px
+      padding-bottom 3px
+      font-family sans-serif
+      font-weight lighter
+      font-size 15pt
+      clear both
+      width 100%
+      position absolute
+      bottom 0
+      background-color theme-bg-color
+      border-radius 0 0 4px 4px
+
+    .bg-container
+
+      .bg-cover
+        width 100%
+        border-radius 4px
+        height 100%
+        background white
+        position absolute
+        top 0
+        left 0
+        opacity 0
+
+      .bg
+        width 100%
+        height 100%
+        background-size contain
+        background-repeat no-repeat
+        position absolute
+        border-radius 4px
+
+        &.blurred
+          -webkit-filter blur(1px)
+
+
+
+  .sm
+    width 100px - 5px
+    height 100px - 5px
+
+    &.long
+      width 200px
+    &.high
+      height 200px
+
+  .mid
+    width 200px
+    height 200px
+
+    &.long
+      width 400px
+    &.high
+      height 400px
+
+  .lg
+    width 400px
+    height 400px
+
+    &.long
+      width 800px
+    &.high
+      height 800px
+
+  & .tile
+    display block
+    margin 5px
+    // height 100px
+    // width 200px
+    text-align center
+
+    & .slide
+      max-width 100%
+      max-height 100%
+      display block
+
+      &:not(:first-child)
+        display none
+
+      .item
+        background-size contain
+        background-repeat no-repeat
+        background-position 50% 50%
+
+    &[theme=light]
+      background #fff
+      color #000
+
+    &[theme=dark]
+      background #000
+      color #fff
+
+
+    & img
+      width 100%
+      height 100%
+      min-width 100%
+      max-width none
+      // width 100%
+
+.border
+  border-bottom 1px solid #ebebeb
+  width 100%

@@ -1,0 +1,36 @@
+img_path = '../img/logo.png'
+
+.logo
+  background-size 100%
+  background-repeat no-repeat
+
+  &.spynotify
+
+    margin-bottom 10px
+    background-image url('/img/logo-full.png')
+    width image-size(img_path)[0]
+    height image-size(img_path)[1]
+
+    @media screen and (max-width: 750px)
+      width image-size(img_path)[0] * 0.8
+      height image-size(img_path)[1] * 0.8
+
+    @media screen and (max-width: 600px)
+      width image-size(img_path)[0] * 0.5
+      height image-size(img_path)[1] * 0.5
+
+.logo-container
+  @media screen and (min-width: 700px)
+    max-width image-size(img_path)[0]
+    max-height 2 * image-size(img_path)[1]
+
+  @media screen and (max-width: 750px)
+    // max-width image-size(img_path)[0] * 0.8
+    max-width none
+    width 100%
+
+  @media screen and (max-width: 600px)
+    max-width none
+    width 100%
+
+    // max-width image-size(img_path)[0] * 0.5

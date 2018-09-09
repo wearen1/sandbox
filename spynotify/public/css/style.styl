@@ -1,0 +1,95 @@
+@import 'nib'
+
+@require 'variables'
+@require 'global'
+@require 'theme'
+@require 'header'
+@require 'logo'
+@require 'grid'
+@require 'activity_log'
+@require 'settings_panel'
+@require 'create_spy'
+@require 'panel'
+
+body
+  background-size cover
+  background-position center
+
+  font-family 'PT Sans', sans-serif
+  margin 0
+  overflow hidden
+  display block
+  background-attachment fixed
+  transition: background-image 0.8s linear
+
+.view
+  margin-top 30px
+  height 100%
+  width 100%
+  overflow none
+  text-align center
+
+.add-spy
+  img_path = '../img/logo.png'
+  position relative
+  cursor pointer
+  background-color white
+  color theme-bg-color
+  text-align left
+  border-radius 8px
+
+  margin-top: 10px;
+
+  width image-size(img_path)[0] - 10px
+  height image-size(img_path)[1] - 10px
+  transition background-color 0.5s linear
+
+  @media screen and (max-width: 750px)
+    float right
+    width image-size(img_path)[0] * 0.8
+    height image-size(img_path)[1] * 0.8
+
+  @media screen and (max-width: 600px)
+    float right
+    width image-size(img_path)[0] * 0.5
+    height image-size(img_path)[1] * 0.5
+
+  &.ready
+    // background-color #008080
+
+    &:hover
+      // background-color lighten(#008080, 10%)
+
+  &:hover
+    // background-color lighten(purple, 10%)
+
+  & i
+    // Vertical alignment
+    position absolute
+    top 50%
+    transform translateY(-50%)
+
+    // margin-left 10%
+
+
+  & i.fa:before
+    float left
+
+@media screen and (max-width: 750px)
+  .fa
+    font-size 20px !important
+
+@media screen and (max-width: 600px)
+  .fa
+    font-size 18px !important
+
+@media screen and (min-width: 600px)
+  .fa
+    font-size 20px !important
+
+
+.ui-effects-transfer
+  background-color black
+  opacity 1
+  border: 3px solid black
+  transition opacity,background-color 0.8s linear

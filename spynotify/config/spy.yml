@@ -1,0 +1,19 @@
+default:
+  spyTypes:
+    - webpage
+    - webelement
+    - social
+  eventTypes:
+    - added
+    - modified
+    - deleted
+  elementTypes:
+    - custom
+    - list
+    - table
+    - media
+  checkIntervals:
+    - 15m
+    - 1h
+    - 1d
+    - 1w

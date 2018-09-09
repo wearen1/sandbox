@@ -1,0 +1,15 @@
+{
+  "name": "jquery-stylesheet",
+  "homepage": "https://github.com/f0r4y312/jquery-stylesheet",
+  "version": "0.3.6",
+  "_release": "0.3.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.6",
+    "commit": "7ec00facbfbaa19e3430c84d7cae3b930a6e2fd3"
+  },
+  "_source": "git://github.com/f0r4y312/jquery-stylesheet.git",
+  "_target": "~0.3.6",
+  "_originalSource": "f0r4y312/jquery-stylesheet",
+  "_direct": true
+}

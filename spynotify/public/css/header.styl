@@ -1,0 +1,48 @@
+header
+  background white
+  opacity 0.8
+
+  & > div.header-center
+    height: 38px
+    width 100%
+    white-space nowrap
+    overflow hidden
+    background black
+    height 38px
+    margin 0 auto
+
+    & > div.header-links
+      margin 0
+      padding 9px 0 0 0
+
+      & > a
+        font-weight 400
+        font-size 14px
+        padding 12px 22px 14px 22px
+        color white
+        text-decoration none
+        &:hover
+          cursor pointer
+          font-weight 800
+          // color theme-bg-color
+
+        &.active
+          text-decoration none
+          color white
+          background theme-bg-color
+          &:hover
+            // color black
+
+        &:not(.visible)
+          transition color 1s linear
+          @media screen and (max-width: 900px)
+            color darken(white, 20%)
+          @media screen and (max-width: 800px)
+            color darken(white, 40% )
+          @media screen and (max-width: 700px)
+            color darken(white, 60%)
+          @media screen and (max-width: 600px)
+            color darken(white, 80%)
+          @media screen and (max-width: 500px)
+            display none
+            color lighten(black, 100%)

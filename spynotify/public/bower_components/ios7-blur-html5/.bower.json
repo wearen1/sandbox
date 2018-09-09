@@ -1,0 +1,14 @@
+{
+  "name": "ios7-blur-html5",
+  "homepage": "https://github.com/abduzeedo/ios7-blur-html5",
+  "_release": "e0ea8f39ba",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e0ea8f39ba8d91ddbb986312e8eb35144f8551d5"
+  },
+  "_source": "git://github.com/abduzeedo/ios7-blur-html5.git",
+  "_target": "*",
+  "_originalSource": "abduzeedo/ios7-blur-html5",
+  "_direct": true
+}

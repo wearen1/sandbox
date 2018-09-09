@@ -1,0 +1,83 @@
+.activity-log
+  overflow hidden
+  height 130px
+  width 420px
+  // border 1px solid #ccc
+  // border-radius 4px
+
+  & > div
+    height calc(100% - 20px)
+
+  @media screen and (max-width: 750px)
+    float left
+    width 315px
+
+  @media screen and (max-width: 600px)
+    &:before
+      content '\n'
+
+  @media screen and (max-width: 450px)
+    width 100%
+    &:before
+      content '\n'
+
+    // height image-size(img_path)[1]-50%
+
+  &:before
+    content attr(title)
+    border-bottom 1px solid #ebebeb
+    width 100%
+  &:after
+    clear both
+    content ''
+  & .item
+    margin-left 20px
+    padding-top 10px
+    padding-bottom 10px
+    height 36px
+
+    &:last-child
+      padding-bottom 0
+
+    &:first-child
+      padding-top 0
+
+    & .border
+      margin-left 36px
+
+    & a.name
+      min-width 200px
+      text-align left
+      text-decoration: none
+      margin-left 8px
+      font-weight 400
+      font-size 14px
+      color black
+
+      &:visited
+        color black
+      &:hover
+        color lighten(black, 50%)
+      &:active
+        color black
+
+    & img.text-avatar
+      border-radius 4px
+      width 36px
+
+    & .desc
+      word-break break-all
+      overflow hidden
+      height 14px
+      line-height 14px
+      margin 2px 0 0 8px
+
+      @media screen and (max-width: 750px)
+        max-width 220px
+        font-size 14px
+
+    & .time
+      line-height 20px
+      font-size 12px
+      color gray
+

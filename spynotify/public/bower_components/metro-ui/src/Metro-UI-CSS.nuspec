@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Metro-UI-CSS</id>
+        <version>2.0.31</version>
+        <title>Metro UI CSS</title>
+        <authors>Sergey Pimenov,Sergey Volkov,Valerio Battaglia</authors>
+        <owners>sirkirby</owners>
+        <licenseUrl>https://raw.github.com/olton/Metro-UI-CSS/master/LICENSE</licenseUrl>
+        <projectUrl>http://metroui.org.ua/</projectUrl>
+        <iconUrl>https://raw.github.com/sirkirby/Metro-UI-CSS-nuget/master/pkglogo.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Metro UI CSS a set of styles to create a site with an interface similar to Windows 8. This set of styles was developed as a self-contained solution. Package issues? post them here https://github.com/sirkirby/Metro-UI-CSS-nuget/issues</description>
+        <summary />
+        <releaseNotes>- updated to latest source
+
+https://github.com/olton/Metro-UI-CSS/blob/master/CHANGELOG.md</releaseNotes>
+        <tags>css javascript bootstrap frontend less metro metroui modern modernui</tags>
+        <dependencies>
+            <dependency id="WebActivatorEx" version="2.0.4" />
+            <dependency id="Microsoft.AspNet.Web.Optimization" version="1.1.2" />
+            <dependency id="jQuery" version="1.10.2" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="MetroUICSSBundleConfig.cs.pp" target="content\App_Start\MetroUICSSBundleConfig.cs.pp" />
+        <file src="iconFont.min.css" target="content\Content\metro-ui\css\iconFont.min.css" />
+        <file src="metro-bootstrap-responsive.css" target="content\Content\metro-ui\css\metro-bootstrap-responsive.css" />
+        <file src="metro-bootstrap-responsive.min.css" target="content\Content\metro-ui\css\metro-bootstrap-responsive.min.css" />
+        <file src="metro-bootstrap.css" target="content\Content\metro-ui\css\metro-bootstrap.css" />
+        <file src="metro-bootstrap.min.css" target="content\Content\metro-ui\css\metro-bootstrap.min.css" />
+        <file src="iconFont.dev.svg" target="content\Content\metro-ui\fonts\iconFont.dev.svg" />
+        <file src="iconFont.eot" target="content\Content\metro-ui\fonts\iconFont.eot" />
+        <file src="iconFont.json" target="content\Content\metro-ui\fonts\iconFont.json" />
+        <file src="iconFont.svg" target="content\Content\metro-ui\fonts\iconFont.svg" />
+        <file src="iconFont.ttf" target="content\Content\metro-ui\fonts\iconFont.ttf" />
+        <file src="iconFont.woff" target="content\Content\metro-ui\fonts\iconFont.woff" />
+        <file src="metroSysIcons.svg" target="content\Content\metro-ui\fonts\metroSysIcons.svg" />
+        <file src="metroSysIcons.ttf" target="content\Content\metro-ui\fonts\metroSysIcons.ttf" />
+        <file src="metroSysIcons.woff" target="content\Content\metro-ui\fonts\metroSysIcons.woff" />
+        <file src="jquery.ui.widget.js" target="content\Scripts\metro-ui\jquery.ui.widget.js" />
+        <file src="metro.min.js" target="content\Scripts\metro-ui\metro.min.js" />
+    </files>
+</package>

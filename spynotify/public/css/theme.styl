@@ -1,0 +1,35 @@
+.view
+  z-index 0
+
+#bgs
+  z-index -1
+  transition opacity 1s linear
+  position: absolute
+  left: 0
+  top: 0
+  width 100%
+  height 100%
+
+  // & img
+  //   position absolute
+  //   top 0
+  //   left 0
+  //   transition opacity 1s ease-in-out
+  //   opacity 0
+
+  //   &.opaque
+  //     opacity 1
+
+.shadow
+  z-index -1
+  transition all 0.8s linear
+  background-color black
+  opacity 0.6
+  position absolute
+  top 0
+  left 0
+  height 100%
+  width 100%
+
+  &.invisible
+    opacity 0

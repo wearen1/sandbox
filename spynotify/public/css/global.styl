@@ -1,0 +1,69 @@
+html
+  font-smoothing antialiased
+
+.fullwidth
+  width 100%
+.fl_l
+  float left
+.fl_r
+  float right
+.clear
+  clear both
+.offset
+  offset = 4px
+
+  &.top
+    margin-top offset * 2
+    &.s
+      margin-top offset * 2
+    &.m
+      margin-top offset * 4
+    &.l
+      margin-top offset * 8
+
+  &.bottom
+    margin-bottom offset * 2
+    &.s
+      margin-bottom offset * 2
+    &.m
+      margin-bottom offset * 4
+    &.l
+      margin-bottom offset * 8
+
+  &.left
+    margin-left offset * 2
+    &.s
+      margin-left offset * 2
+    &.m
+      margin-left offset * 4
+    &.l
+      margin-left offset * 8
+
+.centered
+  &.vertically
+    position absolute
+    top 50%
+    transform translateY(-50%)
+  &.horizontally
+    margin-left auto
+    margin-right auto
+
+.hidden
+  display none
+
+.blurred
+  filter blur(15px)
+  opacity 0.95
+
+.invisible
+  opacity 0
+
+@keyframes swinging
+  0%
+    transform rotate(-5deg)
+  66%
+    transform rotate(5deg)
+  100%
+    transform rotate(-5deg)
+
+

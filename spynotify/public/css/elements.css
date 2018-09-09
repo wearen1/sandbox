@@ -1,0 +1,296 @@
+html {
+  -webkit-font-smoothing: antialiased;
+}
+.fullwidth {
+  width: 100%;
+}
+.fl_l {
+  float: left;
+}
+.fl_r {
+  float: right;
+}
+.clear {
+  clear: both;
+}
+.offset.top {
+  margin-top: 8px;
+}
+.offset.top.s {
+  margin-top: 8px;
+}
+.offset.top.m {
+  margin-top: 16px;
+}
+.offset.top.l {
+  margin-top: 32px;
+}
+.offset.bottom {
+  margin-bottom: 8px;
+}
+.offset.bottom.s {
+  margin-bottom: 8px;
+}
+.offset.bottom.m {
+  margin-bottom: 16px;
+}
+.offset.bottom.l {
+  margin-bottom: 32px;
+}
+.offset.left {
+  margin-left: 8px;
+}
+.offset.left.s {
+  margin-left: 8px;
+}
+.offset.left.m {
+  margin-left: 16px;
+}
+.offset.left.l {
+  margin-left: 32px;
+}
+.centered.vertically {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.centered.horizontally {
+  margin-left: auto;
+  margin-right: auto;
+}
+.hidden {
+  display: none;
+}
+.blurred {
+  filter: blur(15px);
+  opacity: 0.95;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=95)";
+  filter: alpha(opacity=95);
+}
+.invisible {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+@-moz-keyframes swinging {
+  0% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+  66% {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    transform: rotate(5deg);
+  }
+  100% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+}
+@-webkit-keyframes swinging {
+  0% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+  66% {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    transform: rotate(5deg);
+  }
+  100% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+}
+@-o-keyframes swinging {
+  0% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+  66% {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    transform: rotate(5deg);
+  }
+  100% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+}
+@keyframes swinging {
+  0% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+  66% {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    transform: rotate(5deg);
+  }
+  100% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+}
+.logo {
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.logo.spynotify {
+  margin-bottom: 10px;
+  background-image: url("/img/logo-full.png");
+  width: 200px;
+  height: 60px;
+}
+@media screen and (max-width: 750px) {
+  .logo.spynotify {
+    width: 160px;
+    height: 48px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .logo.spynotify {
+    width: 100px;
+    height: 30px;
+  }
+}
+@media screen and (min-width: 700px) {
+  .logo-container {
+    max-width: 200px;
+    max-height: 120px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .logo-container {
+    max-width: none;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .logo-container {
+    max-width: none;
+    width: 100%;
+  }
+}
+body {
+  top: 80px;
+  position: relative;
+}
+.spynotify-element {
+  border: 2px dashed #6c28ca;
+}
+.spynotify-panel {
+  font-family: 'Open Sans', sans-serif;
+  border-bottom: 2px solid #6c28ca;
+  position: fixed;
+  z-index: 9999999999;
+  height: 80px;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: #fff;
+}
+.spynotify-panel .logo {
+  margin-left: 20px;
+  margin-top: 8px;
+}
+.spynotify-panel .indicator {
+  color: #6c28ca;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  margin-top: -15px;
+  margin-right: -15px;
+  font-size: 18px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.spynotify-panel .selected {
+  margin-left: 300px;
+  position: absolute;
+  height: 40px;
+  width: 100px;
+  background-color: #fff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.spynotify-panel .selected>input {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  width: 200px;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-style: none none solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #ccc;
+  font-weight: lighter;
+}
+.spynotify-panel .complete {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 24px;
+  position: relative;
+  width: 220px;
+  height: 50px;
+  color: #fff;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #27ae60;
+}
+.spynotify-panel .complete {
+  cursor: pointer;
+  margin-right: 20px;
+  font-size: 18px;
+  height: 40px;
+  width: 100px;
+  text-align: center;
+}
+.spynotify-panel .complete>div {
+  position: relative;
+}

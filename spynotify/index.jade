@@ -1,0 +1,201 @@
+doctype html
+html
+  head
+    title SpyNotify
+    meta(charset='utf-8')
+    meta(name="viewport" content="width=400,initial-scale=1,maximum-scale=1")
+
+    link(rel='stylesheet', href='//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic')
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/bower_components/normalize.css/normalize.css')
+    link(rel='stylesheet', href='/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css')
+    link(rel='stylesheet', href='/bower_components/gridster.js/dist/jquery.gridster.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+
+    script(type='text/javascript', src='/bower_components/jquery/dist/jquery.min.js')
+    script(type='text/javascript', src='/bower_components/jquery-ui/jquery-ui.min.js')
+    script(type='text/javascript', src='/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')
+    script(type='text/javascript', src='/bower_components/gridster.js/dist/jquery.gridster.with-extras.min.js')
+    script(type='text/javascript', src='/bower_components/initial.js/dist/initial.min.js')
+    script(type='text/javascript', src='/bower_components/ios7-blur-html5/js/html2canvas.js')
+    script(type='text/javascript', src='/bower_components/ios7-blur-html5/js/StackBlur.js')
+    script(type='text/javascript', src='/bower_components/Blur.js/blur.js')
+    script(type='text/javascript', src='/bower_components/jquery-backstretch/jquery.backstretch.min.js')
+    script(type='text/javascript', src='/bower_components/packery/dist/packery.pkgd.min.js')
+    script
+      :coffee
+        $(window).load ->
+          window.background =
+            darken: ->
+              $('.shadow').addClass 'hidden'
+
+          preloadImage = (src, cb)->
+            img = $('<img>').attr 'src', src
+            img.remove()
+            img.load cb
+
+          bgs = ['/img/theme-1.jpg', '/img/theme-2.jpg']
+
+          $('#bgs').backstretch bgs,
+            duration: 1e4
+            fade: 1e3
+
+          $('.text-avatar').initial
+            charCount: 1
+            width: 72
+            height: 72
+
+          $('.activity-log').mCustomScrollbar
+            theme: 'dark'
+
+          #gridster = ($(".gridster ul").gridster
+          #  shift_larger_widgets_down: false
+          #  resize:
+          #    enabled: false
+          #  max_rows: 3
+          #  widget_margins: [5, 5]
+          #  widget_base_dimensions: [124, 124]
+          #).data 'gridster'
+
+          container = $('.grid')
+
+          container.packery
+            itemSelector: '.item'
+            gutter: 10
+            columnWidth: 120
+            rowHeight: 120
+            percentPosition: true
+
+
+          itemElems = container.find('.item')
+
+          container.on 'click', '.item', (e)->
+            $(e.target).toggleClass('x2')
+            container.packery()
+
+          itemElems.draggable
+            containment: container
+          container.packery 'bindUIDraggableEvents', itemElems
+
+          $('.add-spy').click ->
+            unless $('.add-spy').hasClass 'ready'
+              window.new_widget = $('<div>').addClass('item new')
+
+              container.packery 'appended', new_widget
+              new_widget.draggable
+                containment: container
+              container.append(new_widget).packery 'bindUIDraggableEvents', new_widget
+
+
+
+              color = '#'+Math.floor(Math.random()*16777215).toString(16)
+
+              $('#create-spy').show()
+
+              new_widget.animate
+                backgroundColor: color
+                borderColor: color
+              , 400, ->
+
+                $('.ui-effects-transfer').css
+                  opacity: 0.9
+                  backgroundColor: color
+
+                $('#create-spy').animate
+                  opacity: 0.85
+                  backgroundColor: color
+                , 800
+
+                new_widget.effect 'transfer',
+                  to: $('#create-spy')
+                , 800, ->
+                  new_widget.removeClass 'new'
+
+                  $('.add-spy').toggleClass 'ready'
+                  $('.shadow').toggleClass 'invisible'
+            else
+              $('.ui-effects-transfer').css
+                opacity: 0.9
+                display: 'block'
+
+              $('#create-spy').animate
+                opacity: 0
+                backgroundColor: '#fff'
+              , 800
+
+              $('#create-spy').effect 'transfer',
+                to: new_widget
+              , 800, ->
+                $('.add-spy').toggleClass 'ready'
+                $('.shadow').toggleClass 'invisible'
+
+                new_widget.animate
+                  backgroundColor: '#fff'
+                  borderColor: '#fff'
+                  opacity: 0.5
+                , 400, ->
+                  $('#create-spy').hide()
+
+ body
+  header
+    div.header-center
+      .top_worm
+      .fl_l.header-links
+        a Vspace
+        a Runexto
+        a YourTape
+        a.active.visible SpyNotify
+        a Hi
+      .fl_r.header-links
+        a.visible Войти
+  #bgs
+  .shadow.invisible
+  .view.clear
+    .panel.centered.horizontally.top
+      .fl_l.logo-container.offset.bottom.m
+        .logo.spynotify.fl_l
+        .add-spy.fl_l
+          i.fa.fa-plus-square-o.fl_l(style="position:relative")
+          div
+            .create-text
+      .activity-log.centered.horizontally(title='Последние изменения')
+        .item.offset.top.m
+          img.text-avatar(data-name="Lenta").fl_l
+          a.name.fl_l(href="http://lenta.ru", target="_blank") Lenta
+          .time.fl_r 10 минут назад
+          .desc.fl_l Изменилось 20% содержимого страницы
+          .border.fl_l
+        .item
+          img.text-avatar(data-name="Forbes").fl_l
+          a.name.fl_l(href="http://forbes.ru", target="_blank") Forbes
+          .time.fl_r 8 минут назад
+          .desc.fl_l Изменился элемент "комментарий"
+          .border.fl_l
+        .item
+          img.text-avatar(data-name="Habrahabr").fl_l
+          a.name.fl_l(href="http://Habrahabr.ru", target="_blank") Habrahabr
+          .time.fl_r 5 минут назад
+          .desc.fl_l Появился новый элемент "статья"
+          .border.fl_l
+        .item
+          img.text-avatar(data-name="IFMO").fl_l
+          a.name.fl_l(href="http://ifmo.ru", target="_blank") Ifmo
+          .time.fl_r только что
+          .desc.fl_l(title="Появился новый элемент 'расписание'") Появился новый элемент "расписание"
+          .border.fl_l
+      .offset.top.s.fl_l.fullwidth
+      .clear.offset.top.s
+    #grid-table.panel.bottom.grid-container.content-transparent.centered.horizontally
+      #create-spy.panel.middle.grid-container.content-visible.centered.horizontally.attached(style="display: none")
+        | create spy
+      .grid.offset.l
+        .item
+        .item
+          .info
+            .delete
+            .settings
+          .desc
+          .title Ifmo
+        .item
+        .item
+        .offset.l

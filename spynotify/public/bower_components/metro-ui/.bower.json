@@ -1,0 +1,15 @@
+{
+  "name": "metro-ui",
+  "homepage": "https://github.com/sirkirby/Metro-UI-CSS-nuget",
+  "version": "2.0.31",
+  "_release": "2.0.31",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.31",
+    "commit": "612e8b71459eae11e0c574a6eeae539f9603fb64"
+  },
+  "_source": "git://github.com/sirkirby/Metro-UI-CSS-nuget.git",
+  "_target": "~2.0.31",
+  "_originalSource": "metro-ui",
+  "_direct": true
+}

@@ -1,0 +1,40 @@
+.logo {
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.logo.spynotify {
+  margin-bottom: 10px;
+  background-image: url("/img/logo-full.png");
+  width: 200px;
+  height: 60px;
+}
+@media screen and (max-width: 750px) {
+  .logo.spynotify {
+    width: 160px;
+    height: 48px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .logo.spynotify {
+    width: 100px;
+    height: 30px;
+  }
+}
+@media screen and (min-width: 700px) {
+  .logo-container {
+    max-width: 200px;
+    max-height: 120px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .logo-container {
+    max-width: none;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .logo-container {
+    max-width: none;
+    width: 100%;
+  }
+}
